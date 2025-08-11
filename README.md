@@ -7,7 +7,9 @@ get it [here](https://raw.githubusercontent.com/STEVE-916-create/IfniniteYieldLi
 - Open sauced!
 - 1 year in development!
 - Rewritten with code snippets!
+- Command Syntax prediction thing!
 - Snow and fireworks!
+- ...Did I already say that its faster than real IY?
 
 # Developers
 ## me
