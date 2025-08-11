@@ -3602,10 +3602,10 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			end)
 			local root = char:WaitForChild("HumanoidRootPart")
 			local hum = char:WaitForChild("Humanoid")
-			--[[if hum.RigType ~= Enum.HumanoidRigType.R15 then
+			if hum.RigType ~= Enum.HumanoidRigType.R15 then
 				notify("Invisfling", "ngh!! i dont smell R15 here.!! 3:")
 				return
-			end]]
+			end
 			local invis = RunService.PreSimulation:Connect(function()
 				for _,v in pairs(char:GetDescendants()) do
 					if v:IsA("BasePart") then
@@ -5136,7 +5136,7 @@ do -- Silly Humanoid stuff
 						end
 						headsitting = RunService.PostSimulation:Connect(function()
 							if h:IsDescendantOf(workspace) and h.RootPart and h.Sit and root:IsDescendantOf(workspace) then
-								h.RootPart.CFrame = root.CFrame * CFrame.new(0, 1.6, 0.55)
+								h.RootPart.CFrame = root.CFrame * CFrame.new(0, 1.6, 1.05)
 								h.RootPart.Velocity = Vector3.zero
 								h.RootPart.RotVelocity = Vector3.zero
 							else
