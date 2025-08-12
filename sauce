@@ -740,7 +740,6 @@ do
 		"Edge // Zwolf // Moon // Toon",
 		"I hope both sides of your pillow are warm...",
 		"Written (kinda) by STEVE",
-		"this should be at line 755",
 		"sorry for mispelling the name",
 		"Does anyone use IY themes?",
 		"with totally working autocomplete",
@@ -752,6 +751,8 @@ do
 		"iy but faster",
 		"optimisation is goated",
 		"im under 6k lines of code!",
+		"steals your malware",
+		"or add some back on",
 	}
 	Credits.Text = RandomTexts[math.random(1, #RandomTexts)]
 
@@ -3197,14 +3198,6 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			local spin = root:FindFirstChild(spinname)
 			if spin ~= nil then spin:Destroy() end
 		end,
-	})
-	IY_AddCommand({
-		Command = "unfling",
-		Aliases = { "nofling" },
-		Arguments = {},
-		Plugin = "BUILTIN",
-		Description = "makes you boring",
-		Execute = function() fligning = false end,
 	})
 	local fligning = false
 	IY_AddCommand({
