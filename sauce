@@ -1,9 +1,7 @@
 -- Infinite Yield Lite
 -- "OPTIMIZATION IS GOATED!!"
 
-if _G.IYL_LOADED then
-	return
-end
+if _G.IYL_LOADED then return end
 _G.IYL_LOADED = true
 local IY_VERSION = "v0.67.69"
 local IY_MAINNAME = "Ifninite Yeild Lite"
@@ -50,13 +48,9 @@ local function IY_Celebration()
 			month, day = 4, mday - 31
 		end
 		if d == 28 and e == 6 and G < 19 then
-			if month == 4 and day == 25 then
-				day = 18
-			end
+			if month == 4 and day == 25 then day = 18 end
 		elseif d == 29 and e == 6 then
-			if month == 4 and day == 26 then
-				day = 19
-			end
+			if month == 4 and day == 26 then day = 19 end
 		end
 		return ("%02d %02d"):format(month, day)
 	end
@@ -77,7 +71,7 @@ local function IY_Emoji()
 		NEWYEAR = "🎆",
 		EASTER = "🥚",
 		HALLOWEEN = "🎃",
-		CHRISTMAS = "🎄"
+		CHRISTMAS = "🎄",
 	})[IY_Celebration()] or ""
 end
 
@@ -94,7 +88,7 @@ elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
 	syn.protect_gui(Main)
 	Main.Parent = COREGUI
 	PARENT = Main
-elseif COREGUI:FindFirstChild('RobloxGui') then
+elseif COREGUI:FindFirstChild("RobloxGui") then
 	PARENT = COREGUI.RobloxGui
 else
 	local Main = Instance.new("ScreenGui")
@@ -307,7 +301,7 @@ do
 	Title.Text = "Roblox"
 	Title.TextColor3 = Color3.new(1, 1, 1)
 	Title.ZIndex = 20
-	
+
 	local Text = Instance.new("TextLabel")
 	Text.Name = "Content"
 	Text.Parent = Notification
@@ -321,7 +315,7 @@ do
 	Text.TextColor3 = Color3.new(1, 1, 1)
 	Text.TextWrapped = true
 	Text.ZIndex = 20
-	
+
 	local CloseButton = Instance.new("TextButton")
 	CloseButton.Name = "CloseButton"
 	CloseButton.Parent = Notification
@@ -330,7 +324,7 @@ do
 	CloseButton.Size = UDim2.new(0, 20, 0, 20)
 	CloseButton.Text = ""
 	CloseButton.ZIndex = 20
-	
+
 	local CloseImage = Instance.new("ImageLabel")
 	CloseImage.Parent = CloseButton
 	CloseImage.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -339,7 +333,7 @@ do
 	CloseImage.Size = UDim2.new(0, 10, 0, 10)
 	CloseImage.Image = "rbxassetid://5054663650"
 	CloseImage.ZIndex = 20
-	
+
 	--[[PinButton.Name = "PinButton"
 	PinButton.Parent = Notification
 	PinButton.BackgroundTransparency = 1
@@ -382,14 +376,14 @@ do
 	Title.TextColor3 = Color3.new(1, 1, 1)
 	Title.TextTransparency = 0.1
 	Title.ZIndex = 20
-	
+
 	local Description = Instance.new("TextLabel")
 	Description.Name = "Description"
 	Description.Parent = Tooltip
 	Description.BackgroundTransparency = 1
 	Description.BorderSizePixel = 0
-	Description.Size = UDim2.new(0,180,0,72)
-	Description.Position = UDim2.new(0,10,0,18)
+	Description.Size = UDim2.new(0, 180, 0, 72)
+	Description.Position = UDim2.new(0, 10, 0, 18)
 	Description.Font = Enum.Font.SourceSans
 	Description.TextSize = 16
 	Description.Text = ""
@@ -420,7 +414,7 @@ do
 	SettingsHolder.Size = UDim2.new(1, 0, 1, 0)
 	SettingsHolder.ScrollBarThickness = 0
 	SettingsHolder.ZIndex = 11
-	
+
 	local SettingsLayout = Instance.new("UIListLayout")
 	SettingsLayout.Name = "UILayout"
 	SettingsLayout.Parent = SettingsHolder
@@ -471,14 +465,10 @@ function IY_AddSetting(t, text, ...)
 		on.Size = UDim2.new(0, 16, 0, 16)
 		on.Text = ""
 		on.ZIndex = 11
-		local function toggle()
-			val.Value = (val.Value + 1) % 2
-		end
+		local function toggle() val.Value = (val.Value + 1) % 2 end
 		switch.MouseButton1Click:Connect(toggle)
 		on.MouseButton1Click:Connect(toggle)
-		val.Changed:Connect(function(v)
-			on.BackgroundTransparency = 1 - v
-		end)
+		val.Changed:Connect(function(v) on.BackgroundTransparency = 1 - v end)
 	end
 	if t == "SELECT" then
 		local enums = ...
@@ -504,14 +494,10 @@ function IY_AddSetting(t, text, ...)
 		switch.Text = enums[1]
 		switch.TextColor3 = Color3.new(1, 1, 1)
 		switch.ZIndex = 11
-		local function toggle()
-			val.Value = (val.Value % #enums) + 1
-		end
+		local function toggle() val.Value = (val.Value % #enums) + 1 end
 		switch.MouseButton1Click:Connect(toggle)
 		val.Value = 1
-		val.Changed:Connect(function(v)
-			switch.Text = enums[v]
-		end)
+		val.Changed:Connect(function(v) switch.Text = enums[v] end)
 	end
 	if t == "LABEL" then
 		frame.Size = UDim2.new(0, 250, 0, 18)
@@ -577,68 +563,66 @@ do
 					flare.Size = UDim2.new(0, 5, 0, 5)
 					flare.BackgroundTransparency = 0.5
 					flare.ZIndex = 20
-					table.insert(corout, coroutine.create(function()
+					table.insert(
+						corout,
+						coroutine.create(function()
+							local steps = 0
+							local substeps = 0
+							while true do
+								steps += 1
+								substeps += 1
+								if substeps >= 5 then
+									substeps = 0
+									flare.Position = flare.Position + UDim2.new(0, 0, 0, 1)
+								end
+								if rx then flare.Position = flare.Position + UDim2.new(0, rng:NextInteger(-1, 1), 0, 0) end
+								flare.BackgroundColor3 = Color3.fromHSV(rng:NextInteger(0, 7) / 8, math.floor(rng:NextNumber() * 1.3), 1)
+								local size = rng:NextInteger(1, 4)
+								flare.Size = UDim2.new(0, size, 0, size)
+								flare.BackgroundTransparency = steps / 50
+								if steps >= 50 then break end
+								coroutine.yield()
+							end
+							flare:Destroy()
+						end)
+					)
+				end
+				table.insert(
+					corout,
+					coroutine.create(function()
 						local steps = 0
-						local substeps = 0
 						while true do
+							flare(UDim2.new(0, 0, 0, (10 - steps) * 10), true)
 							steps += 1
-							substeps += 1
-							if substeps >= 5 then
-								substeps = 0
-								flare.Position = flare.Position + UDim2.new(0, 0, 0, 1)
-							end
-							if rx then
-								flare.Position = flare.Position + UDim2.new(0, rng:NextInteger(-1, 1), 0, 0)
-							end
-							flare.BackgroundColor3 = Color3.fromHSV(rng:NextInteger(0, 7) / 8, math.floor(rng:NextNumber() * 1.3), 1)
-							local size = rng:NextInteger(1, 4)
-							flare.Size = UDim2.new(0, size, 0, size)
-							flare.BackgroundTransparency = steps / 50
-							if steps >= 50 then
-								break
-							end
+							if steps >= 10 then break end
 							coroutine.yield()
 						end
-						flare:Destroy()
-					end))
-				end
-				table.insert(corout, coroutine.create(function()
-					local steps = 0
-					while true do
-						flare(UDim2.new(0, 0, 0, (10 - steps) * 10), true)
-						steps += 1
-						if steps >= 10 then
-							break
+						steps = 0
+						local ssc = rng:NextInteger(60, 90)
+						flash.BackgroundTransparency = 0.5
+						flash2.BackgroundTransparency = 0.5
+						while true do
+							flash.Rotation = rng:NextNumber() * 360
+							flash2.Rotation = rng:NextNumber() * 360
+							flash.Visible = steps < 2
+							flash2.Visible = steps < 3
+							for i = 1, 16 do
+								local r = i * (math.pi / 8)
+								local huh = steps / 15
+								huh = 1 - math.pow(1 - huh, 3)
+								local v = Vector2.new(math.sin(r), math.cos(r) + (1 / 10)) * huh * ssc
+								flare(UDim2.new(0, v.X, 0, v.Y))
+							end
+							steps += 1
+							if steps >= 15 then break end
+							coroutine.yield()
 						end
-						coroutine.yield()
-					end
-					steps = 0
-					local ssc = rng:NextInteger(60, 90)
-					flash.BackgroundTransparency = 0.5
-					flash2.BackgroundTransparency = 0.5
-					while true do
-						flash.Rotation = rng:NextNumber() * 360
-						flash2.Rotation = rng:NextNumber() * 360
-						flash.Visible = steps < 2
-						flash2.Visible = steps < 3
-						for i=1, 16 do
-							local r = i * (math.pi / 8)
-							local huh = steps / 15
-							huh = 1 - math.pow(1 - huh, 3)
-							local v = Vector2.new(math.sin(r), math.cos(r) + (1 / 10)) * huh * ssc
-							flare(UDim2.new(0, v.X, 0, v.Y))
-						end
-						steps += 1
-						if steps >= 15 then
-							break
-						end
-						coroutine.yield()
-					end
-					flash:Destroy()
-					flash2:Destroy()
-				end))
+						flash:Destroy()
+						flash2:Destroy()
+					end)
+				)
 			end
-			for _=1,10 do
+			for _ = 1, 10 do
 				firework(UDim2.new(0, rng:NextInteger(0, 250), 0, rng:NextInteger(0, 200)))
 				task.wait(rng:NextNumber() * 0.1)
 			end
@@ -659,23 +643,24 @@ do
 				flake.Size = UDim2.new(0, 5, 0, 5)
 				flake.BackgroundTransparency = 0.5
 				flake.ZIndex = 20
-				table.insert(corout, coroutine.create(function()
-					local seed1 = rng:NextNumber()
-					local seed2 = rng:NextNumber()
-					local steps = -10
-					while true do
-						flake.Position = pos + UDim2.new(0, math.noise(seed1, seed2, steps * 0.005) * 20, 0, steps)
-						steps += 1
-						if flake.Position.Y.Offset >= 230 then
-							break
+				table.insert(
+					corout,
+					coroutine.create(function()
+						local seed1 = rng:NextNumber()
+						local seed2 = rng:NextNumber()
+						local steps = -10
+						while true do
+							flake.Position = pos + UDim2.new(0, math.noise(seed1, seed2, steps * 0.005) * 20, 0, steps)
+							steps += 1
+							if flake.Position.Y.Offset >= 230 then break end
+							coroutine.yield()
 						end
-						coroutine.yield()
-					end
-					flake:Destroy()
-				end))
+						flake:Destroy()
+					end)
+				)
 			end
 			spawn(function()
-				for i=1, 220, 4 do
+				for i = 1, 220, 4 do
 					snow(UDim2.new(0, rng:NextInteger(0, 250), 0, i))
 				end
 				while task.wait(0) do
@@ -713,7 +698,7 @@ do
 			end
 		end
 	end)
-	
+
 	local IntroBackground = Instance.new("Frame")
 	IntroBackground.Name = randomString()
 	IntroBackground.Parent = GUIFrame
@@ -723,7 +708,7 @@ do
 	IntroBackground.Position = UDim2.new(0, 0, 0, 45)
 	IntroBackground.Size = UDim2.new(0, 250, 0, 175)
 	IntroBackground.ZIndex = 19
-	
+
 	local Logo = Instance.new("ImageLabel")
 	Logo.Name = randomString()
 	Logo.Parent = GUIFrame
@@ -734,7 +719,7 @@ do
 	Logo.Image = "rbxassetid://1352543873"
 	Logo.ImageTransparency = 0
 	Logo.ZIndex = 19
-	
+
 	local Credits = Instance.new("TextBox")
 	Credits.Name = randomString()
 	Credits.Parent = GUIFrame
@@ -763,10 +748,10 @@ do
 		"bugs are to be reported",
 		"iy but faster",
 		"optimisation is goated",
-		"im under 6k lines of code!"
+		"im under 6k lines of code!",
 	}
 	Credits.Text = RandomTexts[math.random(1, #RandomTexts)]
-	
+
 	spawn(function()
 		local Celebrate = CelebrationAnimations[IY_Celebration()]
 		Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
@@ -777,8 +762,8 @@ do
 			task.wait(1)
 		end
 		local OutInfo = TweenInfo.new(1.6809, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-		TweenService:Create(Logo, OutInfo, {ImageTransparency = 1}):Play()
-		TweenService:Create(IntroBackground, OutInfo, {BackgroundTransparency = 1}):Play()
+		TweenService:Create(Logo, OutInfo, { ImageTransparency = 1 }):Play()
+		TweenService:Create(IntroBackground, OutInfo, { BackgroundTransparency = 1 }):Play()
 		Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
 		task.wait(0.2)
 		Logo:Destroy()
@@ -816,13 +801,11 @@ sethidden = sethiddenproperty or set_hidden_property or set_hidden_prop
 gethidden = gethiddenproperty or get_hidden_property or get_hidden_prop
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
-local IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform())
+local IsOnMobile = table.find({ Enum.Platform.IOS, Enum.Platform.Android }, UserInputService:GetPlatform())
 everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
 
 local GUIScale = 1
-if IsOnMobile then
-	GUIScale = 0.75
-end
+if IsOnMobile then GUIScale = 0.75 end
 GUIScaling.Scale = GUIScale
 
 spawn(function()
@@ -832,8 +815,8 @@ spawn(function()
 		local l = -GUIPivot.Position.X.Offset > 250
 		local L = 0
 		if l then L = 1 end
-		TweenService:Create(Notification, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {AnchorPoint = Vector2.new(1 - L, 1)}):Play()
-		TweenService:Create(NotificationPivot, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, GUIPivot.Position.X.Offset + (-250 * (1 - L)), 1, 0)}):Play()
+		TweenService:Create(Notification, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { AnchorPoint = Vector2.new(1 - L, 1) }):Play()
+		TweenService:Create(NotificationPivot, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { Position = UDim2.new(1, GUIPivot.Position.X.Offset + (-250 * (1 - L)), 1, 0) }):Play()
 		_l = l
 	end
 end)
@@ -842,13 +825,9 @@ local NotificationMode = "Persistent"
 local _notificationz = {}
 spawn(function()
 	local title, text, t, losing, qlose = nil, nil, 0, false, false
-	Notification.CloseButton.MouseButton1Click:Connect(function()
-		losing = true
-	end)
+	Notification.CloseButton.MouseButton1Click:Connect(function() losing = true end)
 	while task.wait() do
-		if NotificationMode == "Disabled" then
-			table.clear(_notificationz)
-		end
+		if NotificationMode == "Disabled" then table.clear(_notificationz) end
 		if title ~= nil then
 			Notification.Title.Text = title
 			Notification.Content.Text = text
@@ -881,9 +860,7 @@ spawn(function()
 				Notification.Title.Text = title
 				Notification.Content.Text = text
 				local outtime = 0.5
-				if qlose then
-					outtime = 0.1
-				end
+				if qlose then outtime = 0.1 end
 				Notification:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", outtime, true, nil)
 			end
 			qlose = false
@@ -892,7 +869,7 @@ spawn(function()
 end)
 function notify(title, text)
 	if NotificationMode == "Disabled" then return end
-	table.insert(_notificationz, {title, text})
+	table.insert(_notificationz, { title, text })
 end
 
 function toClipboard(text)
@@ -904,9 +881,7 @@ function toClipboard(text)
 	end
 end
 
-function writefileExploit()
-	return writefile ~= nil
-end
+function writefileExploit() return writefile ~= nil end
 
 function getHierarchy(obj)
 	local w = true
@@ -935,144 +910,120 @@ end
 local Camera = workspace.CurrentCamera
 workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 	local newCamera = workspace.CurrentCamera
-	if newCamera ~= nil then
-		Camera = newCamera
-	end
+	if newCamera ~= nil then Camera = newCamera end
 end)
 
 SpecialPlayerCases = {
 	["all"] = function(speaker) return Players:GetPlayers() end,
 	["others"] = function(speaker)
 		local plrs = {}
-		for i,v in pairs(Players:GetPlayers()) do
-			if v ~= speaker then
-				table.insert(plrs,v)
-			end
+		for i, v in pairs(Players:GetPlayers()) do
+			if v ~= speaker then table.insert(plrs, v) end
 		end
 		return plrs
 	end,
-	["me"] = function(speaker)return {speaker} end,
-	["#(%d+)"] = function(speaker,args,currentList)
+	["me"] = function(speaker) return { speaker } end,
+	["#(%d+)"] = function(speaker, args, currentList)
 		local returns = {}
 		local randAmount = tonumber(args[1])
-		local players = {unpack(currentList)}
-		for i = 1,randAmount do
+		local players = { unpack(currentList) }
+		for i = 1, randAmount do
 			if #players == 0 then break end
-			local randIndex = math.random(1,#players)
-			table.insert(returns,players[randIndex])
-			table.remove(players,randIndex)
+			local randIndex = math.random(1, #players)
+			table.insert(returns, players[randIndex])
+			table.remove(players, randIndex)
 		end
 		return returns
 	end,
-	["random"] = function(speaker,args,currentList)
+	["random"] = function(speaker, args, currentList)
 		local players = Players:GetPlayers()
 		local localplayer = Players.LocalPlayer
 		table.remove(players, table.find(players, localplayer))
-		return {players[math.random(1,#players)]}
+		return { players[math.random(1, #players)] }
 	end,
-	["%%(.+)"] = function(speaker,args)
+	["%%(.+)"] = function(speaker, args)
 		local returns = {}
 		local team = args[1]
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.Team and string.sub(string.lower(plr.Team.Name),1,#team) == string.lower(team) then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Team and string.sub(string.lower(plr.Team.Name), 1, #team) == string.lower(team) then table.insert(returns, plr) end
 		end
 		return returns
 	end,
 	["allies"] = function(speaker)
 		local returns = {}
 		local team = speaker.Team
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.Team == team then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Team == team then table.insert(returns, plr) end
 		end
 		return returns
 	end,
 	["enemies"] = function(speaker)
 		local returns = {}
 		local team = speaker.Team
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.Team ~= team then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Team ~= team then table.insert(returns, plr) end
 		end
 		return returns
 	end,
 	["team"] = function(speaker)
 		local returns = {}
 		local team = speaker.Team
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.Team == team then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Team == team then table.insert(returns, plr) end
 		end
 		return returns
 	end,
 	["nonteam"] = function(speaker)
 		local returns = {}
 		local team = speaker.Team
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.Team ~= team then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Team ~= team then table.insert(returns, plr) end
 		end
 		return returns
 	end,
-	["friends"] = function(speaker,args)
+	["friends"] = function(speaker, args)
 		local returns = {}
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr:IsFriendsWith(speaker.UserId) and plr ~= speaker then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr:IsFriendsWith(speaker.UserId) and plr ~= speaker then table.insert(returns, plr) end
 		end
 		return returns
 	end,
-	["nonfriends"] = function(speaker,args)
+	["nonfriends"] = function(speaker, args)
 		local returns = {}
-		for _,plr in pairs(Players:GetPlayers()) do
-			if not plr:IsFriendsWith(speaker.UserId) and plr ~= speaker then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if not plr:IsFriendsWith(speaker.UserId) and plr ~= speaker then table.insert(returns, plr) end
 		end
 		return returns
 	end,
-	["guests"] = function(speaker,args)
+	["guests"] = function(speaker, args)
 		local returns = {}
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.Guest then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Guest then table.insert(returns, plr) end
 		end
 		return returns
 	end,
-	["bacons"] = function(speaker,args)
+	["bacons"] = function(speaker, args)
 		local returns = {}
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.Character:FindFirstChild('Pal Hair') or plr.Character:FindFirstChild('Kate Hair') then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Character:FindFirstChild("Pal Hair") or plr.Character:FindFirstChild("Kate Hair") then table.insert(returns, plr) end
 		end
 		return returns
 	end,
-	["age(%d+)"] = function(speaker,args)
+	["age(%d+)"] = function(speaker, args)
 		local returns = {}
 		local age = tonumber(args[1])
 		if age == nil then return end
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.AccountAge <= age then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.AccountAge <= age then table.insert(returns, plr) end
 		end
 		return returns
 	end,
-	["nearest"] = function(speaker,args,currentList)
+	["nearest"] = function(speaker, args, currentList)
 		local speakerChar = speaker.Character
 		if not speakerChar or not speakerChar:FindFirstChild("HumanoidRootPart") then return end
 		local lowest = math.huge
 		local NearestPlayer = nil
-		for _,plr in pairs(currentList) do
+		for _, plr in pairs(currentList) do
 			if plr ~= speaker and plr.Character then
 				local distance = plr:DistanceFromCharacter(speakerChar.HumanoidRootPart.Position)
 				if distance < lowest then
@@ -1081,14 +1032,14 @@ SpecialPlayerCases = {
 				end
 			end
 		end
-		return {NearestPlayer}
+		return { NearestPlayer }
 	end,
-	["farthest"] = function(speaker,args,currentList)
+	["farthest"] = function(speaker, args, currentList)
 		local speakerChar = speaker.Character
 		if not speakerChar or not speakerChar:FindFirstChild("HumanoidRootPart") then return end
 		local highest = 0
 		local Farthest = nil
-		for _,plr in pairs(currentList) do
+		for _, plr in pairs(currentList) do
 			if plr ~= speaker and plr.Character then
 				local distance = plr:DistanceFromCharacter(speakerChar.HumanoidRootPart.Position)
 				if distance > highest then
@@ -1097,45 +1048,39 @@ SpecialPlayerCases = {
 				end
 			end
 		end
-		return {Farthest}
+		return { Farthest }
 	end,
-	["group(%d+)"] = function(speaker,args)
+	["group(%d+)"] = function(speaker, args)
 		local returns = {}
 		local groupID = tonumber(args[1])
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr:IsInGroup(groupID) then  
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr:IsInGroup(groupID) then table.insert(returns, plr) end
 		end
 		return returns
 	end,
-	["alive"] = function(speaker,args)
+	["alive"] = function(speaker, args)
 		local returns = {}
-		for _,plr in pairs(Players:GetPlayers()) do
-			if plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") and plr.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") and plr.Character:FindFirstChildOfClass("Humanoid").Health > 0 then table.insert(returns, plr) end
 		end
 		return returns
 	end,
-	["dead"] = function(speaker,args)
+	["dead"] = function(speaker, args)
 		local returns = {}
-		for _,plr in pairs(Players:GetPlayers()) do
-			if (not plr.Character or not plr.Character:FindFirstChildOfClass("Humanoid")) or plr.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then
-				table.insert(returns,plr)
-			end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if (not plr.Character or not plr.Character:FindFirstChildOfClass("Humanoid")) or plr.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then table.insert(returns, plr) end
 		end
 		return returns
 	end,
-	["rad(%d+)"] = function(speaker,args)
+	["rad(%d+)"] = function(speaker, args)
 		local returns = {}
 		local radius = tonumber(args[1])
 		local speakerChar = speaker.Character
 		if not speakerChar or not speakerChar:FindFirstChild("HumanoidRootPart") then return end
-		for _,plr in pairs(Players:GetPlayers()) do
+		for _, plr in pairs(Players:GetPlayers()) do
 			if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
-				local magnitude = (plr.Character.HumanoidRootPart.Position-speakerChar.HumanoidRootPart.Position).magnitude
-				if magnitude <= radius then table.insert(returns,plr) end
+				local magnitude = (plr.Character.HumanoidRootPart.Position - speakerChar.HumanoidRootPart.Position).magnitude
+				if magnitude <= radius then table.insert(returns, plr) end
 			end
 		end
 		return returns
@@ -1153,33 +1098,39 @@ SpecialPlayerCases = {
 
 function toTokens(str)
 	local tokens = {}
-	for op,name in string.gmatch(str,"([+-])([^+-]+)") do
-		table.insert(tokens,{Operator = op,Name = name})
+	for op, name in string.gmatch(str, "([+-])([^+-]+)") do
+		table.insert(tokens, { Operator = op, Name = name })
 	end
 	return tokens
 end
 
-function onlyIncludeInTable(tab,matches)
+function onlyIncludeInTable(tab, matches)
 	local matchTable = {}
 	local resultTable = {}
-	for i,v in pairs(matches) do matchTable[v.Name] = true end
-	for i,v in pairs(tab) do if matchTable[v.Name] then table.insert(resultTable,v) end end
+	for i, v in pairs(matches) do
+		matchTable[v.Name] = true
+	end
+	for i, v in pairs(tab) do
+		if matchTable[v.Name] then table.insert(resultTable, v) end
+	end
 	return resultTable
 end
 
-function removeTableMatches(tab,matches)
+function removeTableMatches(tab, matches)
 	local matchTable = {}
 	local resultTable = {}
-	for i,v in pairs(matches) do matchTable[v.Name] = true end
-	for i,v in pairs(tab) do if not matchTable[v.Name] then table.insert(resultTable,v) end end
+	for i, v in pairs(matches) do
+		matchTable[v.Name] = true
+	end
+	for i, v in pairs(tab) do
+		if not matchTable[v.Name] then table.insert(resultTable, v) end
+	end
 	return resultTable
 end
 
 function getPlayersByName(name)
 	local comp = function(x) return x end
-	if GetPlayerIsCaseInsensitive then
-		comp = string.lower
-	end
+	if GetPlayerIsCaseInsensitive then comp = string.lower end
 	local Name, Len, Found = name, string.len(name), {}
 	local UsersOnly = string.sub(Name, 1, 1) == "@"
 	if UsersOnly then Name = string.sub(Name, 2, -1) end
@@ -1187,66 +1138,61 @@ function getPlayersByName(name)
 		local c = math.min(string.len(a), string.len(b))
 		return comp(string.sub(a, 1, c)) == comp(string.sub(b, 1, c))
 	end
-	for _,v in pairs(Players:GetPlayers()) do
-		if chk(v.Name, Name) or 
-			(not UsersOnly and 
-				string.len(v.DisplayName) > 0 and 
-					chk(v.DisplayName, Name)) then
-			table.insert(Found, v)
-		end
+	for _, v in pairs(Players:GetPlayers()) do
+		if chk(v.Name, Name) or (not UsersOnly and string.len(v.DisplayName) > 0 and chk(v.DisplayName, Name)) then table.insert(Found, v) end
 	end
 	return Found
 end
 
 function getPlayer(list)
 	local speaker = Players.LocalPlayer
-	if list == nil then return {speaker.Name} end
+	if list == nil then return { speaker.Name } end
 	local nameList = string.split(list, ",")
 	local foundList = {}
-	for _,name in pairs(nameList) do
-		if string.sub(name,1,1) ~= "+" and string.sub(name,1,1) ~= "-" then name = "+"..name end
+	for _, name in pairs(nameList) do
+		if string.sub(name, 1, 1) ~= "+" and string.sub(name, 1, 1) ~= "-" then name = "+" .. name end
 		local tokens = toTokens(name)
 		local initialPlayers = Players:GetPlayers()
-		for i,v in pairs(tokens) do
+		for i, v in pairs(tokens) do
 			if v.Operator == "+" then
 				local tokenContent = v.Name
 				local foundCase = false
-				for regex,case in pairs(SpecialPlayerCases) do
-					local matches = {string.match(tokenContent,"^"..regex.."$")}
+				for regex, case in pairs(SpecialPlayerCases) do
+					local matches = { string.match(tokenContent, "^" .. regex .. "$") }
 					if #matches > 0 then
 						foundCase = true
-						initialPlayers = onlyIncludeInTable(initialPlayers,case(speaker,matches,initialPlayers))
+						initialPlayers = onlyIncludeInTable(initialPlayers, case(speaker, matches, initialPlayers))
 					end
 				end
-				if not foundCase then
-					initialPlayers = onlyIncludeInTable(initialPlayers,getPlayersByName(tokenContent))
-				end
+				if not foundCase then initialPlayers = onlyIncludeInTable(initialPlayers, getPlayersByName(tokenContent)) end
 			else
 				local tokenContent = v.Name
 				local foundCase = false
-				for regex,case in pairs(SpecialPlayerCases) do
-					local matches = {string.match(tokenContent,"^"..regex.."$")}
+				for regex, case in pairs(SpecialPlayerCases) do
+					local matches = { string.match(tokenContent, "^" .. regex .. "$") }
 					if #matches > 0 then
 						foundCase = true
-						initialPlayers = removeTableMatches(initialPlayers,case(speaker,matches,initialPlayers))
+						initialPlayers = removeTableMatches(initialPlayers, case(speaker, matches, initialPlayers))
 					end
 				end
-				if not foundCase then
-					initialPlayers = removeTableMatches(initialPlayers,getPlayersByName(tokenContent))
-				end
+				if not foundCase then initialPlayers = removeTableMatches(initialPlayers, getPlayersByName(tokenContent)) end
 			end
 		end
-		for i,v in pairs(initialPlayers) do table.insert(foundList,v) end
+		for i, v in pairs(initialPlayers) do
+			table.insert(foundList, v)
+		end
 	end
 	local foundNames = {}
-	for i,v in pairs(foundList) do table.insert(foundNames,v.Name) end
+	for i, v in pairs(foundList) do
+		table.insert(foundNames, v.Name)
+	end
 	return foundNames
 end
 
 local SettingsIsOpen = false
 SettingsButton.Icon.MouseButton1Click:Connect(function()
 	SettingsButton.Icon.Rotation = 0
-	TweenService:Create(SettingsButton.Icon, TweenInfo.new(0.3), {Rotation = 180}):Play()
+	TweenService:Create(SettingsButton.Icon, TweenInfo.new(0.3), { Rotation = 180 }):Play()
 	SettingsIsOpen = not SettingsIsOpen
 end)
 local IY__FileAPIErrorShown = false
@@ -1264,9 +1210,7 @@ function IY_FileAPIError(kind)
 		"> If your cheating software is within such file types such as a ZIP/RAR archive, make sure you have done the extraction process.",
 		"> It is possible that your electronic device is indeed extremely faulty. Restarting the device would be enough to refresh it.",
 	}
-	if kind == "NOWRITE" then
-		textlines[1] = "Your cheating software does not support the necessary functions in order to create your IYl save file."
-	end
+	if kind == "NOWRITE" then textlines[1] = "Your cheating software does not support the necessary functions in order to create your IYl save file." end
 	if kind == "SAVEFILECORRUPT" then
 		textlines[1] = "Your IYl save file has been corrupted!"
 		textlines[3] = "If you did not do modifications to the save file, you shall get contact with your cheating software's developer (or support team) and elaborate to them about this."
@@ -1279,7 +1223,7 @@ function IY_FileAPIError(kind)
 	local PopupText = Instance.new("TextLabel")
 	local Exit = Instance.new("TextButton")
 	local ExitImage = Instance.new("ImageLabel")
-	
+
 	FileError.Name = randomString()
 	FileError.Parent = PARENT
 	FileError.Active = true
@@ -1287,7 +1231,7 @@ function IY_FileAPIError(kind)
 	FileError.Position = UDim2.new(0.5, -180, 0, 290)
 	FileError.Size = UDim2.new(0, 360, 0, 20)
 	FileError.ZIndex = 10
-	
+
 	background.Name = "background"
 	background.Parent = FileError
 	background.Active = true
@@ -1296,7 +1240,7 @@ function IY_FileAPIError(kind)
 	background.Position = UDim2.new(0, 0, 0, 20)
 	background.Size = UDim2.new(0, 360, 0, 205)
 	background.ZIndex = 10
-	
+
 	Directions.Name = "Directions"
 	Directions.Parent = background
 	Directions.BackgroundTransparency = 1
@@ -1311,14 +1255,14 @@ function IY_FileAPIError(kind)
 	Directions.TextXAlignment = Enum.TextXAlignment.Left
 	Directions.TextYAlignment = Enum.TextYAlignment.Top
 	Directions.ZIndex = 10
-	
+
 	shadow.Name = "shadow"
 	shadow.Parent = FileError
 	shadow.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
 	shadow.BorderSizePixel = 0
 	shadow.Size = UDim2.new(0, 360, 0, 20)
 	shadow.ZIndex = 10
-	
+
 	PopupText.Name = "PopupText"
 	PopupText.Parent = shadow
 	PopupText.BackgroundTransparency = 1
@@ -1329,7 +1273,7 @@ function IY_FileAPIError(kind)
 	PopupText.Text = "File Error"
 	PopupText.TextColor3 = Color3.new(1, 1, 1)
 	PopupText.TextWrapped = true
-	
+
 	Exit.Name = "Exit"
 	Exit.Parent = shadow
 	Exit.BackgroundTransparency = 1
@@ -1337,7 +1281,7 @@ function IY_FileAPIError(kind)
 	Exit.Size = UDim2.new(0, 20, 0, 20)
 	Exit.Text = ""
 	Exit.ZIndex = 10
-	
+
 	ExitImage.Parent = Exit
 	ExitImage.BackgroundColor3 = Color3.new(1, 1, 1)
 	ExitImage.BackgroundTransparency = 1
@@ -1345,7 +1289,7 @@ function IY_FileAPIError(kind)
 	ExitImage.Size = UDim2.new(0, 10, 0, 10)
 	ExitImage.Image = "rbxassetid://5054663650"
 	ExitImage.ZIndex = 10
-	
+
 	Exit.MouseButton1Click:Connect(function()
 		FileError:Destroy()
 		IY__FileAPIErrorShown = false
@@ -1354,22 +1298,16 @@ end
 local IY_ConfigJson = {}
 local IY_ConfigJsonFile = "IY_Lite.iyl"
 function IY_SaveConfig()
-	if writefileExploit() then
-		writefile(IY_ConfigJsonFile, HttpService:JSONEncode(IY_ConfigJson))
-	end
+	if writefileExploit() then writefile(IY_ConfigJsonFile, HttpService:JSONEncode(IY_ConfigJson)) end
 end
 local _loadcfgretries = 0
 function IY_LoadConfig()
 	if writefileExploit() then
 		_loadcfgretries += 1
-		local s, raw = pcall(function()
-			return readfile(IY_ConfigJsonFile)
-		end)
+		local s, raw = pcall(function() return readfile(IY_ConfigJsonFile) end)
 		if s then
 			if raw ~= nil then
-				local s = pcall(function()
-					IY_ConfigJson = HttpService:JSONDecode(raw)
-				end)
+				local s = pcall(function() IY_ConfigJson = HttpService:JSONDecode(raw) end)
 				if s then
 					return true
 				else
@@ -1400,12 +1338,8 @@ function IY_LoadConfig()
 	return false
 end
 
-function IY_Minimize()
-	GUIFrame:TweenPosition(UDim2.new(0, 0, 0, 200), "InOut", "Quart", 0.5, true, nil)
-end
-function IY_Maximize()
-	GUIFrame:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", 0.2, true, nil)
-end
+function IY_Minimize() GUIFrame:TweenPosition(UDim2.new(0, 0, 0, 200), "InOut", "Quart", 0.5, true, nil) end
+function IY_Maximize() GUIFrame:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", 0.2, true, nil) end
 
 local IY_Commands = {}
 local IY__AddCommandToList_i = 1
@@ -1419,7 +1353,7 @@ function IY_IndexCommands(text)
 	local loopcmd = string.split(text, "^")
 	local prefix = ""
 	if #loopcmd > 1 then
-		for i=1, math.min(2, #loopcmd - 1) do
+		for i = 1, math.min(2, #loopcmd - 1) do
 			prefix ..= loopcmd[1] .. "^"
 			table.remove(loopcmd, 1)
 		end
@@ -1429,8 +1363,8 @@ function IY_IndexCommands(text)
 	if k ~= nil then
 		local cmd = string.sub(command, 1, k - 1)
 		local cmd2 = nil
-		for _,v in pairs(IY_Commands) do
-			local c = {v.Command, unpack(v.Aliases)}
+		for _, v in pairs(IY_Commands) do
+			local c = { v.Command, unpack(v.Aliases) }
 			local d = table.find(c, cmd) ~= nil
 			v.GUIElement.Visible = d
 			if d then
@@ -1448,9 +1382,7 @@ function IY_IndexCommands(text)
 				if arg.Type == "TARGET" then
 					argd ..= "\n"
 					local comp = function(x) return x end
-					if GetPlayerIsCaseInsensitive then
-						comp = string.lower
-					end
+					if GetPlayerIsCaseInsensitive then comp = string.lower end
 					local typed = args[#args]
 					local commaz = string.split(typed, ",")
 					typed = commaz[#commaz]
@@ -1463,45 +1395,41 @@ function IY_IndexCommands(text)
 					table.remove(plusz, #plusz)
 					table.remove(minuz, #minuz)
 					local filler = {
-						{"all", "Every player including you"},
-						{"others", "Every other player"},
-						{"me", "You, this player, whatever"},
-						{"random", "Genshin Impact experience"},
-						{"#", "Select this much random players", "Number of players"},
-						{"allies", "Players on your team"},
-						{"enemies", "Players not in your team"},
-						{"team", "Players on your team"},
-						{"nonteam", "Players not in your team"},
-						{"friends", "Players on your friends list"},
-						{"nonfriends", "Players not in your friends list"},
-						{"guests", "Non-existent players"},
-						{"bacons", "Players with Pal Hair"},
-						{"group", "Players in specific group", "Group ID"},
-						{"alive", "Players that are alive"},
-						{"dead", "Players that are dead"},
-						{"age", "Players below account age", "Account age"},
-						{"nearest", "Nearest player"},
-						{"farthest", "Farthest player"},
-						{"rad", "Players within a radius", "Radius in studs"},
-						{"cursor", "Nearest player on your cursor"},
+						{ "all", "Every player including you" },
+						{ "others", "Every other player" },
+						{ "me", "You, this player, whatever" },
+						{ "random", "Genshin Impact experience" },
+						{ "#", "Select this much random players", "Number of players" },
+						{ "allies", "Players on your team" },
+						{ "enemies", "Players not in your team" },
+						{ "team", "Players on your team" },
+						{ "nonteam", "Players not in your team" },
+						{ "friends", "Players on your friends list" },
+						{ "nonfriends", "Players not in your friends list" },
+						{ "guests", "Non-existent players" },
+						{ "bacons", "Players with Pal Hair" },
+						{ "group", "Players in specific group", "Group ID" },
+						{ "alive", "Players that are alive" },
+						{ "dead", "Players that are dead" },
+						{ "age", "Players below account age", "Account age" },
+						{ "nearest", "Nearest player" },
+						{ "farthest", "Farthest player" },
+						{ "rad", "Players within a radius", "Radius in studs" },
+						{ "cursor", "Nearest player on your cursor" },
 					}
-					for _,plr in pairs(Players:GetPlayers()) do
-						table.insert(filler, {comp(plr.Name), "Select player by name"})
-						table.insert(filler, {"@"..comp(plr.Name), "Select player by username"})
-						if string.len(plr.DisplayName) > 0 then
-							table.insert(filler, {comp(plr.DisplayName), "Select player by name"})
-						end
+					for _, plr in pairs(Players:GetPlayers()) do
+						table.insert(filler, { comp(plr.Name), "Select player by name" })
+						table.insert(filler, { "@" .. comp(plr.Name), "Select player by username" })
+						if string.len(plr.DisplayName) > 0 then table.insert(filler, { comp(plr.DisplayName), "Select player by name" }) end
 					end
 					if string.len(typed) > 0 then
 						local sel = nil
 						local itis = false
-						for _,case in pairs(filler) do
+						for _, case in pairs(filler) do
 							local f = string.find(case[1], typed)
 							if case[3] ~= nil then
 								if string.len(case[1]) <= string.len(typed) then
-									if string.sub(typed, 1, string.len(case[1])) == case[1] then
-										itis = true
-									end
+									if string.sub(typed, 1, string.len(case[1])) == case[1] then itis = true end
 								end
 							else
 								itis = case[1] == typed
@@ -1520,7 +1448,7 @@ function IY_IndexCommands(text)
 								argd ..= sel[1] .. ": " .. sel[2]
 							end
 							local case = cmd .. " "
-							for i=1,#args - 1 do
+							for i = 1, #args - 1 do
 								case ..= args[i] .. " "
 							end
 							table.insert(minuz, sel[1])
@@ -1544,15 +1472,13 @@ function IY_IndexCommands(text)
 					if string.len(typed) > 0 then
 						local sel = nil
 						local itis = false
-						for _,case in pairs(arg.Values) do
+						for _, case in pairs(arg.Values) do
 							local f = string.find(case, typed)
-							if f ~= nil and f == 1 then
-								sel = case
-							end
+							if f ~= nil and f == 1 then sel = case end
 						end
 						if sel ~= nil then
 							local case = cmd .. " "
-							for i=1,#args - 1 do
+							for i = 1, #args - 1 do
 								case ..= args[i] .. " "
 							end
 							case ..= sel
@@ -1567,15 +1493,13 @@ function IY_IndexCommands(text)
 						local valz = arg.Values()
 						local sel = nil
 						local itis = false
-						for _,case in pairs(valz) do
+						for _, case in pairs(valz) do
 							local f = string.find(case, typed)
-							if f ~= nil and f == 1 then
-								sel = case
-							end
+							if f ~= nil and f == 1 then sel = case end
 						end
 						if sel ~= nil then
 							local case = cmd .. " "
-							for i=1,#args - 1 do
+							for i = 1, #args - 1 do
 								case ..= args[i] .. " "
 							end
 							case ..= sel
@@ -1595,11 +1519,9 @@ function IY_IndexCommands(text)
 			if celebrat == "EASTER" and math.random() < 0.2 then
 				local indices = {}
 				local emoji = "🥚"
-				local chars = {"o", "O"}
-				for i=1, string.len(text) do
-					if table.find(chars, string.sub(text, i, i)) ~= nil then
-						table.insert(indices, i)
-					end
+				local chars = { "o", "O" }
+				for i = 1, string.len(text) do
+					if table.find(chars, string.sub(text, i, i)) ~= nil then table.insert(indices, i) end
 				end
 				if #indices > 0 then
 					local sel = indices[math.random(1, #indices)]
@@ -1611,24 +1533,20 @@ function IY_IndexCommands(text)
 		if string.len(cmd) > 0 then
 			local existents = {}
 			local tablesort = table.clone(IY_Commands)
-			for _,v in pairs(tablesort) do
-				local c = {v.Command, unpack(v.Aliases)}
-				for _,t in pairs(c) do
+			for _, v in pairs(tablesort) do
+				local c = { v.Command, unpack(v.Aliases) }
+				for _, t in pairs(c) do
 					local j = string.find(t, cmd)
-					if j ~= nil then
-						table.insert(existents, {j, t, v})
-					end
+					if j ~= nil then table.insert(existents, { j, t, v }) end
 				end
 				v.GUIElement.Visible = false
 			end
 			if #existents > 0 then
 				table.sort(existents, function(a, b)
-					if a[1] == b[1] then
-						return a[2] > b[2]
-					end
+					if a[1] == b[1] then return a[2] > b[2] end
 					return a[1] > b[1]
 				end)
-				for i,v in pairs(existents) do
+				for i, v in pairs(existents) do
 					v[3].GUIElement.LayoutOrder = -i
 					v[3].GUIElement.Visible = true
 					elementsl += 1
@@ -1642,7 +1560,7 @@ function IY_IndexCommands(text)
 				end
 			end
 		else
-			for _,v in pairs(IY_Commands) do
+			for _, v in pairs(IY_Commands) do
 				v.GUIElement.LayoutOrder = v.GUIElement:GetAttribute("i")
 				v.GUIElement.Visible = true
 				elementsl += 1
@@ -1655,10 +1573,10 @@ function IY_IndexCommands(text)
 end
 function IY__AddCommandToList(data)
 	local text = data.Command
-	for _,v in pairs(data.Aliases) do
+	for _, v in pairs(data.Aliases) do
 		text ..= " / " .. v
 	end
-	for _,v in pairs(data.Arguments) do
+	for _, v in pairs(data.Arguments) do
 		if v.Optional then
 			text ..= " [" .. v.Name .. "]"
 		else
@@ -1731,9 +1649,7 @@ function IY_ExecuteCommand(command, nonotify)
 			local ts = 0
 			while toe > IY__LastCommandBreak do
 				ts += 1
-				if times < ts then
-					break
-				end
+				if times < ts then break end
 				IY_ExecuteCommand(cmd .. " " .. table.concat(args, " "), nonotify)
 				task.wait(delat)
 			end
@@ -1742,13 +1658,13 @@ function IY_ExecuteCommand(command, nonotify)
 	end
 	local multicmd = string.split(cmd, "\\")
 	if #multicmd > 1 then
-		for i=1, #multicmd do
+		for i = 1, #multicmd do
 			IY_ExecuteCommand(multicmd[i], nonotify)
 		end
 		return true, true
 	end
 	local data = nil
-	for _,v in pairs(IY_Commands) do
+	for _, v in pairs(IY_Commands) do
 		if v.Command == cmd or table.find(v.Aliases, cmd) ~= nil then
 			data = v
 			break
@@ -1781,9 +1697,7 @@ Cmdbar.FocusLost:Connect(function(enter)
 	end
 end)
 Cmdbar:GetPropertyChangedSignal("Text"):Connect(function()
-	if Cmdbar:IsFocused() then
-		IY_IndexCommands(Cmdbar.Text)
-	end
+	if Cmdbar:IsFocused() then IY_IndexCommands(Cmdbar.Text) end
 	if string.len(Cmdbar.Text) > 0 then
 		CmdbarView.Text = Cmdbar.Text
 		CmdbarView.TextColor3 = Cmdbar.TextColor3
@@ -1798,28 +1712,16 @@ function IY_UserClick(x, y)
 		IY__LastUserInput = tick()
 		return
 	end
-	if GUIFrame.AbsolutePosition.X >= x and GUIFrame.AbsolutePosition.Y >= y
-		and GUIFrame.AbsolutePosition.X + GUIFrame.AbsoluteSize.X < x
-		and GUIFrame.AbsolutePosition.Y + GUIFrame.AbsoluteSize.Y < y then
-		IY__LastUserInput = tick()
-	end
+	if GUIFrame.AbsolutePosition.X >= x and GUIFrame.AbsolutePosition.Y >= y and GUIFrame.AbsolutePosition.X + GUIFrame.AbsoluteSize.X < x and GUIFrame.AbsolutePosition.Y + GUIFrame.AbsoluteSize.Y < y then IY__LastUserInput = tick() end
 end
-IYMouse.Button1Down:Connect(function()
-	IY_UserClick(IYMouse.X, IYMouse.Y)
-end)
+IYMouse.Button1Down:Connect(function() IY_UserClick(IYMouse.X, IYMouse.Y) end)
 IYMouse.Move:Connect(function()
-	if not IsOnMobile then
-		IY_UserClick(IYMouse.X, IYMouse.Y)
-	end
+	if not IsOnMobile then IY_UserClick(IYMouse.X, IYMouse.Y) end
 end)
 GUIFrame.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.Touch then
-		IY_UserClick()
-	end
+	if input.UserInputType == Enum.UserInputType.Touch then IY_UserClick() end
 end)
-GUIFrame.MouseEnter:Connect(function()
-	IY_UserClick()
-end)
+GUIFrame.MouseEnter:Connect(function() IY_UserClick() end)
 spawn(function()
 	local dragging = false
 	local dragInput = nil
@@ -1829,7 +1731,7 @@ spawn(function()
 		local delta = input.Position.X - dragStart
 		local Position = guiStart + (delta / GUIScale)
 		Position = math.clamp(Position, (250 - Camera.ViewportSize.X) / GUIScale, 0)
-		TweenService:Create(GUIPivot, TweenInfo.new(1.5, Enum.EasingStyle.Elastic), {Position = UDim2.new(1, Position, 1, 0)}):Play()
+		TweenService:Create(GUIPivot, TweenInfo.new(1.5, Enum.EasingStyle.Elastic), { Position = UDim2.new(1, Position, 1, 0) }):Play()
 		IY_UserClick()
 	end
 	GUITitle.InputBegan:Connect(function(input)
@@ -1841,15 +1743,11 @@ spawn(function()
 	end)
 	UserInputService.InputChanged:Connect(function(input)
 		if dragging then
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				update(input)
-			end
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then update(input) end
 		end
 	end)
 	UserInputService.InputEnded:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			dragging = false
-		end
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then dragging = false end
 	end)
 end)
 local IY__HolderState = true
@@ -1857,9 +1755,7 @@ local IY__KeepIYOpen = false
 local IY__SettingsAlpha = 0
 local IY__HideTime = 2
 RunService.RenderStepped:Connect(function(dt)
-	if Cmdbar:IsFocused() or IY__KeepIYOpen then
-		IY__LastUserInput = tick()
-	end
+	if Cmdbar:IsFocused() or IY__KeepIYOpen then IY__LastUserInput = tick() end
 	if tick() - IY__LastUserInput >= IY__HideTime then
 		if IY__HolderState then
 			IY__HolderState = false
@@ -1871,9 +1767,7 @@ RunService.RenderStepped:Connect(function(dt)
 			IY_Maximize()
 		end
 	end
-	if IsOnMobile then
-		Tooltip.Position = GUIPivot.Position + UDim2.new(0, -460, 0, -240)
-	end
+	if IsOnMobile then Tooltip.Position = GUIPivot.Position + UDim2.new(0, -460, 0, -240) end
 	if SettingsIsOpen and not Cmdbar:IsFocused() then
 		IY__SettingsAlpha = math.min(1, IY__SettingsAlpha + (dt / 0.3))
 	else
@@ -1889,23 +1783,13 @@ local function IY__UpdateConfigIn()
 	IY_ConfigJson.GUIScale = GUIScaling.Scale
 end
 local function IY__UpdateConfigOut()
-	if table.find({"Disabled", "Dynamic", "Persistent"}, IY_ConfigJson.NotificationMode) == nil then
-		IY_ConfigJson.NotificationMode = "Persistent"
-	end
-	if IY_ConfigJson.KeepMenuOpen == nil or typeof(IY_ConfigJson.KeepMenuOpen) ~= "boolean" then
-		IY_ConfigJson.KeepMenuOpen = false
-	end
-	if IY_ConfigJson.CaseInsensitivePlayerSelector == nil or typeof(IY_ConfigJson.CaseInsensitivePlayerSelector) ~= "boolean" then
-		IY_ConfigJson.CaseInsensitivePlayerSelector = true
-	end
-	if IY_ConfigJson.CelebrationAnimations == nil or typeof(IY_ConfigJson.CelebrationAnimations) ~= "boolean" then
-		IY_ConfigJson.CelebrationAnimations = true
-	end
+	if table.find({ "Disabled", "Dynamic", "Persistent" }, IY_ConfigJson.NotificationMode) == nil then IY_ConfigJson.NotificationMode = "Persistent" end
+	if IY_ConfigJson.KeepMenuOpen == nil or typeof(IY_ConfigJson.KeepMenuOpen) ~= "boolean" then IY_ConfigJson.KeepMenuOpen = false end
+	if IY_ConfigJson.CaseInsensitivePlayerSelector == nil or typeof(IY_ConfigJson.CaseInsensitivePlayerSelector) ~= "boolean" then IY_ConfigJson.CaseInsensitivePlayerSelector = true end
+	if IY_ConfigJson.CelebrationAnimations == nil or typeof(IY_ConfigJson.CelebrationAnimations) ~= "boolean" then IY_ConfigJson.CelebrationAnimations = true end
 	if IY_ConfigJson.GUIScale == nil or typeof(IY_ConfigJson.GUIScale) ~= "number" or IY_ConfigJson.GUIScale < 0.01 then
 		IY_ConfigJson.GUIScale = 1
-		if IsOnMobile then
-			IY_ConfigJson.GUIScale = 0.75
-		end
+		if IsOnMobile then IY_ConfigJson.GUIScale = 0.75 end
 	end
 	NotificationMode = IY_ConfigJson.NotificationMode
 	IY__KeepIYOpen = IY_ConfigJson.KeepMenuOpen
@@ -1926,21 +1810,15 @@ spawn(function()
 end)
 do
 	local a = IY_AddSetting("SWITCH", "Keep Menu Open")
-	a.Changed:Connect(function(v)
-		IY__KeepIYOpen = v == 1
-	end)
+	a.Changed:Connect(function(v) IY__KeepIYOpen = v == 1 end)
 	a.Value = IY__KeepIYOpen and 1 or 0
 	local b = IY_AddSetting("SWITCH", "Case Insensitive Selector")
-	b.Changed:Connect(function(v)
-		GetPlayerIsCaseInsensitive = v == 1
-	end)
+	b.Changed:Connect(function(v) GetPlayerIsCaseInsensitive = v == 1 end)
 	b.Value = GetPlayerIsCaseInsensitive and 1 or 0
 	local c = IY_AddSetting("SWITCH", "Holiday Animations")
-	c.Changed:Connect(function(v)
-		CelebrationContainer.Visible = v == 1
-	end)
+	c.Changed:Connect(function(v) CelebrationContainer.Visible = v == 1 end)
 	c.Value = CelebrationContainer.Visible and 1 or 0
-	local de = {"Disabled", "Dynamic", "Persistent"}
+	local de = { "Disabled", "Dynamic", "Persistent" }
 	local d = IY_AddSetting("SELECT", "Notify Mode", de)
 	d.Changed:Connect(function(v)
 		NotificationMode = de[v]
@@ -1954,7 +1832,7 @@ local FallenPartsDestroyHeight = workspace.FallenPartsDestroyHeight
 
 IY_AddCommand({
 	Command = "discord",
-	Aliases = {"support", "help"},
+	Aliases = { "support", "help" },
 	Arguments = {},
 	Plugin = "BUILTIN",
 	--Description = "this command is useless, this is only here to make this look like the real iy",
@@ -1968,7 +1846,7 @@ IY_AddCommand({
 	Command = "guiscale",
 	Aliases = {},
 	Arguments = {
-		{Name = "scale", Optional = false, Description = "UI Scale"},
+		{ Name = "scale", Optional = false, Description = "UI Scale" },
 	},
 	Plugin = "BUILTIN",
 	Description = "scale the ui (1 is default scale)",
@@ -1980,19 +1858,17 @@ IY_AddCommand({
 })
 IY_AddCommand({
 	Command = "console",
-	Aliases = {"devconsole"},
+	Aliases = { "devconsole" },
 	Arguments = {},
 	Plugin = "BUILTIN",
 	Description = "Shows the Developer's Console.",
-	Execute = function()
-		StarterGui:SetCore("DevConsoleVisible", true)
-	end,
+	Execute = function() StarterGui:SetCore("DevConsoleVisible", true) end,
 })
 
 do -- Other Scripts from others
 	IY_AddCommand({
 		Command = "dex",
-		Aliases = {"explorer"},
+		Aliases = { "explorer" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Opens DEX by Moon.",
@@ -2003,7 +1879,7 @@ do -- Other Scripts from others
 	})
 	IY_AddCommand({
 		Command = "remotespy",
-		Aliases = {"rspy"},
+		Aliases = { "rspy" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Opens Simple Spy V3.",
@@ -2014,13 +1890,13 @@ do -- Other Scripts from others
 	})
 	IY_AddCommand({
 		Command = "audiologger",
-		Aliases = {"alogger"},
+		Aliases = { "alogger" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Opens Edge's Audio Logger.",
 		Execute = function()
 			notify("Loading...", "Sit back and relax while this script loads...")
-			loadstring(game:HttpGet(('https://raw.githubusercontent.com/infyiff/backup/main/audiologger.lua'),true))()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/audiologger.lua", true))()
 		end,
 	})
 end
@@ -2028,7 +1904,7 @@ do -- Server info related
 	local canOpenServerinfo = true
 	IY_AddCommand({
 		Command = "serverinfo",
-		Aliases = {"info"},
+		Aliases = { "info" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Gives you information about this server.",
@@ -2055,7 +1931,7 @@ do -- Server info related
 				local CopyApp = Instance.new("TextButton")
 				local CopyPlrID = Instance.new("TextButton")
 				local CopyPlcID = Instance.new("TextButton")
-				
+
 				FRAME.Name = randomString()
 				FRAME.Parent = PARENT
 				FRAME.Active = true
@@ -2063,14 +1939,14 @@ do -- Server info related
 				FRAME.Position = UDim2.new(0.5, -130, 0, -500)
 				FRAME.Size = UDim2.new(0, 250, 0, 20)
 				FRAME.ZIndex = 10
-				
+
 				shadow.Name = "shadow"
 				shadow.Parent = FRAME
 				shadow.BackgroundColor3 = currentShade2
 				shadow.BorderSizePixel = 0
 				shadow.Size = UDim2.new(0, 250, 0, 20)
 				shadow.ZIndex = 10
-				
+
 				PopupText.Name = "PopupText"
 				PopupText.Parent = shadow
 				PopupText.BackgroundTransparency = 1
@@ -2081,7 +1957,7 @@ do -- Server info related
 				PopupText.Text = "Server"
 				PopupText.TextColor3 = currentText1
 				PopupText.TextWrapped = true
-				
+
 				Exit.Name = "Exit"
 				Exit.Parent = shadow
 				Exit.BackgroundTransparency = 1
@@ -2089,7 +1965,7 @@ do -- Server info related
 				Exit.Size = UDim2.new(0, 20, 0, 20)
 				Exit.Text = ""
 				Exit.ZIndex = 10
-				
+
 				ExitImage.Parent = Exit
 				ExitImage.BackgroundColor3 = Color3.new(1, 1, 1)
 				ExitImage.BackgroundTransparency = 1
@@ -2097,7 +1973,7 @@ do -- Server info related
 				ExitImage.Size = UDim2.new(0, 10, 0, 10)
 				ExitImage.Image = "rbxassetid://5054663650"
 				ExitImage.ZIndex = 10
-				
+
 				background.Name = "background"
 				background.Parent = FRAME
 				background.Active = true
@@ -2106,7 +1982,7 @@ do -- Server info related
 				background.Position = UDim2.new(0, 0, 1, 0)
 				background.Size = UDim2.new(0, 250, 0, 250)
 				background.ZIndex = 10
-				
+
 				TextLabel.Name = "Text Label"
 				TextLabel.Parent = background
 				TextLabel.BackgroundTransparency = 1
@@ -2119,7 +1995,7 @@ do -- Server info related
 				TextLabel.Text = "Run Time:"
 				TextLabel.TextColor3 = currentText1
 				TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				TextLabel2.Name = "Text Label2"
 				TextLabel2.Parent = background
 				TextLabel2.BackgroundTransparency = 1
@@ -2132,7 +2008,7 @@ do -- Server info related
 				TextLabel2.Text = "Statistics:"
 				TextLabel2.TextColor3 = currentText1
 				TextLabel2.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				TextLabel3.Name = "Text Label3"
 				TextLabel3.Parent = background
 				TextLabel3.BackgroundTransparency = 1
@@ -2145,7 +2021,7 @@ do -- Server info related
 				TextLabel3.Text = "Local Player:"
 				TextLabel3.TextColor3 = currentText1
 				TextLabel3.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				Time.Name = "Time"
 				Time.Parent = background
 				Time.BackgroundTransparency = 1
@@ -2158,7 +2034,7 @@ do -- Server info related
 				Time.Text = "LOADING"
 				Time.TextColor3 = currentText1
 				Time.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				appearance.Name = "appearance"
 				appearance.Parent = background
 				appearance.BackgroundTransparency = 1
@@ -2171,7 +2047,7 @@ do -- Server info related
 				appearance.Text = "Appearance: LOADING"
 				appearance.TextColor3 = currentText1
 				appearance.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				maxplayers.Name = "maxplayers"
 				maxplayers.Parent = background
 				maxplayers.BackgroundTransparency = 1
@@ -2184,7 +2060,7 @@ do -- Server info related
 				maxplayers.Text = "LOADING"
 				maxplayers.TextColor3 = currentText1
 				maxplayers.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				name.Name = "name"
 				name.Parent = background
 				name.BackgroundTransparency = 1
@@ -2199,7 +2075,7 @@ do -- Server info related
 				name.TextWrapped = true
 				name.TextXAlignment = Enum.TextXAlignment.Left
 				name.TextYAlignment = Enum.TextYAlignment.Top
-				
+
 				placeid.Name = "placeid"
 				placeid.Parent = background
 				placeid.BackgroundTransparency = 1
@@ -2212,7 +2088,7 @@ do -- Server info related
 				placeid.Text = "Place ID: LOADING"
 				placeid.TextColor3 = currentText1
 				placeid.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				playerid.Name = "playerid"
 				playerid.Parent = background
 				playerid.BackgroundTransparency = 1
@@ -2225,7 +2101,7 @@ do -- Server info related
 				playerid.Text = "Server Code: LOADING"
 				playerid.TextColor3 = currentText1
 				playerid.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				players.Name = "players"
 				players.Parent = background
 				players.BackgroundTransparency = 1
@@ -2238,7 +2114,7 @@ do -- Server info related
 				players.Text = "LOADING"
 				players.TextColor3 = currentText1
 				players.TextXAlignment = Enum.TextXAlignment.Left
-				
+
 				CopyApp.Name = "CopyApp"
 				CopyApp.Parent = background
 				CopyApp.BackgroundColor3 = currentShade2
@@ -2250,7 +2126,7 @@ do -- Server info related
 				CopyApp.Text = "Copy"
 				CopyApp.TextColor3 = currentText1
 				CopyApp.ZIndex = 10
-				
+
 				CopyPlrID.Name = "CopyPlrID"
 				CopyPlrID.Parent = background
 				CopyPlrID.BackgroundColor3 = currentShade2
@@ -2262,7 +2138,7 @@ do -- Server info related
 				CopyPlrID.Text = "Copy"
 				CopyPlrID.TextColor3 = currentText1
 				CopyPlrID.ZIndex = 10
-				
+
 				CopyPlcID.Name = "CopyPlcID"
 				CopyPlcID.Parent = background
 				CopyPlcID.BackgroundColor3 = currentShade2
@@ -2274,38 +2150,32 @@ do -- Server info related
 				CopyPlcID.Text = "Copy"
 				CopyPlcID.TextColor3 = currentText1
 				CopyPlcID.ZIndex = 10
-				
+
 				local SINFOGUI = background
-				FRAME:TweenPosition(UDim2.new(0.5, -130, 0, 100), "InOut", "Quart", 0.5, true, nil) 
+				FRAME:TweenPosition(UDim2.new(0.5, -130, 0, 100), "InOut", "Quart", 0.5, true, nil)
 				wait(0.5)
 				Exit.MouseButton1Click:Connect(function()
-					FRAME:TweenPosition(UDim2.new(0.5, -130, 0, -500), "InOut", "Quart", 0.5, true, nil) 
+					FRAME:TweenPosition(UDim2.new(0.5, -130, 0, -500), "InOut", "Quart", 0.5, true, nil)
 					wait(0.6)
 					FRAME:Destroy()
 					canOpenServerinfo = true
 				end)
-				SINFOGUI.playerid.Text = "Server Code: " ..game.PrivateServerId
-				SINFOGUI.maxplayers.Text = Players.MaxPlayers.. " Players Max"
-				SINFOGUI.placeid.Text = "Place ID: " ..game.PlaceId
+				SINFOGUI.playerid.Text = "Server Code: " .. game.PrivateServerId
+				SINFOGUI.maxplayers.Text = Players.MaxPlayers .. " Players Max"
+				SINFOGUI.placeid.Text = "Place ID: " .. game.PlaceId
 				spawn(function()
 					local Asset = MarketplaceService:GetProductInfo(PlaceId)
 					SINFOGUI.name.Text = "Place Name: " .. Asset.Name
 				end)
-		
-				CopyApp.MouseButton1Click:Connect(function()
-					toClipboard(speaker.CharacterAppearanceId)
-				end)
-				CopyPlrID.MouseButton1Click:Connect(function()
-					toClipboard(game.PrivateServerId)
-				end)
-				CopyPlcID.MouseButton1Click:Connect(function()
-					toClipboard(game.PlaceId)
-				end)
-		
+
+				CopyApp.MouseButton1Click:Connect(function() toClipboard(speaker.CharacterAppearanceId) end)
+				CopyPlrID.MouseButton1Click:Connect(function() toClipboard(game.PrivateServerId) end)
+				CopyPlcID.MouseButton1Click:Connect(function() toClipboard(game.PlaceId) end)
+
 				repeat
 					players = Players:GetPlayers()
-					SINFOGUI.players.Text = #players.. " Player(s)"
-					SINFOGUI.appearance.Text = "Appearance: " ..speaker.CharacterAppearanceId
+					SINFOGUI.players.Text = #players .. " Player(s)"
+					SINFOGUI.appearance.Text = "Appearance: " .. speaker.CharacterAppearanceId
 					local seconds = math.floor(workspace.DistributedGameTime)
 					local minutes = math.floor(workspace.DistributedGameTime / 60)
 					local hours = math.floor(workspace.DistributedGameTime / 60 / 60)
@@ -2331,9 +2201,7 @@ do -- Server info related
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Creates a Teleport script to this server, and places it in your clipboard.",
-		Execute = function()
-			toClipboard("game.TeleportService:TeleportToPlaceInstance(" .. game.PlaceId .. ",\"" .. game.JobId .. "\",game.Players.LocalPlayer)")
-		end,
+		Execute = function() toClipboard("game.TeleportService:TeleportToPlaceInstance(" .. game.PlaceId .. ",\"" .. game.JobId .. "\",game.Players.LocalPlayer)") end,
 	})
 	IY_AddCommand({
 		Command = "notifyjobid",
@@ -2341,15 +2209,13 @@ do -- Server info related
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Notifies you the JobId. why would you want that?",
-		Execute = function()
-			notify("JobId notify", game.JobId)
-		end,
+		Execute = function() notify("JobId notify", game.JobId) end,
 	})
 	IY_AddCommand({
 		Command = "copyplrid",
-		Aliases = {"userid"},
+		Aliases = { "userid" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Copies the player ID of the target player",
@@ -2368,9 +2234,9 @@ do -- Server info related
 	})
 	IY_AddCommand({
 		Command = "age",
-		Aliases = {"plrage"},
+		Aliases = { "plrage" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Notifies you the account age of the target player",
@@ -2389,7 +2255,7 @@ do -- Server info related
 	})
 	IY_AddCommand({
 		Command = "rejoin",
-		Aliases = {"rj"},
+		Aliases = { "rj" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Lets you rejoin",
@@ -2406,7 +2272,7 @@ do -- Server info related
 	local autorjEnabled = false
 	IY_AddCommand({
 		Command = "autorejoin",
-		Aliases = {"autorj"},
+		Aliases = { "autorj" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Automatically rejoins you if you get disconnected/kicked",
@@ -2414,45 +2280,37 @@ do -- Server info related
 			notify("Auto Rejoin", "Auto rejoin enabled")
 			if autorjEnabled then return end
 			autorjEnabled = true
-			GuiService.ErrorMessageChanged:Connect(function()
-				IY_ExecuteCommand("rejoin")
-			end)
+			GuiService.ErrorMessageChanged:Connect(function() IY_ExecuteCommand("rejoin") end)
 		end,
 	})
 	IY_AddCommand({
 		Command = "serverhop",
-		Aliases = {"shop"},
+		Aliases = { "shop" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "this doesnt work for me, i destroyed it and is now unusable",
-		Execute = function()
-			notify("Command", "this command doesnt work well, its disabled")
-		end,
+		Execute = function() notify("Command", "this command doesnt work well, its disabled") end,
 	})
 	IY_AddCommand({
 		Command = "joinplayer",
 		Aliases = {},
 		Arguments = {
-			{Name = "Username / ID", Optional = false, Description = "Target Player's username or user ID"},
-			{Name = "Place ID", Optional = false, Description = "Target Player's place ID"},
+			{ Name = "Username / ID", Optional = false, Description = "Target Player's username or user ID" },
+			{ Name = "Place ID", Optional = false, Description = "Target Player's place ID" },
 		},
 		Plugin = "BUILTIN",
 		Description = "this doesnt work for me, i destroyed it and is now unusable",
-		Execute = function()
-			notify("Command", "this command doesnt work well, its disabled")
-		end,
+		Execute = function() notify("Command", "this command doesnt work well, its disabled") end,
 	})
 	IY_AddCommand({
 		Command = "gameteleport",
-		Aliases = {"gametp"},
+		Aliases = { "gametp" },
 		Arguments = {
-			{Name = "Place ID", Optional = false, Description = "Target Player's place ID"},
+			{ Name = "Place ID", Optional = false, Description = "Target Player's place ID" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Joins a game using its Place ID",
-		Execute = function(placeid)
-			TeleportService:Teleport(tonumber(placeid))
-		end,
+		Execute = function(placeid) TeleportService:Teleport(tonumber(placeid)) end,
 	})
 	IY_AddCommand({
 		Command = "exit",
@@ -2471,28 +2329,24 @@ do -- Network related stuff
 		Command = "datalimit",
 		Aliases = {},
 		Arguments = {
-			{Name = "KBPS", Optional = true, Description = "Kilobits per second"},
+			{ Name = "KBPS", Optional = true, Description = "Kilobits per second" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Sets the outgoing KBPS limit",
 		Execute = function(num)
-			if tonumber(num) ~= nil then
-				NetworkClient:SetOutgoingKBPSLimit(tonumber(num))
-			end
+			if tonumber(num) ~= nil then NetworkClient:SetOutgoingKBPSLimit(tonumber(num)) end
 		end,
 	})
 	IY_AddCommand({
 		Command = "replicationlag",
-		Aliases = {"backtrack"},
+		Aliases = { "backtrack" },
 		Arguments = {
-			{Name = "millis", Optional = true, Description = "Additional Ping in ms"},
+			{ Name = "millis", Optional = true, Description = "Additional Ping in ms" },
 		},
 		Plugin = "BUILTIN",
 		Description = "This can be used to increase your ping so u can complain",
 		Execute = function()
-			if tonumber(num) ~= nil then
-				settings():GetService("NetworkSettings").IncomingReplicationLag = tonumber(num)
-			end
+			if tonumber(num) ~= nil then settings():GetService("NetworkSettings").IncomingReplicationLag = tonumber(num) end
 		end,
 	})
 end
@@ -2500,17 +2354,17 @@ do -- Anti____
 	local antiidling = false
 	IY_AddCommand({
 		Command = "antiidle",
-		Aliases = {"antiafk", "clientantiidle", "clientantiafk"},
+		Aliases = { "antiafk", "clientantiidle", "clientantiafk" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Prevents being kicked for being idle",
 		Execute = function()
-			notify('Anti Idle','Anti idle is enabled')
+			notify("Anti Idle", "Anti idle is enabled")
 			if antiidling then return end
 			antiidling = true
 			local GC = getconnections or get_signal_cons
 			if GC then
-				for i,v in pairs(GC(Players.LocalPlayer.Idled)) do
+				for i, v in pairs(GC(Players.LocalPlayer.Idled)) do
 					if v["Disable"] then
 						v["Disable"](v)
 					elseif v["Disconnect"] then
@@ -2529,18 +2383,14 @@ do -- Anti____
 	local antikicking = false
 	IY_AddCommand({
 		Command = "clientantikick",
-		Aliases = {"antikick"},
+		Aliases = { "antikick" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Prevents kicked from client",
 		Execute = function()
-			if not hookmetamethod then 
-				return notify('Incompatible Exploit','Your exploit does not support this command (missing hookmetamethod)')
-			end
-			if not newcclosure then 
-				return notify('Incompatible Exploit','Your exploit does not support this command (missing newcclosure)')
-			end
-			notify('Client Antikick','Client anti kick is now active (only effective on localscript kick)')
+			if not hookmetamethod then return notify("Incompatible Exploit", "Your exploit does not support this command (missing hookmetamethod)") end
+			if not newcclosure then return notify("Incompatible Exploit", "Your exploit does not support this command (missing newcclosure)") end
+			notify("Client Antikick", "Client anti kick is now active (only effective on localscript kick)")
 			if antikicking then return end
 			antikicking = true
 			-- this was fixed by STEVE, because for some reason the guy who made this
@@ -2550,39 +2400,37 @@ do -- Anti____
 			local oldhmmi
 			local oldhmmnc
 			local function namecallkick(self, ...)
-				if typeof(self) == "Instance" and self == LocalPlayer then
-					return
-				end
+				if typeof(self) == "Instance" and self == LocalPlayer then return end
 				error("Expected ':' not '.' calling member function Kick", 2)
 			end
-			oldhmmi = hookmetamethod(LocalPlayer , "__index", newcclosure(function(self, method)
-				if typeof(self) == "Instance" and self == LocalPlayer
-					and type(method) == "string" and method == "Kick" then
-					return namecallkick
-				end
-				return oldhmmi(self, method)
-			end))
-			oldhmmnc = hookmetamethod(LocalPlayer, "__namecall", newcclosure(function(self, ...)
-				if typeof(self) == "Instance" and self == LocalPlayer
-					and getnamecallmethod() == "Kick" then
-					return namecallkick(self, ...)
-				end
-				return oldhmmnc(self, ...)
-			end))
+			oldhmmi = hookmetamethod(
+				LocalPlayer,
+				"__index",
+				newcclosure(function(self, method)
+					if typeof(self) == "Instance" and self == LocalPlayer and type(method) == "string" and method == "Kick" then return namecallkick end
+					return oldhmmi(self, method)
+				end)
+			)
+			oldhmmnc = hookmetamethod(
+				LocalPlayer,
+				"__namecall",
+				newcclosure(function(self, ...)
+					if typeof(self) == "Instance" and self == LocalPlayer and getnamecallmethod() == "Kick" then return namecallkick(self, ...) end
+					return oldhmmnc(self, ...)
+				end)
+			)
 		end,
 	})
 	local antiteleporting = false
 	IY_AddCommand({
 		Command = "clientantiteleport",
-		Aliases = {"antikick"},
+		Aliases = { "antikick" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Prevents teleport from client",
 		Execute = function()
-			if not hookmetamethod then 
-				return notify('Incompatible Exploit','Your exploit does not support this command (missing hookmetamethod)')
-			end
-			notify('Client AntiTP','Client anti teleport is now active (only effective on localscript teleport)')
+			if not hookmetamethod then return notify("Incompatible Exploit", "Your exploit does not support this command (missing hookmetamethod)") end
+			notify("Client AntiTP", "Client anti teleport is now active (only effective on localscript teleport)")
 			if antiteleporting then return end
 			antiteleporting = true
 			local TeleportService = TeleportService
@@ -2599,21 +2447,19 @@ do -- Anti____
 				return oldhmmi(self, method)
 			end)
 			oldhmmnc = hookmetamethod(game, "__namecall", function(self, ...)
-				if self == TeleportService and getnamecallmethod():lower() == "teleport" or getnamecallmethod() == "TeleportToPlaceInstance" then
-					return
-				end
+				if self == TeleportService and getnamecallmethod():lower() == "teleport" or getnamecallmethod() == "TeleportToPlaceInstance" then return end
 				return oldhmmnc(self, ...)
 			end)
 		end,
 	})
 	IY_AddCommand({
 		Command = "antilag",
-		Aliases = {"boostfps", "lowgraphics", "reducelag"},
+		Aliases = { "boostfps", "lowgraphics", "reducelag" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Prevents lag idk",
 		Execute = function()
-			local Terrain = workspace:FindFirstChildOfClass('Terrain')
+			local Terrain = workspace:FindFirstChildOfClass("Terrain")
 			Terrain.WaterWaveSize = 0
 			Terrain.WaterWaveSpeed = 0
 			Terrain.WaterReflectance = 0
@@ -2621,7 +2467,7 @@ do -- Anti____
 			Lighting.GlobalShadows = false
 			Lighting.FogEnd = 9e9
 			settings().Rendering.QualityLevel = 1
-			for i,v in pairs(game:GetDescendants()) do
+			for i, v in pairs(game:GetDescendants()) do
 				if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
 					v.Material = "Plastic"
 					v.Reflectance = 0
@@ -2634,20 +2480,18 @@ do -- Anti____
 					v.BlastRadius = 1
 				end
 			end
-			for i,v in pairs(Lighting:GetDescendants()) do
-				if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
-					v.Enabled = false
-				end
+			for i, v in pairs(Lighting:GetDescendants()) do
+				if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then v.Enabled = false end
 			end
 			workspace.DescendantAdded:Connect(function(child)
 				task.spawn(function()
-					if child:IsA('ForceField') then
+					if child:IsA("ForceField") then
 						RunService.Heartbeat:Wait()
 						child:Destroy()
-					elseif child:IsA('Sparkles') then
+					elseif child:IsA("Sparkles") then
 						RunService.Heartbeat:Wait()
 						child:Destroy()
-					elseif child:IsA('Smoke') or child:IsA('Fire') then
+					elseif child:IsA("Smoke") or child:IsA("Fire") then
 						RunService.Heartbeat:Wait()
 						child:Destroy()
 					end
@@ -2658,17 +2502,15 @@ do -- Anti____
 	local anticloging = false
 	IY_AddCommand({
 		Command = "antichatlog",
-		Aliases = {"antilog", "antiban"},
+		Aliases = { "antilog", "antiban" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Prevents chat logging",
 		Execute = function()
-			if not hookmetamethod or not hookfunction then 
-				return notify('Incompatible Exploit','Your exploit does not support this command (missing hookmetamethod)')
-			end
-			if anticloging then return notify('Antichat-log','Im already g bro') end
+			if not hookmetamethod or not hookfunction then return notify("Incompatible Exploit", "Your exploit does not support this command (missing hookmetamethod)") end
+			if anticloging then return notify("Antichat-log", "Im already g bro") end
 			anticloging = true
-			notify('Antichat-log','Wait while I load...')
+			notify("Antichat-log", "Wait while I load...")
 			-- this was made by STEVE
 			local randomquotes = {
 				"hi lol",
@@ -2765,58 +2607,57 @@ do -- Anti____
 			local LocalPlayer = Players.LocalPlayer
 			local metas = {}
 			local function namecallkick(self, ...)
-				if typeof(self) == "Instance" and self == Players then
-					return metas.Players_index(self, "Chat")(self, _chat())
-				end
+				if typeof(self) == "Instance" and self == Players then return metas.Players_index(self, "Chat")(self, _chat()) end
 				error("Expected ':' not '.' calling member function Chat", 2)
 			end
-			metas.Players_index = hookmetamethod(Players, "__index", newcclosure(function(self, method)
-				if typeof(self) == "Instance" and self == Players
-					and type(method) == "string" and method == "Chat" then
-					return namecallkick
-				end
-				return metas.Players_index(self, method)
-			end))
-			metas.Players_namecall = hookmetamethod(Players, "__namecall", newcclosure(function(self, ...)
-				if typeof(self) == "Instance" and self == Players
-					and getnamecallmethod() == "Chat" then
-					return namecallkick(self, ...)
-				end
-				return metas.Players_namecall(self, ...)
-			end))
+			metas.Players_index = hookmetamethod(
+				Players,
+				"__index",
+				newcclosure(function(self, method)
+					if typeof(self) == "Instance" and self == Players and type(method) == "string" and method == "Chat" then return namecallkick end
+					return metas.Players_index(self, method)
+				end)
+			)
+			metas.Players_namecall = hookmetamethod(
+				Players,
+				"__namecall",
+				newcclosure(function(self, ...)
+					if typeof(self) == "Instance" and self == Players and getnamecallmethod() == "Chat" then return namecallkick(self, ...) end
+					return metas.Players_namecall(self, ...)
+				end)
+			)
 			local chatev = Instance.new("BindableEvent")
-			metas.Player_index = hookmetamethod(LocalPlayer, "__index", newcclosure(function(self, method)
-				if typeof(self) == "Instance" and self == LocalPlayer
-					and type(method) == "string" and (method == "Chatted" or method == "chatted") then
-					return chatev.Event
-				end
-				return metas.Player_index(self, method)
-			end))
+			metas.Player_index = hookmetamethod(
+				LocalPlayer,
+				"__index",
+				newcclosure(function(self, method)
+					if typeof(self) == "Instance" and self == LocalPlayer and type(method) == "string" and (method == "Chatted" or method == "chatted") then return chatev.Event end
+					return metas.Player_index(self, method)
+				end)
+			)
 			local posted = LocalPlayer:WaitForChild("PlayerScripts", 10)
 			if posted == nil then
-				notify('Antichat-log','Client anti chat log not supported')
+				notify("Antichat-log", "Client anti chat log not supported")
 				anticloging = false
 				return
 			end
 			posted = posted:WaitForChild("ChatScript", 10)
 			if posted == nil then
-				notify('Antichat-log','Client anti chat log not supported')
+				notify("Antichat-log", "Client anti chat log not supported")
 				anticloging = false
 				return
 			end
 			posted = posted:WaitForChild("ChatMain", 10)
 			if posted == nil then
-				notify('Antichat-log','Client anti chat log not supported')
+				notify("Antichat-log", "Client anti chat log not supported")
 				anticloging = false
 				return
 			end
 			posted = require(posted)
 			local s = false
-			s, posted = pcall(function()
-				return posted.MessagePosted
-			end)
+			s, posted = pcall(function() return posted.MessagePosted end)
 			if not s then
-				notify('Antichat-log','Client anti chat log not supported')
+				notify("Antichat-log", "Client anti chat log not supported")
 				anticloging = false
 				return
 			end
@@ -2824,7 +2665,7 @@ do -- Anti____
 				if self == StarterGui then
 					if name == "CoreGuiChatConnections" then
 						StarterGui:SetCore("ChatMakeSystemMessage", {
-							Text = "[Antichat-log]: SETCORE changed ChatConnections"
+							Text = "[Antichat-log]: SETCORE changed ChatConnections",
 						})
 						local what = ...
 						what = what.ChatWindow
@@ -2833,7 +2674,7 @@ do -- Anti____
 							if what ~= nil then
 								posted = what
 								StarterGui:SetCore("ChatMakeSystemMessage", {
-									Text = "[Antichat-log]: SETCORE found MessagePosted"
+									Text = "[Antichat-log]: SETCORE found MessagePosted",
 								})
 							end
 						end
@@ -2842,20 +2683,22 @@ do -- Anti____
 				end
 				error("Expected ':' not '.' calling member function SetCore", 2)
 			end
-			metas.StarterGui_index = hookmetamethod(StarterGui, "__index", newcclosure(function(self, method)
-				if typeof(self) == "Instance" and self == StarterGui
-					and type(method) == "string" and method == "SetCore" then
-					return _newsetcore
-				end
-				return metas.StarterGui_index(self, method)
-			end))
-			metas.StarterGui_namecall = hookmetamethod(StarterGui, "__namecall", newcclosure(function(self, ...)
-				if typeof(self) == "Instance" and self == StarterGui
-					and getnamecallmethod() == "SetCore" then
-					return _newsetcore(self, ...)
-				end
-				return metas.StarterGui_namecall(self, ...)
-			end))
+			metas.StarterGui_index = hookmetamethod(
+				StarterGui,
+				"__index",
+				newcclosure(function(self, method)
+					if typeof(self) == "Instance" and self == StarterGui and type(method) == "string" and method == "SetCore" then return _newsetcore end
+					return metas.StarterGui_index(self, method)
+				end)
+			)
+			metas.StarterGui_namecall = hookmetamethod(
+				StarterGui,
+				"__namecall",
+				newcclosure(function(self, ...)
+					if typeof(self) == "Instance" and self == StarterGui and getnamecallmethod() == "SetCore" then return _newsetcore(self, ...) end
+					return metas.StarterGui_namecall(self, ...)
+				end)
+			)
 			local lol = newcclosure(function(...)
 				local self, message = ...
 				if self == posted then
@@ -2863,7 +2706,7 @@ do -- Anti____
 					metas.Posted_hook(self, m2)
 					chatev:Fire(message)
 					StarterGui:SetCore("ChatMakeSystemMessage", {
-						Text = "[Antichat-log]: MESSAGE " .. m2
+						Text = "[Antichat-log]: MESSAGE " .. m2,
 					})
 				end
 				return metas.Posted_hook(...)
@@ -2872,24 +2715,22 @@ do -- Anti____
 				-- hook function upvalue trick
 				return lol(...)
 			end)
-			if setfflag then
-				pcall(function()
-					setfflag("AbuseReportScreenshot", "False")
-					setfflag("AbuseReportScreenshotPercentage", "0")
-				end)
-			end
-			notify('Antichat-log','Client anti chat log is now active')
+			if setfflag then pcall(function()
+				setfflag("AbuseReportScreenshot", "False")
+				setfflag("AbuseReportScreenshotPercentage", "0")
+			end) end
+			notify("Antichat-log", "Client anti chat log is now active")
 		end,
 	})
 	local antiadonisaa = false
 	IY_AddCommand({
 		Command = "antiadonisanticheat",
-		Aliases = {"antiaac"},
+		Aliases = { "antiaac" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Adonis really wants to kill the client. Lets murder them! >:3",
 		Execute = function()
-			notify('AntiAnticheat (Adonis)', 'Anti anticheat is now active')
+			notify("AntiAnticheat (Adonis)", "Anti anticheat is now active")
 			if antiadonisaa then return end
 			antiadonisaa = true
 			-- anti client detection and anticrashes
@@ -2898,7 +2739,7 @@ do -- Anti____
 			local Hooked = {}
 			local Detected, Kill = nil, nil
 			setthreadidentity(2)
-			local nyaa = {"Crash", "HardCrash", "GPUCrash", "RAMCrash", "KillClient", "SetFPS"} 
+			local nyaa = { "Crash", "HardCrash", "GPUCrash", "RAMCrash", "KillClient", "SetFPS" }
 			for i, v in getgc(true) do
 				if typeof(v) == "table" then
 					local DetectFunc = rawget(v, "Detected")
@@ -2916,43 +2757,40 @@ do -- Anti____
 				end
 				if type(v) == "function" then
 					local info = debug.getinfo(v)
-					if info.source:find(".Core.Functions") and table.find(nyaa, info.name) then
-						hookfunction(v, function() end)
-					end
+					if info.source:find(".Core.Functions") and table.find(nyaa, info.name) then hookfunction(v, function() end) end
 				end
 			end
 			local OldRobloxDebugInfo = nil
-			OldRobloxDebugInfo = hookfunction(getrenv().debug.info, newcclosure(function(...)
-				local LevelOrFunc, Info = ...
-				if Detected and LevelOrFunc == Detected then
-					return coroutine.yield(coroutine.running())
-				end
-				return OldRobloxDebugInfo(...)
-			end))
+			OldRobloxDebugInfo = hookfunction(
+				getrenv().debug.info,
+				newcclosure(function(...)
+					local LevelOrFunc, Info = ...
+					if Detected and LevelOrFunc == Detected then return coroutine.yield(coroutine.running()) end
+					return OldRobloxDebugInfo(...)
+				end)
+			)
 			setthreadidentity(7)
 		end,
 	})
 	local anticlienthandlekill = false
 	IY_AddCommand({
 		Command = "anticlienthandlekill",
-		Aliases = {"anticlienthkill", "antidoubletouch"},
+		Aliases = { "anticlienthkill", "antidoubletouch" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "In SF games, you get hit if you touch their sword on either your or their client. This makes it apply only on theirs.",
 		Execute = function()
-			notify('Anti client handle kill','Anti client handle kill is now active')
+			notify("Anti client handle kill", "Anti client handle kill is now active")
 			if anticlienthandlekill then return end
 			anticlienthandlekill = true
 			local function nocok(v)
 				if v:IsA("BasePart") and v.Parent.ClassName == "Tool" and v.Name == "Handle" then
-					if Players.LocalPlayer.Character ~= nil and v:IsDescendantOf(Players.LocalPlayer.Character) then
-						return
-					end
+					if Players.LocalPlayer.Character ~= nil and v:IsDescendantOf(Players.LocalPlayer.Character) then return end
 					v.CanTouch = false
 				end
 			end
 			workspace.DescendantAdded:Connect(nocok)
-			for _,v in pairs(workspace:GetDescendants()) do
+			for _, v in pairs(workspace:GetDescendants()) do
 				nocok(v)
 			end
 		end,
@@ -2970,16 +2808,12 @@ local function GetSandboxPosition()
 end
 do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	local ControlM = {
-		GetMoveVector = function()
-			return Vector3.zero
-		end,
+		GetMoveVector = function() return Vector3.zero end,
 	}
 	task.spawn(function()
 		while true do
 			ControlM = require(Players.LocalPlayer.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule"))
-			if ControlM ~= nil then
-				return
-			end
+			if ControlM ~= nil then return end
 			task.wait()
 		end
 		notify("RequireControlModule", "ControlModule returns nil!")
@@ -2988,21 +2822,26 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	function NOFLY()
 		if FLYING ~= nil then
 			local h = FLYING:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h.PlatformStand = false
-			end
+			if h ~= nil then h.PlatformStand = false end
 		end
 		FLYING = nil
 	end
 	local SPEED = 50
 	function FLY(vfly)
-		repeat wait() until Players.LocalPlayer and Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-		repeat wait() until IYMouse
+		repeat
+			wait()
+		until Players.LocalPlayer and Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+		repeat
+			wait()
+		until IYMouse
 		FLYING = Players.LocalPlayer.Character
 		local H = FLYING:FindFirstChildOfClass("Humanoid")
 		local T = nil
-		repeat T = H.RootPart wait() until T ~= nil
-		local CONTROL = {X = 0, Y = 0, Z = 0}
+		repeat
+			T = H.RootPart
+			wait()
+		until T ~= nil
+		local CONTROL = { X = 0, Y = 0, Z = 0 }
 		local function _FLY()
 			local BV = Instance.new("BodyVelocity", T)
 			BV.Name = randomString()
@@ -3015,10 +2854,9 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			BG.MaxTorque = Vector3.new(9e9, 9e9, 9e9)
 			BG.CFrame = T.CFrame
 			spawn(function()
-				if not vfly then
-					H.PlatformStand = true
-				end
-				repeat RunService.Stepped:Wait()
+				if not vfly then H.PlatformStand = true end
+				repeat
+					RunService.Stepped:Wait()
 					BV.MaxForce = Vector3.new(9e9, 9e9, 9e9)
 					BG.MaxTorque = Vector3.new(9e9, 9e9, 9e9)
 					local cf = Camera.CFrame
@@ -3049,26 +2887,31 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	function NOCFLY()
 		if CFLYING ~= nil then
 			local h = CFLYING:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h.PlatformStand = false
-			end
+			if h ~= nil then h.PlatformStand = false end
 		end
 		CFLYING = nil
 	end
 	local CSPEED = 50
 	function CFLY()
-		repeat wait() until Players.LocalPlayer and Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-		repeat wait() until IYMouse
+		repeat
+			wait()
+		until Players.LocalPlayer and Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+		repeat
+			wait()
+		until IYMouse
 		CFLYING = Players.LocalPlayer.Character
 		local H = CFLYING:FindFirstChildOfClass("Humanoid")
 		local T = nil
-		repeat T = H.RootPart wait() until T ~= nil
-		local CONTROL = {X = 0, Y = 0, Z = 0}
+		repeat
+			T = H.RootPart
+			wait()
+		until T ~= nil
+		local CONTROL = { X = 0, Y = 0, Z = 0 }
 		local function _FLY()
 			spawn(function()
 				local char = CFLYING
 				local CF = T.CFrame
-				repeat 
+				repeat
 					local dt = RunService.Heartbeat:Wait()
 					H.PlatformStand = true
 					local cf = Camera.CFrame
@@ -3078,7 +2921,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 					vel += cf.UpVector * CONTROL.Y * SPEED
 					CF = CFrame.new(CF.Position + (vel * dt)) * cf.Rotation
 					T.CFrame = CF
-					for _,v in pairs(char:GetDescendants()) do
+					for _, v in pairs(char:GetDescendants()) do
 						if v:IsA("BasePart") then
 							v.Velocity = Vector3.new(0, 0, 0)
 							v.RotVelocity = Vector3.new(0, 0, 0)
@@ -3117,9 +2960,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			repeat
 				RunService.Stepped:Wait()
 				local feet = 3 + h.HipHeight
-				if h.RigType == Enum.HumanoidRigType.R15 then
-					feet = 1 + h.HipHeight
-				end
+				if h.RigType == Enum.HumanoidRigType.R15 then feet = 1 + h.HipHeight end
 				f.Anchored = true
 				f.CanCollide = true
 				f.Position = r.Position - Vector3.new(0, feet + (f.Size.Y / 2), 0)
@@ -3127,16 +2968,14 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		end
 	end
 	local function NOFLOAT()
-		if FLOATING ~= nil then
-			FLOATING:Destroy()
-		end
+		if FLOATING ~= nil then FLOATING:Destroy() end
 		FLOATING = nil
 	end
 	IY_AddCommand({
 		Command = "fly",
 		Aliases = {},
 		Arguments = {
-			{Name = "speed", Optional = true, Description = "Fly speed"},
+			{ Name = "speed", Optional = true, Description = "Fly speed" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Lets you fly around",
@@ -3160,7 +2999,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Command = "vfly",
 		Aliases = {},
 		Arguments = {
-			{Name = "speed", Optional = true, Description = "Fly speed"},
+			{ Name = "speed", Optional = true, Description = "Fly speed" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Lets you fly around with a vehicle",
@@ -3182,9 +3021,9 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "cframefly",
-		Aliases = {"cfly"},
+		Aliases = { "cfly" },
 		Arguments = {
-			{Name = "speed", Optional = true, Description = "Fly speed"},
+			{ Name = "speed", Optional = true, Description = "Fly speed" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Fly using CFrame, the replicating version.",
@@ -3206,7 +3045,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "unfly",
-		Aliases = {"nofly"},
+		Aliases = { "nofly" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Disables flying (works for 3 types of fly)",
@@ -3218,23 +3057,19 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "unvfly",
-		Aliases = {"novfly"},
+		Aliases = { "novfly" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Disables vehicle flying (same as unfly)",
-		Execute = function()
-			IY_ExecuteCommand("unfly")
-		end,
+		Execute = function() IY_ExecuteCommand("unfly") end,
 	})
 	IY_AddCommand({
 		Command = "uncfly",
-		Aliases = {"nocfly"},
+		Aliases = { "nocfly" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Disables CFrame flying (same as unfly)",
-		Execute = function()
-			IY_ExecuteCommand("unfly")
-		end,
+		Execute = function() IY_ExecuteCommand("unfly") end,
 	})
 	local ncconn = nil
 	IY_AddCommand({
@@ -3245,16 +3080,12 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Description = "Go through walls by letting your atoms align",
 		Execute = function()
 			notify("Noclip", "Noclip Enabled")
-			if ncconn ~= nil then
-				ncconn:Disconnect()
-			end
+			if ncconn ~= nil then ncconn:Disconnect() end
 			ncconn = RunService.Stepped:Connect(function()
 				local char = Players.LocalPlayer.Character
 				if char ~= nil then
-					for _,v in pairs(char:GetDescendants()) do
-						if v:IsA("BasePart") and v ~= FLOATING then
-							v.CanCollide = false
-						end
+					for _, v in pairs(char:GetDescendants()) do
+						if v:IsA("BasePart") and v ~= FLOATING then v.CanCollide = false end
 					end
 				end
 			end)
@@ -3262,15 +3093,13 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "unnoclip",
-		Aliases = {"clip"},
+		Aliases = { "clip" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Become solid again, i guess",
 		Execute = function()
 			notify("Noclip", "Noclip Disabled")
-			if ncconn ~= nil then
-				ncconn:Disconnect()
-			end
+			if ncconn ~= nil then ncconn:Disconnect() end
 			local char = Players.LocalPlayer.Character
 			local root = char:FindFirstChild("HumanoidRootPart")
 			if root ~= nil then root.CanCollide = true end
@@ -3279,25 +3108,23 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	local vnoclipParts = {}
 	IY_AddCommand({
 		Command = "vehiclenoclip",
-		Aliases = {"vnoclip"},
+		Aliases = { "vnoclip" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Make your vehicle's atoms align",
 		Execute = function()
 			notify("Noclip", "Vehicle Noclip Enabled")
 			vnoclipParts = {}
-			local seat = Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').SeatPart
+			local seat = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").SeatPart
 			local vehicleModel = seat.Parent
 			repeat
-				if vehicleModel.ClassName ~= "Model" then
-					vehicleModel = vehicleModel.Parent
-				end
+				if vehicleModel.ClassName ~= "Model" then vehicleModel = vehicleModel.Parent end
 			until vehicleModel.ClassName == "Model"
 			wait(0.1)
 			IY_ExecuteCommand("noclip", true)
-			for i,v in pairs(vehicleModel:GetDescendants()) do
+			for i, v in pairs(vehicleModel:GetDescendants()) do
 				if v:IsA("BasePart") and v.CanCollide then
-					table.insert(vnoclipParts,v)
+					table.insert(vnoclipParts, v)
 					v.CanCollide = false
 				end
 			end
@@ -3305,7 +3132,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "vehicleclip",
-		Aliases = {"vclip", "unvehiclenoclip", "unvnoclip"},
+		Aliases = { "vclip", "unvehiclenoclip", "unvnoclip" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Solidify your vehicle back",
@@ -3320,7 +3147,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "float",
-		Aliases = {"platform"},
+		Aliases = { "platform" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Places a floor directly on your feet",
@@ -3334,7 +3161,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "unfloat",
-		Aliases = {"unplatform", "nofloat", "noplatform"},
+		Aliases = { "unplatform", "nofloat", "noplatform" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops float/platform",
@@ -3348,7 +3175,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Command = "spin",
 		Aliases = {},
 		Arguments = {
-			{Name = "speed", Optional = true, Description = "Spin speed"},
+			{ Name = "speed", Optional = true, Description = "Spin speed" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Watch out here I, watch out here I come. Spin me right round baby right round like a record baby right round round round.",
@@ -3380,13 +3207,11 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "unfling",
-		Aliases = {"nofling"},
+		Aliases = { "nofling" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "makes you boring",
-		Execute = function()
-			fligning = false
-		end,
+		Execute = function() fligning = false end,
 	})
 	local fligning = false
 	IY_AddCommand({
@@ -3408,11 +3233,9 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			local root = char:FindFirstChild("HumanoidRootPart")
 			if root == nil then return end
 			local nocliper = RunService.PreSimulation:Connect(function()
-				for _,v in pairs(char:GetDescendants()) do
+				for _, v in pairs(char:GetDescendants()) do
 					if v:IsA("BasePart") then
-						if v.Parent == char then
-							v.CustomPhysicalProperties = PhysicalProperties.new(100, 0.3, 0.5)
-						end
+						if v.Parent == char then v.CustomPhysicalProperties = PhysicalProperties.new(100, 0.3, 0.5) end
 						v.CanCollide = false
 					end
 				end
@@ -3423,9 +3246,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			bambam.AngularVelocity = Vector3.new(0, 99999, 0)
 			bambam.MaxTorque = Vector3.new(0, math.huge, 0)
 			bambam.P = math.huge
-			char.Destroying:Connect(function()
-				fligning = false
-			end)
+			char.Destroying:Connect(function() fligning = false end)
 			notify("Fling", "ok now go touch some kids")
 			repeat
 				bambam.AngularVelocity = Vector3.new(0, 99999, 0)
@@ -3434,7 +3255,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 				task.wait(0.1)
 			until not fligning
 			nocliper:Disconnect()
-			for _,v in pairs(char:GetDescendants()) do
+			for _, v in pairs(char:GetDescendants()) do
 				if v:IsA("BasePart") then
 					v.CustomPhysicalProperties = nil
 					v.Velocity = Vector3.zero
@@ -3446,18 +3267,16 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "unfling",
-		Aliases = {"nofling"},
+		Aliases = { "nofling" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "makes you boring",
-		Execute = function()
-			fligning = false
-		end,
+		Execute = function() fligning = false end,
 	})
 	local walkfligning = false
 	IY_AddCommand({
 		Command = "walkfling",
-		Aliases = {"wfling"},
+		Aliases = { "wfling" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "fling but you can walk, better than real iy",
@@ -3480,7 +3299,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 					local root = char:FindFirstChild("HumanoidRootPart")
 					if root ~= nil then
 						local a, b = root.Velocity, root.RotVelocity
-						root.Velocity, root.RotVelocity = Vector3.new(0, -2^64, 0), Vector3.zero
+						root.Velocity, root.RotVelocity = Vector3.new(0, -2 ^ 64, 0), Vector3.zero
 						RunService.PreAnimation:Wait()
 						root.Velocity, root.RotVelocity = a, b
 					end
@@ -3490,19 +3309,17 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "unwalkfling",
-		Aliases = {"unwfling"},
+		Aliases = { "unwfling" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "restore yourself",
-		Execute = function()
-			walkfligning = false
-		end,
+		Execute = function() walkfligning = false end,
 	})
 	IY_AddCommand({
 		Command = "copypos",
-		Aliases = {"copyplrpos"},
+		Aliases = { "copyplrpos" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = true, Description = "The target player"},
+			{ Name = "target", Type = "TARGET", Optional = true, Description = "The target player" },
 		},
 		Plugin = "BUILTIN",
 		Description = "setclipboard(target character pivot)",
@@ -3519,22 +3336,18 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 	IY_AddCommand({
 		Command = "tppos",
-		Aliases = {"gotopos"},
+		Aliases = { "gotopos" },
 		Arguments = {
-			{Name = "X", Optional = true, Description = "X axis"},
-			{Name = "Y", Optional = true, Description = "Y axis"},
-			{Name = "Z", Optional = true, Description = "Z axis"},
+			{ Name = "X", Optional = true, Description = "X axis" },
+			{ Name = "Y", Optional = true, Description = "Y axis" },
+			{ Name = "Z", Optional = true, Description = "Z axis" },
 		},
 		Plugin = "BUILTIN",
 		Description = "teleports you to the coords",
 		Execute = function(x, y, z)
 			local function w(v)
-				if tonumber(v) ~= nil then
-					return tonumber(v)
-				end
-				if v:sub(v:len(),v:len()) == "," then
-					return tonumber(v:sub(1,v:len()-1))
-				end
+				if tonumber(v) ~= nil then return tonumber(v) end
+				if v:sub(v:len(), v:len()) == "," then return tonumber(v:sub(1, v:len() - 1)) end
 			end
 			x = w(x)
 			y = w(y)
@@ -3556,12 +3369,10 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 				antiflingcon = nil
 			end
 			antiflingcon = RunService.PreSimulation:Connect(function()
-				for _,v in pairs(Players:GetPlayers()) do
+				for _, v in pairs(Players:GetPlayers()) do
 					if v ~= Players.LocalPlayer and v.Character ~= nil then
-						for _,w in pairs(v.Character:GetDescendants()) do
-							if w:IsA("BasePart") then
-								w.CanCollide = false
-							end
+						for _, w in pairs(v.Character:GetDescendants()) do
+							if w:IsA("BasePart") then w.CanCollide = false end
 						end
 					end
 				end
@@ -3652,10 +3463,8 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Execute = function()
 			local char = Players.LocalPlayer.Character
 			local root = char:WaitForChild("HumanoidRootPart")
-			for _,v in pairs(char:GetDescendants()) do
-				if v:IsA("BasePart") then
-					v.Massless = v ~= root
-				end
+			for _, v in pairs(char:GetDescendants()) do
+				if v:IsA("BasePart") then v.Massless = v ~= root end
 			end
 		end,
 	})
@@ -3679,7 +3488,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	local hatflinging = false
 	IY_AddCommand({
 		Command = "hatfling",
-		Aliases = {"hfling"},
+		Aliases = { "hfling" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "(r6 only for now) you become hat, but i NGHFHFHFHHFHHH!!! uwu",
@@ -3706,15 +3515,13 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 				local hum = char:WaitForChild("Humanoid")
 				local torso = char:WaitForChild("Torso")
 				local root = char:WaitForChild("HumanoidRootPart")
-				if CurrentCF == nil then
-					CurrentCF = root.CFrame
-				end
-				workspace.FallenPartsDestroyHeight = 0/0
+				if CurrentCF == nil then CurrentCF = root.CFrame end
+				workspace.FallenPartsDestroyHeight = 0 / 0
 				task.wait(0.1)
 				local neko = CFrame.new(0, FallenPartsDestroyHeight + 0.25, 0) * CFrame.Angles(math.pi * 0.5, 0, 0)
 				local hatcolling = true
-				workspace.FallenPartsDestroyHeight = 0/0
-				for _,v in pairs(hum:GetPlayingAnimationTracks()) do
+				workspace.FallenPartsDestroyHeight = 0 / 0
+				for _, v in pairs(hum:GetPlayingAnimationTracks()) do
 					v:Stop(0)
 				end
 				local hack = hum:LoadAnimation(HackAnimation)
@@ -3737,18 +3544,19 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 				if char == Players.LocalPlayer.Character then
 					local hats = {}
 					local statelock = {}
-					for _,v in pairs(char:GetChildren()) do
+					for _, v in pairs(char:GetChildren()) do
 						if v:IsA("Accessory") then
-							table.insert(statelock, v.Changed:Connect(function(p)
-								if p == "BackendAccoutrementState" then
-									sethiddenproperty(v, "BackendAccoutrementState", 0)
-								end
-							end))
+							table.insert(
+								statelock,
+								v.Changed:Connect(function(p)
+									if p == "BackendAccoutrementState" then sethiddenproperty(v, "BackendAccoutrementState", 0) end
+								end)
+							)
 							sethiddenproperty(v, "BackendAccoutrementState", 2)
-							table.insert(hats, {v, v:WaitForChild("Handle")})
+							table.insert(hats, { v, v:WaitForChild("Handle") })
 						end
 					end
-					for _,v in pairs(hats) do
+					for _, v in pairs(hats) do
 						local h = v[2]
 						h:BreakJoints()
 						h.Velocity = Vector3.new(0, 50, 0)
@@ -3758,7 +3566,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 					task.spawn(function()
 						while hatcolling do
 							RunService.PostSimulation:Wait()
-							for _,v in pairs(hats) do
+							for _, v in pairs(hats) do
 								local h = v[2]
 								h.Velocity = Vector3.new(0, 50, 0)
 								h.RotVelocity = Vector3.zero
@@ -3768,18 +3576,18 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 					end)
 					hum:ChangeState(Enum.HumanoidStateType.Dead)
 					torso.AncestryChanged:Wait()
-					for _,v in pairs(statelock) do v:Disconnect() end
-					for _,v in pairs(hats) do
+					for _, v in pairs(statelock) do
+						v:Disconnect()
+					end
+					for _, v in pairs(hats) do
 						sethiddenproperty(v[1], "BackendAccoutrementState", 4)
 					end
 					task.wait(1)
 					local ohats = hats
 					hats = {}
-					for _,v in pairs(ohats) do
+					for _, v in pairs(ohats) do
 						local h = v[2]
-						if h:IsDescendantOf(workspace) and h.CanCollide then
-							table.insert(hats, v)
-						end
+						if h:IsDescendantOf(workspace) and h.CanCollide then table.insert(hats, v) end
 					end
 					hatcolling = false
 					workspace.FallenPartsDestroyHeight = FallenPartsDestroyHeight
@@ -3787,18 +3595,14 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 						replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend)
 						return
 					end
-					table.sort(hats, function(a, b)
-						return a[2].Size.Magnitude > b[2].Size.Magnitude
-					end)
+					table.sort(hats, function(a, b) return a[2].Size.Magnitude > b[2].Size.Magnitude end)
 					flinghat = hats[1][2]
 					flinghat.AncestryChanged:Wait()
 					replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend)
 				end
 			end
 			local c = Players.LocalPlayer.CharacterAdded:Connect(doanywithmeuwu)
-			if Players.LocalPlayer.Character ~= nil then
-				task.spawn(doanywithmeuwu, Players.LocalPlayer.Character)
-			end
+			if Players.LocalPlayer.Character ~= nil then task.spawn(doanywithmeuwu, Players.LocalPlayer.Character) end
 			local cam = Instance.new("Part")
 			cam.Name = randomString()
 			cam.Anchored = true
@@ -3843,27 +3647,23 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			cam:Destroy()
 			c:Disconnect()
 			if flinghat ~= nil then flinghat:Destroy() end
-			if Players.LocalPlayer.Character ~= nil then
-				Players.LocalPlayer.Character:BreakJoints()
-			end
+			if Players.LocalPlayer.Character ~= nil then Players.LocalPlayer.Character:BreakJoints() end
 			replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend)
 		end,
 	})
 	IY_AddCommand({
 		Command = "unhatfling",
-		Aliases = {"unhfling"},
+		Aliases = { "unhfling" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops hatfling",
-		Execute = function()
-			hatflinging = false
-		end,
+		Execute = function() hatflinging = false end,
 	})
 end
 do -- Animation
 	IY_AddCommand({
 		Command = "stopanimations",
-		Aliases = {"stopanims"},
+		Aliases = { "stopanims" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "stops all animations",
@@ -3872,7 +3672,7 @@ do -- Animation
 			if Character ~= nil then
 				local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 				if Humanoid ~= nil then
-					for i,v in pairs(Humanoid:GetPlayingAnimationTracks()) do
+					for i, v in pairs(Humanoid:GetPlayingAnimationTracks()) do
 						v:Stop()
 					end
 				end
@@ -3881,9 +3681,9 @@ do -- Animation
 	})
 	IY_AddCommand({
 		Command = "animationspeed",
-		Aliases = {"animspeed"},
+		Aliases = { "animspeed" },
 		Arguments = {
-			{Name = "speed", Optional = false, Description = "Animation speed"},
+			{ Name = "speed", Optional = false, Description = "Animation speed" },
 		},
 		Plugin = "BUILTIN",
 		Description = "sets all playing animations to this speed",
@@ -3892,7 +3692,7 @@ do -- Animation
 			if Character ~= nil then
 				local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 				if Humanoid ~= nil then
-					for i,v in pairs(Humanoid:GetPlayingAnimationTracks()) do
+					for i, v in pairs(Humanoid:GetPlayingAnimationTracks()) do
 						v:AdjustSpeed(tonumber(speed) or 1)
 					end
 				end
@@ -3905,7 +3705,7 @@ do -- Stuff related to players
 		Command = "goto",
 		Aliases = {},
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Brings you to the target player",
@@ -3918,10 +3718,8 @@ do -- Stuff related to players
 					if target.Character ~= nil then
 						local tar = target.Character:GetPivot()
 						char:PivotTo(tar + (tar.LookVector * -2.5))
-						for _,v in pairs(char:GetChildren()) do
-							if v:IsA("BasePart") then
-								v.AssemblyLinearVelocity = Vector3.zero
-							end
+						for _, v in pairs(char:GetChildren()) do
+							if v:IsA("BasePart") then v.AssemblyLinearVelocity = Vector3.zero end
 						end
 					end
 				end
@@ -3933,7 +3731,7 @@ do -- Stuff related to players
 		Command = "loopgoto",
 		Aliases = {},
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Repeatedly brings you to the target player",
@@ -3949,10 +3747,8 @@ do -- Stuff related to players
 						if target.Character ~= nil then
 							local tar = target.Character:GetPivot()
 							char:PivotTo(tar)
-							for _,v in pairs(char:GetChildren()) do
-								if v:IsA("BasePart") then
-									v.AssemblyLinearVelocity = Vector3.zero
-								end
+							for _, v in pairs(char:GetChildren()) do
+								if v:IsA("BasePart") then v.AssemblyLinearVelocity = Vector3.zero end
 							end
 						end
 					end
@@ -3963,33 +3759,29 @@ do -- Stuff related to players
 	})
 	IY_AddCommand({
 		Command = "unloopgoto",
-		Aliases = {"noloopgoto"},
+		Aliases = { "noloopgoto" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stop loopgoto",
-		Execute = function()
-			loopgotoing = false
-		end,
+		Execute = function() loopgotoing = false end,
 	})
 	IY_AddCommand({
 		Command = "clientbring",
-		Aliases = {"cbring"},
+		Aliases = { "cbring" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Brings the target player in your clientside",
 		Execute = function(list)
 			local me = Players.LocalPlayer.Character:GetPivot()
 			local targets = getPlayer(list)
-			for _,v in pairs(targets) do
+			for _, v in pairs(targets) do
 				local plr = Players:FindFirstChild(v)
 				if plr ~= nil then
 					if plr.Character then
 						local r = plr.Character:FindFirstChild("HumanoidRootPart")
-						if r ~= nil then
-							r.CFrame = me + (me.LookVector * 4)
-						end
+						if r ~= nil then r.CFrame = me + (me.LookVector * 4) end
 					end
 				end
 			end
@@ -3998,9 +3790,9 @@ do -- Stuff related to players
 	local loopbringing = false
 	IY_AddCommand({
 		Command = "loopclientbring",
-		Aliases = {"loopcbring", "loopbring"},
+		Aliases = { "loopcbring", "loopbring" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Repeatedly brings the target player in your clientside",
@@ -4010,14 +3802,12 @@ do -- Stuff related to players
 			while loopbringing do
 				if Players.LocalPlayer.Character ~= nil then
 					local me = Players.LocalPlayer.Character:GetPivot()
-					for _,v in pairs(targets) do
+					for _, v in pairs(targets) do
 						local plr = Players:FindFirstChild(v)
 						if plr ~= nil then
 							if plr.Character then
 								local r = plr.Character:FindFirstChild("HumanoidRootPart")
-								if r ~= nil then
-									r.CFrame = me + (me.LookVector * 4)
-								end
+								if r ~= nil then r.CFrame = me + (me.LookVector * 4) end
 							end
 						end
 					end
@@ -4028,13 +3818,11 @@ do -- Stuff related to players
 	})
 	IY_AddCommand({
 		Command = "unloopclientbring",
-		Aliases = {"unloopcbring", "unloopbring"},
+		Aliases = { "unloopcbring", "unloopbring" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Stop loopclientbring",
-		Execute = function()
-			loopbringing = false
-		end,
+		Execute = function() loopbringing = false end,
 	})
 	local function febring(yu, to, tries)
 		tries = tries or 1
@@ -4058,7 +3846,7 @@ do -- Stuff related to players
 		while t < 1 do
 			local dt = RunService.PostSimulation:Wait()
 			meh:ChangeState(Enum.HumanoidStateType.Physics)
-			for _,v in pairs(meh:GetPlayingAnimationTracks()) do
+			for _, v in pairs(meh:GetPlayingAnimationTracks()) do
 				v:Stop(0)
 			end
 			t += dt * ts * sp
@@ -4086,28 +3874,24 @@ do -- Stuff related to players
 			lastpos = targ
 			table.insert(coins, targ + Vector3.new(0, 3, 0))
 			ct += dt
-			for i,v in pairs(coins) do
+			for i, v in pairs(coins) do
 				if (yur.Position - v).Magnitude < 3 then
 					ct = 0
 					coins[i] = v + Vector3.new(0, 10000, 0)
 				end
 			end
-			if ct > 0.8 + Players.LocalPlayer:GetNetworkPing() then
-				break
-			end
+			if ct > 0.8 + Players.LocalPlayer:GetNetworkPing() then break end
 		end
 		meh:ChangeState(Enum.HumanoidStateType.GettingUp)
 		mer.CFrame = oldcf
 		mer.Velocity = Vector3.zero
-		if t < 1 and yur.Velocity.Y > workspace.Gravity * -0.5 and yu:IsDescendantOf(workspace) and tries < 5 then
-			return febring(yu, to, tries + 1)
-		end
+		if t < 1 and yur.Velocity.Y > workspace.Gravity * -0.5 and yu:IsDescendantOf(workspace) and tries < 5 then return febring(yu, to, tries + 1) end
 	end
 	IY_AddCommand({
 		Command = "bring",
-		Aliases = {"febring"},
+		Aliases = { "febring" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Brings player to your position using your character",
@@ -4116,18 +3900,16 @@ do -- Stuff related to players
 			local to = Players.LocalPlayer.Character.HumanoidRootPart.Position
 			if targets[1] ~= nil then
 				local plr = game.Players:FindFirstChild(targets[1])
-				if plr ~= nil and plr.Character ~= nil then
-					febring(plr.Character, to)
-				end
+				if plr ~= nil and plr.Character ~= nil then febring(plr.Character, to) end
 			end
 		end,
 	})
 	IY_AddCommand({
 		Command = "bringto",
-		Aliases = {"febringto"},
+		Aliases = { "febringto" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player to bring"},
-			{Name = "source", Type = "TARGET", Optional = false, Description = "The target player to bring to"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player to bring" },
+			{ Name = "source", Type = "TARGET", Optional = false, Description = "The target player to bring to" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Brings player to your position using your character",
@@ -4137,31 +3919,27 @@ do -- Stuff related to players
 			if targets[1] ~= nil and sources[1] ~= nil then
 				local plr1 = game.Players:FindFirstChild(targets[1])
 				local plr2 = game.Players:FindFirstChild(sources[1])
-				if plr1 ~= nil and plr1.Character ~= nil and plr2 ~= nil and plr2.Character ~= nil then
-					febring(plr1.Character, plr2.Character.HumanoidRootPart.Position)
-				end
+				if plr1 ~= nil and plr1.Character ~= nil and plr2 ~= nil and plr2.Character ~= nil then febring(plr1.Character, plr2.Character.HumanoidRootPart.Position) end
 			end
 		end,
 	})
 	IY_AddCommand({
 		Command = "freeze",
-		Aliases = {"fr"},
+		Aliases = { "fr" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Freezes the target player in your clientside",
 		Execute = function(list)
 			local targets = getPlayer(list)
-			if list == nil or string.len(list) <= 0 then targets = {Players.LocalPlayer.Name} end
-			for _,v in pairs(targets) do
+			if list == nil or string.len(list) <= 0 then targets = { Players.LocalPlayer.Name } end
+			for _, v in pairs(targets) do
 				local plr = Players:FindFirstChild(v)
 				if plr ~= nil then
 					if plr.Character then
-						for _,v in pairs(plr.Character:GetDescendants()) do
-							if v:IsA("BasePart") then
-								v.Anchored = true
-							end
+						for _, v in pairs(plr.Character:GetDescendants()) do
+							if v:IsA("BasePart") then v.Anchored = true end
 						end
 					end
 				end
@@ -4170,23 +3948,21 @@ do -- Stuff related to players
 	})
 	IY_AddCommand({
 		Command = "unfreeze",
-		Aliases = {"unfr", "thaw"},
+		Aliases = { "unfr", "thaw" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Unfreezes the target player in your clientside",
 		Execute = function(list)
 			local targets = getPlayer(list)
-			if list == nil or string.len(list) <= 0 then targets = {Players.LocalPlayer.Name} end
-			for _,v in pairs(targets) do
+			if list == nil or string.len(list) <= 0 then targets = { Players.LocalPlayer.Name } end
+			for _, v in pairs(targets) do
 				local plr = Players:FindFirstChild(v)
 				if plr ~= nil then
 					if plr.Character then
-						for _,v in pairs(plr.Character:GetDescendants()) do
-							if v:IsA("BasePart") then
-								v.Anchored = false
-							end
+						for _, v in pairs(plr.Character:GetDescendants()) do
+							if v:IsA("BasePart") then v.Anchored = false end
 						end
 					end
 				end
@@ -4197,13 +3973,11 @@ do -- Stuff related to players
 		Command = "gravity",
 		Aliases = {},
 		Arguments = {
-			{Name = "studs/s2", Optional = false, Description = "studs per second, per second"},
+			{ Name = "studs/s2", Optional = false, Description = "studs per second, per second" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Set the workspace gravity in your clientside",
-		Execute = function(grav)
-			workspace.Gravity = tonumber(grav) or 196.2
-		end,
+		Execute = function(grav) workspace.Gravity = tonumber(grav) or 196.2 end,
 	})
 end
 __OnDiedEvent = {}
@@ -4211,7 +3985,7 @@ do -- Silly Spawning related commands
 	local LastDeath = nil
 	IY_AddCommand({
 		Command = "flashback",
-		Aliases = {"diedtp"},
+		Aliases = { "diedtp" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Teleports you to where you last died",
@@ -4226,7 +4000,7 @@ do -- Silly Spawning related commands
 	local spawnpos = nil
 	IY_AddCommand({
 		Command = "spawnpoint",
-		Aliases = {"spawn"},
+		Aliases = { "spawn" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Set spawnpoint",
@@ -4234,16 +4008,14 @@ do -- Silly Spawning related commands
 			local char = Players.LocalPlayer.Character
 			if char ~= nil then
 				local root = char:FindFirstChild("HumanoidRootPart")
-				if root ~= nil then
-					spawnpos = root.CFrame
-				end
+				if root ~= nil then spawnpos = root.CFrame end
 			end
 			notify("Spawnpoint", "Spawn point created!")
 		end,
 	})
 	IY_AddCommand({
 		Command = "unspawnpoint",
-		Aliases = {"unspawn", "nospawnpoint", "nospawn"},
+		Aliases = { "unspawn", "nospawnpoint", "nospawn" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Remove spawnpoint",
@@ -4255,7 +4027,7 @@ do -- Silly Spawning related commands
 	local flashbackOnRespawn = false
 	IY_AddCommand({
 		Command = "autoflashback",
-		Aliases = {"autodiedtp"},
+		Aliases = { "autodiedtp" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Automatically teleports you to where you died when you respawn",
@@ -4266,7 +4038,7 @@ do -- Silly Spawning related commands
 	})
 	IY_AddCommand({
 		Command = "unautoflashback",
-		Aliases = {"unautodiedtp", "noautoflashback", "noautodiedtp"},
+		Aliases = { "unautodiedtp", "noautoflashback", "noautodiedtp" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops autoflashback",
@@ -4285,10 +4057,8 @@ do -- Silly Spawning related commands
 					hum.Died:Connect(function()
 						LastDeath = nil
 						local r = hum.RootPart
-						if r ~= nil then
-							LastDeath = r.CFrame
-						end
-						for _,f in pairs(__OnDiedEvent) do
+						if r ~= nil then LastDeath = r.CFrame end
+						for _, f in pairs(__OnDiedEvent) do
 							spawn(f)
 						end
 					end)
@@ -4300,7 +4070,9 @@ do -- Silly Spawning related commands
 		end)
 	end
 	Players.LocalPlayer.CharacterAdded:Connect(function()
-		repeat wait() until Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+		repeat
+			wait()
+		until Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 		pcall(function()
 			if flashbackOnRespawn then
 				wait()
@@ -4317,15 +4089,9 @@ end
 do -- Silly Tool related commands
 	IY_ConfigJson.LoopkillConfig = IY_ConfigJson.LoopkillConfig or {}
 	local loopkillcfg = IY_ConfigJson.LoopkillConfig
-	if loopkillcfg.ufte == nil then
-		loopkillcfg.ufte = true
-	end
-	if loopkillcfg.ause == nil then
-		loopkillcfg.ause = true
-	end
-	if loopkillcfg.ares == nil then
-		loopkillcfg.ares = false
-	end
+	if loopkillcfg.ufte == nil then loopkillcfg.ufte = true end
+	if loopkillcfg.ause == nil then loopkillcfg.ause = true end
+	if loopkillcfg.ares == nil then loopkillcfg.ares = false end
 	loopkillcfg.arest = loopkillcfg.arest or 3
 	local loophkilling = false
 	local loophkilling_ufte = loopkillcfg.ufte
@@ -4336,7 +4102,7 @@ do -- Silly Tool related commands
 		if char == Players.LocalPlayer.Character then return end
 		tooh.CanTouch = true
 		if loophkilling_ufte and firetouchinterest ~= nil then
-			for _,v in pairs(char:GetDescendants()) do
+			for _, v in pairs(char:GetDescendants()) do
 				if v:IsA("BasePart") then
 					v.CanTouch = true
 					pcall(firetouchinterest, tooh, v, 1)
@@ -4344,7 +4110,7 @@ do -- Silly Tool related commands
 				end
 			end
 		else
-			for _,v in pairs(char:GetDescendants()) do
+			for _, v in pairs(char:GetDescendants()) do
 				if v:IsA("BasePart") then
 					v:BreakJoints()
 					v.CanCollide = false
@@ -4359,9 +4125,9 @@ do -- Silly Tool related commands
 	end
 	IY_AddCommand({
 		Command = "kill",
-		Aliases = {"handlekill", "hkill"},
+		Aliases = { "handlekill", "hkill" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Kills the target using tools that kill on touch (like the Classic Sword)",
@@ -4378,15 +4144,13 @@ do -- Silly Tool related commands
 			end
 			local targets = getPlayer(list)
 			local models = {}
-			for _,v in pairs(targets) do
+			for _, v in pairs(targets) do
 				local plr = Players[v]
-				if plr ~= Players.LocalPlayer and plr.Character then
-					table.insert(models, plr.Character)
-				end
+				if plr ~= Players.LocalPlayer and plr.Character then table.insert(models, plr.Character) end
 			end
 			while tooh:IsDescendantOf(workspace) do
 				local k = false
-				for _,char in pairs(models) do
+				for _, char in pairs(models) do
 					if char:IsDescendantOf(workspace) then
 						k = true
 						touchthisfurry(tooh, char)
@@ -4400,11 +4164,11 @@ do -- Silly Tool related commands
 	local auraing = false
 	IY_AddCommand({
 		Command = "aura",
-		Aliases = {"protect"},
+		Aliases = { "protect" },
 		Arguments = {
-			{Name = "master", Type = "TARGET", Optional = false, Description = "The player to aura"},
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target players"},
-			{Name = "radius", Optional = false, Description = "Aura radius"},
+			{ Name = "master", Type = "TARGET", Optional = false, Description = "The player to aura" },
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target players" },
+			{ Name = "radius", Optional = false, Description = "Aura radius" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Creates a kill aura on the master using tools that kill on touch (like the classic sword)",
@@ -4421,10 +4185,8 @@ do -- Silly Tool related commands
 				return
 			end
 			local function getChild(parent, name, class)
-				for _,v in pairs(parent:GetChildren()) do
-					if v.Name == name and v.ClassName == class then
-						return v
-					end
+				for _, v in pairs(parent:GetChildren()) do
+					if v.Name == name and v.ClassName == class then return v end
 				end
 			end
 			local toolname = tool.Name
@@ -4441,24 +4203,18 @@ do -- Silly Tool related commands
 								h:UnequipTools()
 								tool.Parent = Players.LocalPlayer.Character
 							end
-							if loophkilling_ause then
-								tool:Activate()
-							end
+							if loophkilling_ause then tool:Activate() end
 						else
 							continue
 						end
 						local tooh = tool:FindFirstChild("Handle")
-						if tooh == nil then
-							continue
-						end
+						if tooh == nil then continue end
 						if aurafarmer.Character ~= nil then
 							local targets = getPlayer(list2)
 							if #targets > 0 then
-								for _,v in pairs(targets) do
+								for _, v in pairs(targets) do
 									local plr = Players[v]
-									if plr.Character and aurafarmer:DistanceFromCharacter(plr.Character:GetPivot().Position) <= radius then
-										touchthisfurry(tooh, plr.Character)
-									end
+									if plr.Character and aurafarmer:DistanceFromCharacter(plr.Character:GetPivot().Position) <= radius then touchthisfurry(tooh, plr.Character) end
 								end
 							end
 						end
@@ -4469,19 +4225,17 @@ do -- Silly Tool related commands
 	})
 	IY_AddCommand({
 		Command = "unaura",
-		Aliases = {"unprotect"},
+		Aliases = { "unprotect" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops aura",
-		Execute = function()
-			auraing = false
-		end,
+		Execute = function() auraing = false end,
 	})
 	IY_AddCommand({
 		Command = "loopkill",
-		Aliases = {"loophandlekill", "loophkill"},
+		Aliases = { "loophandlekill", "loophkill" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player/s" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Repeatedly kills the target using tools that kill on touch (like the classic sword)",
@@ -4497,10 +4251,8 @@ do -- Silly Tool related commands
 				return
 			end
 			local function getChild(parent, name, class)
-				for _,v in pairs(parent:GetChildren()) do
-					if v.Name == name and v.ClassName == class then
-						return v
-					end
+				for _, v in pairs(parent:GetChildren()) do
+					if v.Name == name and v.ClassName == class then return v end
 				end
 			end
 			local toolname = tool.Name
@@ -4526,18 +4278,14 @@ do -- Silly Tool related commands
 							continue
 						end
 						local tooh = tool:FindFirstChild("Handle")
-						if tooh == nil then
-							continue
-						end
+						if tooh == nil then continue end
 						local targets = getPlayer(list)
 						if #targets > 0 then
 							if not loophkilling_ares then lastreset = tick() end
 							if tick() - lastreset < loophkilling_ares_d then
-								for _,v in pairs(targets) do
+								for _, v in pairs(targets) do
 									local plr = Players[v]
-									if plr.Character then
-										touchthisfurry(tooh, plr.Character)
-									end
+									if plr.Character then touchthisfurry(tooh, plr.Character) end
 								end
 							else
 								h:ChangeState(Enum.HumanoidStateType.Dead)
@@ -4562,13 +4310,11 @@ do -- Silly Tool related commands
 	})
 	IY_AddCommand({
 		Command = "unloopkill",
-		Aliases = {"unloophandlekill", "unloophkill"},
+		Aliases = { "unloophandlekill", "unloophkill" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops loopkill",
-		Execute = function()
-			loophkilling = false
-		end,
+		Execute = function() loophkilling = false end,
 	})
 	IY_AddSetting("LABEL", "Handle kill Settings")
 	local loophkill_a = IY_AddSetting("SWITCH", "Use firetouchinterest")
@@ -4595,7 +4341,7 @@ do -- Silly Tool related commands
 		loopkillcfg.ares = loophkilling_ares
 	end)
 	loophkill_c.Value = loophkilling_ares and 1 or 0
-	local loophkill_d = IY_AddSetting("SELECT", "Reset Time", {"1", "2", "3", "4", "5"})
+	local loophkill_d = IY_AddSetting("SELECT", "Reset Time", { "1", "2", "3", "4", "5" })
 	loophkill_d.Changed:Connect(function()
 		loophkilling_ares_d = loophkill_d.Value
 		loopkillcfg.arest = loophkilling_ares_d
@@ -4609,10 +4355,8 @@ do -- Silly Tool related commands
 		Description = "Equips all tools in your backpack",
 		Execute = function()
 			if Players.LocalPlayer.Character ~= nil then
-				for _,v in pairs(Players.LocalPlayer.Backpack:GetChildren()) do
-					if v:IsA("Tool") then
-						v.Parent = Players.LocalPlayer.Character
-					end
+				for _, v in pairs(Players.LocalPlayer.Backpack:GetChildren()) do
+					if v:IsA("Tool") then v.Parent = Players.LocalPlayer.Character end
 				end
 			end
 		end,
@@ -4626,9 +4370,7 @@ do -- Silly Tool related commands
 		Execute = function()
 			if Players.LocalPlayer.Character ~= nil then
 				local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-				if h ~= nil then
-					h:UnequipTools()
-				end
+				if h ~= nil then h:UnequipTools() end
 			end
 		end,
 	})
@@ -4642,10 +4384,8 @@ do -- Silly Tool related commands
 			if Players.LocalPlayer.Character ~= nil then
 				local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 				if h ~= nil then
-					for _,v in pairs(Players.LocalPlayer.Character:GetChildren()) do
-						if v:IsA("Tool") and v.CanBeDropped then
-							v.Parent = workspace
-						end
+					for _, v in pairs(Players.LocalPlayer.Character:GetChildren()) do
+						if v:IsA("Tool") and v.CanBeDropped then v.Parent = workspace end
 					end
 				end
 			end
@@ -4661,15 +4401,11 @@ do -- Silly Tool related commands
 			if Players.LocalPlayer.Character ~= nil then
 				local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 				if h ~= nil then
-					for _,v in pairs(Players.LocalPlayer.Backpack:GetChildren()) do
-						if v:IsA("Tool") and v.CanBeDropped then
-							v.Parent = Players.LocalPlayer.Character
-						end
+					for _, v in pairs(Players.LocalPlayer.Backpack:GetChildren()) do
+						if v:IsA("Tool") and v.CanBeDropped then v.Parent = Players.LocalPlayer.Character end
 					end
-					for _,v in pairs(Players.LocalPlayer.Character:GetChildren()) do
-						if v:IsA("Tool") and v.CanBeDropped then
-							v.Parent = workspace
-						end
+					for _, v in pairs(Players.LocalPlayer.Character:GetChildren()) do
+						if v:IsA("Tool") and v.CanBeDropped then v.Parent = workspace end
 					end
 				end
 			end
@@ -4677,7 +4413,7 @@ do -- Silly Tool related commands
 	})
 	IY_AddCommand({
 		Command = "activatetools",
-		Aliases = {"usetools"},
+		Aliases = { "usetools" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Activates all equipped tools",
@@ -4685,10 +4421,8 @@ do -- Silly Tool related commands
 			if Players.LocalPlayer.Character ~= nil then
 				local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 				if h ~= nil then
-					for _,v in pairs(Players.LocalPlayer.Character:GetChildren()) do
-						if v:IsA("Tool") then
-							v:Activate()
-						end
+					for _, v in pairs(Players.LocalPlayer.Character:GetChildren()) do
+						if v:IsA("Tool") then v:Activate() end
 					end
 				end
 			end
@@ -4708,7 +4442,7 @@ do -- Silly Tool related commands
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 					if h ~= nil then
-						for _,v in pairs(Players.LocalPlayer.Character:GetChildren()) do
+						for _, v in pairs(Players.LocalPlayer.Character:GetChildren()) do
 							if v:IsA("Tool") then
 								v.Enabled = true
 								v:Activate()
@@ -4726,9 +4460,7 @@ do -- Silly Tool related commands
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops spamtools",
-		Execute = function()
-			spamtoolsing = false
-		end,
+		Execute = function() spamtoolsing = false end,
 	})
 	IY_AddCommand({
 		Command = "grabtools",
@@ -4740,10 +4472,8 @@ do -- Silly Tool related commands
 			if Players.LocalPlayer.Character ~= nil then
 				local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 				if h ~= nil then
-					for _,v in pairs(workspace:GetChildren()) do
-						if v:IsA("Tool") then
-							h:EquipTool(v)
-						end
+					for _, v in pairs(workspace:GetChildren()) do
+						if v:IsA("Tool") then h:EquipTool(v) end
 					end
 				end
 			end
@@ -4763,9 +4493,7 @@ do -- Silly Tool related commands
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 					if h ~= nil then
-						if v:IsA("Tool") then
-							h:EquipTool(v)
-						end
+						if v:IsA("Tool") then h:EquipTool(v) end
 					end
 				end
 			end)
@@ -4785,9 +4513,9 @@ do -- Silly Tool related commands
 	local reachname = randomString()
 	IY_AddCommand({
 		Command = "reach",
-		Aliases = {"toolsize", "toolhitbox", "boxreach"},
+		Aliases = { "toolsize", "toolhitbox", "boxreach" },
 		Arguments = {
-			{Name = "size", Optional = true, Description = "New handle size in studs"},
+			{ Name = "size", Optional = true, Description = "New handle size in studs" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Increases your tool's Handle's Size, allowing you to killaura in some games",
@@ -4812,8 +4540,8 @@ do -- Silly Tool related commands
 		Command = "toolorbit",
 		Aliases = {},
 		Arguments = {
-			{Name = "speed", Optional = true, Description = "Speed of orbit (in pies, defaults to 1)"},
-			{Name = "size", Optional = true, Description = "Size of orbit (in studs, defaults to 8)"},
+			{ Name = "speed", Optional = true, Description = "Speed of orbit (in pies, defaults to 1)" },
+			{ Name = "size", Optional = true, Description = "Size of orbit (in studs, defaults to 8)" },
 		},
 		Plugin = "BUILTIN",
 		Description = "All tools go in orbit.",
@@ -4831,15 +4559,13 @@ do -- Silly Tool related commands
 				local char = Players.LocalPlayer.Character
 				local back = Players.LocalPlayer:FindFirstChildOfClass("Backpack")
 				if char ~= nil and back ~= nil then
-					for _,v in pairs(char:GetChildren()) do
-						if v:IsA("Tool") and orbits[v] == nil then
-							orbits[v] = {
-								CFrame.Angles(math.random() * math.pi * 2, math.random() * math.pi * 2, math.random() * math.pi * 2),
-								math.random()
-							}
-						end
+					for _, v in pairs(char:GetChildren()) do
+						if v:IsA("Tool") and orbits[v] == nil then orbits[v] = {
+							CFrame.Angles(math.random() * math.pi * 2, math.random() * math.pi * 2, math.random() * math.pi * 2),
+							math.random(),
+						} end
 					end
-					for k,v in pairs(orbits) do
+					for k, v in pairs(orbits) do
 						if k.Parent == char then
 							v[2] = (v[2] + (dt * speed * 0.5)) % 1
 							k.Parent = back
@@ -4861,21 +4587,19 @@ do -- Silly Tool related commands
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "remove gravitational pull",
-		Execute = function()
-			toolorbitting = false
-		end,
+		Execute = function() toolorbitting = false end,
 	})
 	IY_AddCommand({
 		Command = "dupetools",
-		Aliases = {"clonetools"},
+		Aliases = { "clonetools" },
 		Arguments = {
-			{Name = "times", Optional = false, Description = "How many times to dupe"},
+			{ Name = "times", Optional = false, Description = "How many times to dupe" },
 		},
 		Plugin = "BUILTIN",
 		Description = "abuse starterpack/startergear and tool canbedropped for duping",
 		Execute = function(times)
 			times = tonumber(times) or 1
-			for i=1, times do
+			for i = 1, times do
 				local char = Players.LocalPlayer.Character
 				local back = Players.LocalPlayer.Backpack
 				local root = char:WaitForChild("HumanoidRootPart")
@@ -4883,13 +4607,11 @@ do -- Silly Tool related commands
 				root.Velocity = Vector3.zero
 				root.RotVelocity = Vector3.zero
 				task.wait(0.2)
-				for _,v in pairs(back:GetChildren()) do
-					if v:IsA("Tool") and v.CanBeDropped then
-						v.Parent = Players.LocalPlayer.Character
-					end
+				for _, v in pairs(back:GetChildren()) do
+					if v:IsA("Tool") and v.CanBeDropped then v.Parent = Players.LocalPlayer.Character end
 				end
 				local tools = {}
-				for _,v in pairs(char:GetChildren()) do
+				for _, v in pairs(char:GetChildren()) do
 					if v:IsA("Tool") and v.CanBeDropped then
 						v.Parent = workspace
 						table.insert(tools, v)
@@ -4901,7 +4623,7 @@ do -- Silly Tool related commands
 				task.wait(0.2)
 				char = Players.LocalPlayer.Character
 				local hum = char:WaitForChild("Humanoid")
-				for _,v in pairs(tools) do
+				for _, v in pairs(tools) do
 					hum:EquipTool(v)
 				end
 				task.wait(0.5)
@@ -4912,9 +4634,9 @@ end
 do -- Silly Humanoid stuff
 	IY_AddCommand({
 		Command = "walkspeed",
-		Aliases = {"ws", "speed"},
+		Aliases = { "ws", "speed" },
 		Arguments = {
-			{Name = "speed", Optional = false, Description = "Speed to set (Default 16)"},
+			{ Name = "speed", Optional = false, Description = "Speed to set (Default 16)" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Changes your walkspeed",
@@ -4922,17 +4644,15 @@ do -- Silly Humanoid stuff
 			local ws = tonumber(ws) or 16
 			if Players.LocalPlayer.Character ~= nil then
 				local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-				if h ~= nil then
-					h.WalkSpeed = ws
-				end
+				if h ~= nil then h.WalkSpeed = ws end
 			end
 		end,
 	})
 	IY_AddCommand({
 		Command = "jumppower",
-		Aliases = {"jp", "jpower"},
+		Aliases = { "jp", "jpower" },
 		Arguments = {
-			{Name = "power", Optional = false, Description = "Power to set (Default 50)"},
+			{ Name = "power", Optional = false, Description = "Power to set (Default 50)" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Changes your jump power",
@@ -4940,18 +4660,16 @@ do -- Silly Humanoid stuff
 			local jp = tonumber(jp) or 50
 			if Players.LocalPlayer.Character ~= nil then
 				local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-				if h ~= nil then
-					h.JumpPower = jp
-				end
+				if h ~= nil then h.JumpPower = jp end
 			end
 		end,
 	})
 	local loopwsing = false
 	IY_AddCommand({
 		Command = "loopwalkspeed",
-		Aliases = {"loopws", "loopspeed"},
+		Aliases = { "loopws", "loopspeed" },
 		Arguments = {
-			{Name = "speed", Optional = false, Description = "Speed to set (Default 16)"},
+			{ Name = "speed", Optional = false, Description = "Speed to set (Default 16)" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Repeatedly changes your walkspeed",
@@ -4965,29 +4683,25 @@ do -- Silly Humanoid stuff
 				RunService.Stepped:Wait()
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-					if h ~= nil then
-						h.WalkSpeed = ws
-					end
+					if h ~= nil then h.WalkSpeed = ws end
 				end
 			end
 		end,
 	})
 	IY_AddCommand({
 		Command = "unloopwalkspeed",
-		Aliases = {"unloopws", "unloopspeed"},
+		Aliases = { "unloopws", "unloopspeed" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops loopwalkspeed",
-		Execute = function()
-			loopwsing = false
-		end,
+		Execute = function() loopwsing = false end,
 	})
 	local loopjping = false
 	IY_AddCommand({
 		Command = "loopjumppower",
-		Aliases = {"loopjp", "loopbunny"},
+		Aliases = { "loopjp", "loopbunny" },
 		Arguments = {
-			{Name = "power", Optional = false, Description = "Power to set (Default 50)"},
+			{ Name = "power", Optional = false, Description = "Power to set (Default 50)" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Repeatedly changes your jump power",
@@ -5001,34 +4715,28 @@ do -- Silly Humanoid stuff
 				RunService.Stepped:Wait()
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-					if h ~= nil then
-						h.JumpPower = jp
-					end
+					if h ~= nil then h.JumpPower = jp end
 				end
 			end
 		end,
 	})
 	IY_AddCommand({
 		Command = "unloopjumppower",
-		Aliases = {"unloopjp", "unloopbunny"},
+		Aliases = { "unloopjp", "unloopbunny" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops loopjumppower",
-		Execute = function()
-			loopjping = false
-		end,
+		Execute = function() loopjping = false end,
 	})
 	IY_AddCommand({
 		Command = "reset",
-		Aliases = {"die"},
+		Aliases = { "die" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Kills your character",
 		Execute = function()
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h:ChangeState(Enum.HumanoidStateType.Dead)
-			end
+			if h ~= nil then h:ChangeState(Enum.HumanoidStateType.Dead) end
 		end,
 	})
 	IY_AddCommand({
@@ -5039,38 +4747,30 @@ do -- Silly Humanoid stuff
 		Description = "Respawns your character with methods",
 		Execute = function()
 			local h = Players.LocalPlayer.Character
-			if h ~= nil then
-				h:BreakJoints()
-			end
-			if replicatesignal ~= nil then
-				replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend)
-			end
+			if h ~= nil then h:BreakJoints() end
+			if replicatesignal ~= nil then replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend) end
 		end,
 	})
 	IY_AddCommand({
 		Command = "maxslopeangle",
-		Aliases = {"msa"},
+		Aliases = { "msa" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Sets the floor angle your character can walk on",
 		Execute = function(msa)
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h.MaxSlopeAngle = tonumber(msa) or 89
-			end
+			if h ~= nil then h.MaxSlopeAngle = tonumber(msa) or 89 end
 		end,
 	})
 	IY_AddCommand({
 		Command = "hipheight",
-		Aliases = {"hheight"},
+		Aliases = { "hheight" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Sets the R15 Leg height.",
 		Execute = function(hh)
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h.HipHeight = tonumber(hh) or 0
-			end
+			if h ~= nil then h.HipHeight = tonumber(hh) or 0 end
 		end,
 	})
 	IY_AddCommand({
@@ -5081,9 +4781,7 @@ do -- Silly Humanoid stuff
 		Description = "sit anywhere, just balance yourself",
 		Execute = function()
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h.Sit = true
-			end
+			if h ~= nil then h.Sit = true end
 		end,
 	})
 	IY_AddCommand({
@@ -5094,9 +4792,7 @@ do -- Silly Humanoid stuff
 		Description = "i refuse",
 		Execute = function()
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h:SetStateEnabled(Enum.HumanoidStateType.Sitting, false)
-			end
+			if h ~= nil then h:SetStateEnabled(Enum.HumanoidStateType.Sitting, false) end
 		end,
 	})
 	IY_AddCommand({
@@ -5107,9 +4803,7 @@ do -- Silly Humanoid stuff
 		Description = "i accept",
 		Execute = function()
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h:SetStateEnabled(Enum.HumanoidStateType.Sitting, true)
-			end
+			if h ~= nil then h:SetStateEnabled(Enum.HumanoidStateType.Sitting, true) end
 		end,
 	})
 	local headsitting = nil
@@ -5117,7 +4811,7 @@ do -- Silly Humanoid stuff
 		Command = "headsit",
 		Aliases = {},
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player"}
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player" },
 		},
 		Plugin = "BUILTIN",
 		Description = "shoulder sit on players",
@@ -5164,15 +4858,13 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "platformstand",
-		Aliases = {"stun"},
+		Aliases = { "stun" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stuns your character",
 		Execute = function()
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h.PlatformStand = true
-			end
+			if h ~= nil then h.PlatformStand = true end
 		end,
 	})
 	IY_AddCommand({
@@ -5192,7 +4884,7 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "lay",
-		Aliases = {"laydown"},
+		Aliases = { "laydown" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Watch the stars go by...",
@@ -5217,15 +4909,13 @@ do -- Silly Humanoid stuff
 		Description = "wanna see me jump?",
 		Execute = function()
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then
-				h:ChangeState(Enum.HumanoidStateType.Jumping)
-			end
+			if h ~= nil then h:ChangeState(Enum.HumanoidStateType.Jumping) end
 		end,
 	})
 	local inflyjump = nil
 	IY_AddCommand({
 		Command = "infinitejump",
-		Aliases = {"infjump"},
+		Aliases = { "infjump" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Gives you infinite jumps",
@@ -5249,7 +4939,7 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "uninfinitejump",
-		Aliases = {"uninfjump", "noinfinitejump", "noinfjump"},
+		Aliases = { "uninfjump", "noinfinitejump", "noinfjump" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Disables infinite jumping",
@@ -5261,9 +4951,9 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "infiniteveljump",
-		Aliases = {"infveljump"},
+		Aliases = { "infveljump" },
 		Arguments = {
-			{Name = "jumppower", Optional = true, Description = "override jump power"},
+			{ Name = "jumppower", Optional = true, Description = "override jump power" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Gives you velocity based infinite jumps, bypasses infinite jump detectors",
@@ -5276,9 +4966,7 @@ do -- Silly Humanoid stuff
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 					if h ~= nil and h.RootPart ~= nil then
-						h.RootPart.AssemblyLinearVelocity = 
-							(h.RootPart.AssemblyLinearVelocity * Vector3.new(1, 0, 1))
-								+ Vector3.new(0, tonumber(jumppower) or h.JumpPower, 0)
+						h.RootPart.AssemblyLinearVelocity = (h.RootPart.AssemblyLinearVelocity * Vector3.new(1, 0, 1)) + Vector3.new(0, tonumber(jumppower) or h.JumpPower, 0)
 						deb = true
 						wait()
 						deb = false
@@ -5289,7 +4977,7 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "uninfiniteveljump",
-		Aliases = {"uninfveljump", "noinfiniteveljump", "noinfveljump"},
+		Aliases = { "uninfveljump", "noinfiniteveljump", "noinfveljump" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Disables infinite velocity jumping",
@@ -5311,16 +4999,14 @@ do -- Silly Humanoid stuff
 			inflyjump = UserInputService.JumpRequest:Connect(function()
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-					if h ~= nil then
-						h:ChangeState(Enum.HumanoidStateType.Jumping)
-					end
+					if h ~= nil then h:ChangeState(Enum.HumanoidStateType.Jumping) end
 				end
 			end)
 		end,
 	})
 	IY_AddCommand({
 		Command = "unflyjump",
-		Aliases = {"noflyjump"},
+		Aliases = { "noflyjump" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Disables fly jump",
@@ -5333,14 +5019,14 @@ do -- Silly Humanoid stuff
 	local autojump = nil
 	IY_AddCommand({
 		Command = "autojump",
-		Aliases = {"ajump"},
+		Aliases = { "ajump" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Automatically jump over obstacles",
 		Execute = function()
 			notify("Auto Jump", "Auto Jump enabled!")
 			if autojump then autojump:Disconnect() end
-			autojump = RunService.Stepped:Connect(function(_,dt)
+			autojump = RunService.Stepped:Connect(function(_, dt)
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 					if h ~= nil and h.RootPart ~= nil then
@@ -5349,11 +5035,9 @@ do -- Silly Humanoid stuff
 							local rcp = RaycastParams.new()
 							rcp.RespectCanCollide = true
 							rcp.FilterType = Enum.RaycastFilterType.Exclude
-							rcp.FilterDescendantsInstances = {Players.LocalPlayer.Character}
+							rcp.FilterDescendantsInstances = { Players.LocalPlayer.Character }
 							local check = workspace:Blockcast(r.CFrame, r.Size, r.AssemblyLinearVelocity * Vector3.new(dt, 0, dt), rcp)
-							if check ~= nil then
-								h:ChangeState(Enum.HumanoidStateType.Jumping)
-							end
+							if check ~= nil then h:ChangeState(Enum.HumanoidStateType.Jumping) end
 						end
 					end
 				end
@@ -5362,7 +5046,7 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "unautojump",
-		Aliases = {"unajump", "noautojump", "noajump"},
+		Aliases = { "unajump", "noautojump", "noajump" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Disables auto jump",
@@ -5375,7 +5059,7 @@ do -- Silly Humanoid stuff
 	local edgejump = nil
 	IY_AddCommand({
 		Command = "edgejump",
-		Aliases = {"ejump"},
+		Aliases = { "ejump" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Automatically jump over gaps",
@@ -5383,7 +5067,7 @@ do -- Silly Humanoid stuff
 			notify("Edge Jump", "Edge Jump enabled!")
 			if edgejump then edgejump:Disconnect() end
 			local lstate = nil
-			edgejump = RunService.Stepped:Connect(function(_,dt)
+			edgejump = RunService.Stepped:Connect(function(_, dt)
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 					if h ~= nil and h.RootPart ~= nil then
@@ -5392,11 +5076,9 @@ do -- Silly Humanoid stuff
 							local rcp = RaycastParams.new()
 							rcp.RespectCanCollide = true
 							rcp.FilterType = Enum.RaycastFilterType.Exclude
-							rcp.FilterDescendantsInstances = {Players.LocalPlayer.Character}
+							rcp.FilterDescendantsInstances = { Players.LocalPlayer.Character }
 							local check = workspace:Raycast(r.Position, Vector3.new(0, -3.5, 0), rcp)
-							if check == nil then
-								h:ChangeState(Enum.HumanoidStateType.Jumping)
-							end
+							if check == nil then h:ChangeState(Enum.HumanoidStateType.Jumping) end
 						end
 						lstate = h:GetState()
 						return
@@ -5408,7 +5090,7 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "unedgejump",
-		Aliases = {"unejump", "noedgejump", "noejump"},
+		Aliases = { "unejump", "noedgejump", "noejump" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Disables edge jump",
@@ -5421,9 +5103,9 @@ do -- Silly Humanoid stuff
 	local tpwalker = nil
 	IY_AddCommand({
 		Command = "teleportwalk",
-		Aliases = {"tpwalk"},
+		Aliases = { "tpwalk" },
 		Arguments = {
-			{Name = "speed", Optional = true, Description = "Walkspeed to add"},
+			{ Name = "speed", Optional = true, Description = "Walkspeed to add" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Walk faster using teleportation",
@@ -5431,7 +5113,7 @@ do -- Silly Humanoid stuff
 			notify("Teleport walk", "Teleport walk enabled!")
 			if tpwalker then tpwalker:Disconnect() end
 			local ws = tonumber(speed) or 1
-			tpwalker = RunService.Stepped:Connect(function(_,dt)
+			tpwalker = RunService.Stepped:Connect(function(_, dt)
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 					if h ~= nil and h.RootPart ~= nil then
@@ -5444,7 +5126,7 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "unteleportwalk",
-		Aliases = {"untpwalk", "noteleportwalk", "notpwalk"},
+		Aliases = { "untpwalk", "noteleportwalk", "notpwalk" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Disables teleport walk",
@@ -5469,9 +5151,7 @@ do -- Silly Humanoid stuff
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 					if h ~= nil and h.RootPart ~= nil then
 						local r = h.RootPart
-						if r.Position.Y + (r.AssemblyLinearVelocity.Y * (1 / 15)) < FallenPartsDestroyHeight + 10 then
-							r.AssemblyLinearVelocity = Vector3.new(0, 50, 0) - r.AssemblyLinearVelocity
-						end
+						if r.Position.Y + (r.AssemblyLinearVelocity.Y * (1 / 15)) < FallenPartsDestroyHeight + 10 then r.AssemblyLinearVelocity = Vector3.new(0, 50, 0) - r.AssemblyLinearVelocity end
 					end
 				end
 			end)
@@ -5479,7 +5159,7 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "unantivoid",
-		Aliases = {"noantivoid"},
+		Aliases = { "noantivoid" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops antivoid",
@@ -5492,7 +5172,7 @@ do -- Silly Humanoid stuff
 	local fakingout = false
 	IY_AddCommand({
 		Command = "fakeout",
-		Aliases = {"antiattach"},
+		Aliases = { "antiattach" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Teleports you to the void for some seconds, useful to kill loopgoto'ers",
@@ -5504,7 +5184,7 @@ do -- Silly Humanoid stuff
 					local r = h.RootPart
 					fakingout = true
 					local old = r.CFrame
-					workspace.FallenPartsDestroyHeight = 0/0
+					workspace.FallenPartsDestroyHeight = 0 / 0
 					r.CFrame = CFrame.new(0, FallenPartsDestroyHeight + 5, 0) + GetSandboxPosition()
 					r.Velocity = Vector3.new(0, -100, 0)
 					task.wait(0.5)
@@ -5518,7 +5198,7 @@ do -- Silly Humanoid stuff
 	local noonecankillme = nil
 	IY_AddCommand({
 		Command = "noonecankillme",
-		Aliases = {"infakeout"},
+		Aliases = { "infakeout" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Fakeout but forever until you un___ it",
@@ -5529,7 +5209,7 @@ do -- Silly Humanoid stuff
 			end
 			local iter = 0
 			noonecankillme = RunService.Stepped:Connect(function()
-				workspace.FallenPartsDestroyHeight = 0/1/0
+				workspace.FallenPartsDestroyHeight = 0 / 1 / 0
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 					if h ~= nil and h.RootPart ~= nil then
@@ -5546,7 +5226,7 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "unnoonecankillme",
-		Aliases = {"onecankillme", "uninfakeout", "noinfakeout"},
+		Aliases = { "onecankillme", "uninfakeout", "noinfakeout" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops noonecankillme",
@@ -5567,7 +5247,7 @@ do -- Silly Humanoid stuff
 		Description = "Removes the void completely, allowing you to fall forever.",
 		Execute = function()
 			notify("No void", "workspace.Void:Destroy() executed successfully")
-			workspace.FallenPartsDestroyHeight = 0/0
+			workspace.FallenPartsDestroyHeight = 0 / 0
 		end,
 	})
 	IY_AddCommand({
@@ -5583,7 +5263,7 @@ do -- Silly Humanoid stuff
 	})
 	IY_AddCommand({
 		Command = "permadeath",
-		Aliases = {"unpermadeath"},
+		Aliases = { "unpermadeath" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "either disables respawning or respawns",
@@ -5606,7 +5286,7 @@ do -- Silly Humanoid stuff
 	local instarespawner = nil
 	IY_AddCommand({
 		Command = "instantrespawn",
-		Aliases = {"instarespawn"},
+		Aliases = { "instarespawn" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Instant respawn",
@@ -5616,24 +5296,18 @@ do -- Silly Humanoid stuff
 				return
 			end
 			notify("Instant respawn", "Instant respawn enabled")
-			if instarespawner then
-				instarespawner:Disconnect()
-			end
-			instarespawner = RunService.Stepped:Connect(function()
-				replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend)
-			end)
+			if instarespawner then instarespawner:Disconnect() end
+			instarespawner = RunService.Stepped:Connect(function() replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend) end)
 		end,
 	})
 	IY_AddCommand({
 		Command = "noinstantrespawn",
-		Aliases = {"noinstarespawn"},
+		Aliases = { "noinstarespawn" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Stops instantrespawn",
 		Execute = function()
-			if instarespawner then
-				instarespawner:Disconnect()
-			end
+			if instarespawner then instarespawner:Disconnect() end
 			instarespawner = nil
 		end,
 	})
@@ -5644,10 +5318,8 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Nanomachines, son! They harden in response to physical trauma.",
 		Execute = function()
-			for _,v in pairs(Players.LocalPlayer:GetDescendants()) do
-				if v:IsA("BasePart") then
-					v.CustomPhysicalProperties = PhysicalProperties.new(100, 0.3, 0.5)
-				end
+			for _, v in pairs(Players.LocalPlayer:GetDescendants()) do
+				if v:IsA("BasePart") then v.CustomPhysicalProperties = PhysicalProperties.new(100, 0.3, 0.5) end
 			end
 		end,
 	})
@@ -5658,24 +5330,20 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "U-UwU~ P-P-Pwease don't h-hurt me~!! ^w^",
 		Execute = function()
-			for _,v in pairs(Players.LocalPlayer:GetDescendants()) do
-				if v:IsA("BasePart") then
-					v.CustomPhysicalProperties = PhysicalProperties.new(0.001, 0.3, 0.5)
-				end
+			for _, v in pairs(Players.LocalPlayer:GetDescendants()) do
+				if v:IsA("BasePart") then v.CustomPhysicalProperties = PhysicalProperties.new(0.001, 0.3, 0.5) end
 			end
 		end,
 	})
 	IY_AddCommand({
 		Command = "unstrengthen",
-		Aliases = {"unweaken"},
+		Aliases = { "unweaken" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "yo bro",
 		Execute = function()
-			for _,v in pairs(Players.LocalPlayer:GetDescendants()) do
-				if v:IsA("BasePart") then
-					v.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.3, 0.5)
-				end
+			for _, v in pairs(Players.LocalPlayer:GetDescendants()) do
+				if v:IsA("BasePart") then v.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.3, 0.5) end
 			end
 		end,
 	})
@@ -5686,33 +5354,31 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "kill force and stuff",
 		Execute = function()
-			for _,v in pairs(Players.LocalPlayer:GetDescendants()) do
+			for _, v in pairs(Players.LocalPlayer:GetDescendants()) do
 				if v:IsA("BasePart") then
 					v.Velocity = Vector3.zero
 					v.RotVelocity = Vector3.zero
 				end
-				if v:IsA("BodyMover") then
-					v:Destroy()
-				end
+				if v:IsA("BodyMover") then v:Destroy() end
 			end
 		end,
 	})
 	IY_AddCommand({
 		Command = "simulationradius",
-		Aliases = {"simrad"},
+		Aliases = { "simrad" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Set your simulationradius to 9 billion",
 		Execute = function()
 			Players.LocalPlayer.ReplicationFocus = workspace -- all belongs to me everything that i see
-			sethiddenproperty(Players.LocalPlayer, "SimulationRadius", 1/0) -- math.huge in 3 chars!
+			sethiddenproperty(Players.LocalPlayer, "SimulationRadius", 1 / 0) -- math.huge in 3 chars!
 		end,
 	})
 end
 do -- Cool tools
 	IY_AddCommand({
 		Command = "teleporttool",
-		Aliases = {"tptool"},
+		Aliases = { "tptool" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Gives you a tool to teleport",
@@ -5733,10 +5399,8 @@ do -- Cool tools
 	local tpuaname_bp = randomString()
 	local tpuaname_bg = randomString()
 	local function tpua_PUT(part, cf)
-		for _,c in pairs(part:GetChildren()) do
-			if c:IsA("BodyPosition") or c:IsA("BodyGyro") then
-				c:Destroy()
-			end
+		for _, c in pairs(part:GetChildren()) do
+			if c:IsA("BodyPosition") or c:IsA("BodyGyro") then c:Destroy() end
 		end
 		local BP = part:FindFirstChild(tpuaname_bp) or Instance.new("BodyPosition")
 		BP.Name = tpuaname_bp
@@ -5770,7 +5434,7 @@ do -- Cool tools
 				local rcp = RaycastParams.new()
 				rcp.RespectCanCollide = false
 				rcp.FilterType = Enum.RaycastFilterType.Exclude
-				rcp.FilterDescendantsInstances = {Players.LocalPlayer.Character}
+				rcp.FilterDescendantsInstances = { Players.LocalPlayer.Character }
 				local rc = workspace:Raycast(Camera.CFrame.Position, IYMouse.UnitRay.Direction * 65536, rcp)
 				local hit = nil
 				if rc ~= nil then hit = rc.Instance end
@@ -5787,28 +5451,24 @@ do -- Cool tools
 end
 do -- Outfit related commands
 	IY_ConfigJson.OutfitData = IY_ConfigJson.OutfitData or {}
-	local DESC_INSTS = {"BodyColors", "Shirt", "ShirtGraphic", "Pants", "Accessory", "CharacterMesh"}
+	local DESC_INSTS = { "BodyColors", "Shirt", "ShirtGraphic", "Pants", "Accessory", "CharacterMesh" }
 	local function becomehd(hdesc)
 		local char = Players.LocalPlayer.Character
 		if char ~= nil then
 			local hum = char:FindFirstChildOfClass("Humanoid")
 			if hum ~= nil then
 				local death = {}
-				for _,v in pairs(char:GetDescendants()) do
+				for _, v in pairs(char:GetDescendants()) do
 					if table.find(DESC_INSTS, v.ClassName) ~= nil then
-						local spare = {v, true}
-						v.Changed:Connect(function()
-							spare[2] = false
-						end)
+						local spare = { v, true }
+						v.Changed:Connect(function() spare[2] = false end)
 						table.insert(death, spare)
 					end
 				end
 				hum:ApplyDescriptionClientServer(hdesc)
 				RunService.RenderStepped:Wait()
-				for _,spare in pairs(death) do
-					if spare[2] and spare[1] ~= nil then
-						spare[1]:Destroy()
-					end
+				for _, spare in pairs(death) do
+					if spare[2] and spare[1] ~= nil then spare[1]:Destroy() end
 				end
 			end
 		end
@@ -5855,20 +5515,18 @@ do -- Outfit related commands
 		}
 		local tabla = {}
 		tabla.Properties = {}
-		for _,prop in pairs(prowpertis) do
+		for _, prop in pairs(prowpertis) do
 			local v = hdesc[prop]
-			if typeof(v) == "Color3" then
-				v = {v.R, v.G, v.B}
-			end
+			if typeof(v) == "Color3" then v = { v.R, v.G, v.B } end
 			tabla.Properties[prop] = v
 		end
 		tabla.Accessories = {}
-		for i,blob in pairs(hdesc:GetAccessories(true)) do
+		for i, blob in pairs(hdesc:GetAccessories(true)) do
 			local patch = blob
 			patch.AccessoryType = patch.AccessoryType.Name
-			patch.Position = {patch.Position.X, patch.Position.Y, patch.Position.Z}
-			patch.Rotation = {patch.Rotation.X, patch.Rotation.Y, patch.Rotation.Z}
-			patch.Scale = {patch.Scale.X, patch.Scale.Y, patch.Scale.Z}
+			patch.Position = { patch.Position.X, patch.Position.Y, patch.Position.Z }
+			patch.Rotation = { patch.Rotation.X, patch.Rotation.Y, patch.Rotation.Z }
+			patch.Scale = { patch.Scale.X, patch.Scale.Y, patch.Scale.Z }
 			tabla.Accessories[i] = patch
 		end
 		tabla.Emotes = hdesc:GetEmotes()
@@ -5886,7 +5544,7 @@ do -- Outfit related commands
 			"TorsoColor",
 		}
 		local hdesc = Instance.new("HumanoidDescription")
-		for prop,v in pairs(tabla.Properties) do
+		for prop, v in pairs(tabla.Properties) do
 			if typeof(hdesc[prop]) == "Color3" then
 				hdesc[prop] = Color3.new(unpack(v))
 				continue
@@ -5894,7 +5552,7 @@ do -- Outfit related commands
 			hdesc[prop] = v
 		end
 		local accs = {}
-		for i,blob in pairs(tabla.Accessories) do
+		for i, blob in pairs(tabla.Accessories) do
 			local patch = blob
 			patch.AccessoryType = Enum.AccessoryType[patch.AccessoryType]
 			patch.Position = Vector3.new(unpack(patch.Position))
@@ -5925,9 +5583,9 @@ do -- Outfit related commands
 	end
 	IY_AddCommand({
 		Command = "loadavatar",
-		Aliases = {"disguise"},
+		Aliases = { "disguise" },
 		Arguments = {
-			{Name = "Target / Player ID", Type = "TARGET", Optional = false, Description = "The target player / ID"},
+			{ Name = "Target / Player ID", Type = "TARGET", Optional = false, Description = "The target player / ID" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Loads an avatar by player or player ID, and applies it to your character",
@@ -5935,14 +5593,10 @@ do -- Outfit related commands
 			local ID = getPlayer(plrid)[1]
 			if ID ~= nil then
 				ID = Players:FindFirstChild(ID)
-				if ID ~= nil then 
-					ID = ID.UserId
-				end
+				if ID ~= nil then ID = ID.UserId end
 			end
-			if ID == nil then
-				ID = tonumber(plrid)
-			end
-			notify("Disguise", "Loading from ID: "..ID)
+			if ID == nil then ID = tonumber(plrid) end
+			notify("Disguise", "Loading from ID: " .. ID)
 			local target = game.Players:GetHumanoidDescriptionFromUserId(ID)
 			loadavatar(target)
 		end,
@@ -5951,20 +5605,20 @@ do -- Outfit related commands
 		Command = "loadavatarfromoutfit",
 		Aliases = {},
 		Arguments = {
-			{Name = "Outfit ID", Optional = false, Description = "The target ID"},
+			{ Name = "Outfit ID", Optional = false, Description = "The target ID" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Loads an avatar by outfit ID, and applies it to your character",
 		Execute = function(plrid)
 			local ID = tonumber(plrid)
-			notify("Disguise", "Loading from outfit ID: "..ID)
+			notify("Disguise", "Loading from outfit ID: " .. ID)
 			local target = game.Players:GetHumanoidDescriptionFromOutfitId(ID)
 			loadavatar(target)
 		end,
 	})
 	IY_AddCommand({
 		Command = "loadavatartool",
-		Aliases = {"disguisetool"},
+		Aliases = { "disguisetool" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Gives you a tool to disguise into characters, like NPCs",
@@ -5978,7 +5632,7 @@ do -- Outfit related commands
 					local rcp = RaycastParams.new()
 					rcp.RespectCanCollide = false
 					rcp.FilterType = Enum.RaycastFilterType.Exclude
-					rcp.FilterDescendantsInstances = {Players.LocalPlayer.Character}
+					rcp.FilterDescendantsInstances = { Players.LocalPlayer.Character }
 					local rc = workspace:Raycast(Camera.CFrame.Position, IYMouse.UnitRay.Direction * 65536, rcp)
 					local hit = nil
 					if rc ~= nil then hit = rc.Instance end
@@ -6003,13 +5657,19 @@ do -- Outfit related commands
 		Command = "loadoutfit",
 		Aliases = {},
 		Arguments = {
-			{Name = "Outfit Name", Type = "ENUMF", Values = function()
-				local keys = {}
-				for k,_ in pairs(IY_ConfigJson.OutfitData) do
-					table.insert(keys, k)
-				end
-				return keys
-			end, Optional = false, Description = "The saved outfit name"},
+			{
+				Name = "Outfit Name",
+				Type = "ENUMF",
+				Values = function()
+					local keys = {}
+					for k, _ in pairs(IY_ConfigJson.OutfitData) do
+						table.insert(keys, k)
+					end
+					return keys
+				end,
+				Optional = false,
+				Description = "The saved outfit name",
+			},
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Loads an outfit you saved, to your character",
@@ -6017,11 +5677,7 @@ do -- Outfit related commands
 			local target = IY_ConfigJson.OutfitData[name]
 			if target ~= nil then
 				local success = false
-				success, target = xpcall(function()
-					return deserializehd(target)
-				end, function(m)
-					print(debug.traceback(m))
-				end)
+				success, target = xpcall(function() return deserializehd(target) end, function(m) print(debug.traceback(m)) end)
 				if success then
 					loadavatar(target)
 					return
@@ -6036,7 +5692,7 @@ do -- Outfit related commands
 		Command = "saveoutfit",
 		Aliases = {},
 		Arguments = {
-			{Name = "Outfit Name", Optional = false, Description = "The outfit name to save"},
+			{ Name = "Outfit Name", Optional = false, Description = "The outfit name to save" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Saves the current outfit of your character",
@@ -6053,11 +5709,7 @@ do -- Outfit related commands
 			end
 			local target = hum:GetAppliedDescription()
 			local success = false
-			success, target = xpcall(function()
-				return serializehd(target)
-			end, function(m)
-				print(debug.traceback(m))
-			end)
+			success, target = xpcall(function() return serializehd(target) end, function(m) print(debug.traceback(m)) end)
 			if not success then notify("Save Outfit", "Failed to serialize.") end
 			IY_ConfigJson.OutfitData[name] = target
 		end,
@@ -6065,9 +5717,9 @@ do -- Outfit related commands
 	local keepers = nil
 	IY_AddCommand({
 		Command = "keepavatar",
-		Aliases = {"become"},
+		Aliases = { "become" },
 		Arguments = {
-			{Name = "Target / Player ID", Type = "TARGET", Optional = false, Description = "The target player / ID"},
+			{ Name = "Target / Player ID", Type = "TARGET", Optional = false, Description = "The target player / ID" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Loads an avatar by player or player ID, and applies it to your character, even when respawning",
@@ -6075,20 +5727,18 @@ do -- Outfit related commands
 			local ID = getPlayer(plrid)[1]
 			if ID ~= nil then
 				ID = Players:FindFirstChild(ID)
-				if ID ~= nil then 
-					ID = ID.UserId
-				end
+				if ID ~= nil then ID = ID.UserId end
 			end
-			if ID == nil then
-				ID = tonumber(plrid)
-			end
+			if ID == nil then ID = tonumber(plrid) end
 			if keepers ~= nil then
 				keepers:Disconnect()
 				keepers = nil
 			end
 			local uwu = function()
 				if Players.LocalPlayer.Character == nil then return end
-				repeat task.wait() until Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") ~= nil
+				repeat
+					task.wait()
+				until Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") ~= nil
 				wait(0.5)
 				local target = game.Players:GetHumanoidDescriptionFromUserId(ID)
 				loadavatar(target)
@@ -6099,15 +5749,21 @@ do -- Outfit related commands
 	})
 	IY_AddCommand({
 		Command = "keepoutfit",
-		Aliases = {"becomeo"},
+		Aliases = { "becomeo" },
 		Arguments = {
-			{Name = "Outfit Name", Type = "ENUMF", Values = function()
-				local keys = {}
-				for k,_ in pairs(IY_ConfigJson.OutfitData) do
-					table.insert(keys, k)
-				end
-				return keys
-			end, Optional = false, Description = "The saved outfit name"},
+			{
+				Name = "Outfit Name",
+				Type = "ENUMF",
+				Values = function()
+					local keys = {}
+					for k, _ in pairs(IY_ConfigJson.OutfitData) do
+						table.insert(keys, k)
+					end
+					return keys
+				end,
+				Optional = false,
+				Description = "The saved outfit name",
+			},
 		},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Loads an outfit you saved, and applies it to your character, even when respawning",
@@ -6115,11 +5771,7 @@ do -- Outfit related commands
 			local target = IY_ConfigJson.OutfitData[name]
 			if target ~= nil then
 				local success = false
-				success, target = xpcall(function()
-					return deserializehd(target)
-				end, function(m)
-					print(debug.traceback(m))
-				end)
+				success, target = xpcall(function() return deserializehd(target) end, function(m) print(debug.traceback(m)) end)
 				if success then
 					if keepers ~= nil then
 						keepers:Disconnect()
@@ -6127,7 +5779,9 @@ do -- Outfit related commands
 					end
 					local uwu = function()
 						if Players.LocalPlayer.Character == nil then return end
-						repeat task.wait() until Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") ~= nil
+						repeat
+							task.wait()
+						until Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") ~= nil
 						wait(0.5)
 						loadavatar(target)
 					end
@@ -6143,7 +5797,7 @@ do -- Outfit related commands
 	})
 	IY_AddCommand({
 		Command = "nokeepavatar",
-		Aliases = {"unbecome", "nokeepoutfit", "unbecomeo"},
+		Aliases = { "unbecome", "nokeepoutfit", "unbecomeo" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "[CLIENT] Stops keepavatar/keepoutfit",
@@ -6165,9 +5819,7 @@ do
 		Description = "Brings you to your camera",
 		Execute = function()
 			local char = Players.LocalPlayer.Character
-			if char ~= nil then
-				char:PivotTo(Camera.CFrame)
-			end
+			if char ~= nil then char:PivotTo(Camera.CFrame) end
 		end,
 	})
 	local viewplr = nil
@@ -6175,9 +5827,9 @@ do
 	local viewplrconn2 = nil
 	IY_AddCommand({
 		Command = "view",
-		Aliases = {"spectate"},
+		Aliases = { "spectate" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Spectate a player",
@@ -6197,15 +5849,15 @@ do
 				local cursub = nil
 				Camera.CameraSubject = viewplr.Character:FindFirstChildOfClass("Humanoid") or char
 				viewplrconn = Camera:GetPropertyChangedSignal("CameraSubject"):Connect(function()
-					if Camera.CameraSubject ~= cursub then
-						Camera.CameraSubject = cursub
-					end
+					if Camera.CameraSubject ~= cursub then Camera.CameraSubject = cursub end
 				end)
 				viewplrconn2 = viewplr.CharacterAdded:Connect(function(char)
 					cursub = char
 					Camera.CameraSubject = cursub
 					local t = tick() + 1
-					repeat task.wait() until char:FindFirstChildOfClass("Humanoid") ~= nil or tick() > t
+					repeat
+						task.wait()
+					until char:FindFirstChildOfClass("Humanoid") ~= nil or tick() > t
 					cursub = char:FindFirstChildOfClass("Humanoid") or char
 					Camera.CameraSubject = cursub
 				end)
@@ -6216,7 +5868,7 @@ do
 	})
 	IY_AddCommand({
 		Command = "unview",
-		Aliases = {"unspectate"},
+		Aliases = { "unspectate" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Unspectate",
@@ -6256,7 +5908,7 @@ do
 	local freecamRot = Vector2.zero
 	IY_AddCommand({
 		Command = "freecam",
-		Aliases = {"fc", "camfly"},
+		Aliases = { "fc", "camfly" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "sv_cheats 1;fly",
@@ -6322,48 +5974,27 @@ do
 				freecamtc = TouchControlGUI
 			else
 				local keyboard = {
-					W = 0, S = 0, E = 0, Q = 0, D = 0, A = 0
+					W = 0,
+					S = 0,
+					E = 0,
+					Q = 0,
+					D = 0,
+					A = 0,
 				}
-				ContextActionService:BindActionAtPriority(
-					"IYLITE_FreeCameraKeyboard",
-					function(_, state, input)
-						keyboard[input.KeyCode.Name] = state == Enum.UserInputState.Begin and 1 or 0
-						Move = Vector3.new(
-							keyboard.D - keyboard.A,
-							keyboard.E - keyboard.Q,
-							keyboard.W - keyboard.S
-						)
-						return Enum.ContextActionResult.Sink
-					end,
-					false,
-					INPUT_PRIORITY,
-					Enum.KeyCode.W,
-					Enum.KeyCode.A,
-					Enum.KeyCode.S,
-					Enum.KeyCode.D,
-					Enum.KeyCode.E,
-					Enum.KeyCode.Q,
-					Enum.KeyCode.Up,
-					Enum.KeyCode.Down
-				)
-				ContextActionService:BindActionAtPriority(
-					"IYLITE_FreeCameraMouse",
-					function(_, _, input)
-						Look = Vector2.new(-input.Delta.Y, -input.Delta.X) * math.pi / 64
-						return Enum.ContextActionResult.Sink
-					end,
-					false,
-					INPUT_PRIORITY,
-					Enum.UserInputType.MouseMovement
-				)
+				ContextActionService:BindActionAtPriority("IYLITE_FreeCameraKeyboard", function(_, state, input)
+					keyboard[input.KeyCode.Name] = state == Enum.UserInputState.Begin and 1 or 0
+					Move = Vector3.new(keyboard.D - keyboard.A, keyboard.E - keyboard.Q, keyboard.W - keyboard.S)
+					return Enum.ContextActionResult.Sink
+				end, false, INPUT_PRIORITY, Enum.KeyCode.W, Enum.KeyCode.A, Enum.KeyCode.S, Enum.KeyCode.D, Enum.KeyCode.E, Enum.KeyCode.Q, Enum.KeyCode.Up, Enum.KeyCode.Down)
+				ContextActionService:BindActionAtPriority("IYLITE_FreeCameraMouse", function(_, _, input)
+					Look = Vector2.new(-input.Delta.Y, -input.Delta.X) * math.pi / 64
+					return Enum.ContextActionResult.Sink
+				end, false, INPUT_PRIORITY, Enum.UserInputType.MouseMovement)
 			end
 			freecamPos = Camera.CFrame.Position
 			freecamRot = Vector2.new(Camera.CFrame:ToEulerAngles(Enum.RotationOrder.YXZ))
 			RunService:BindToRenderStep("IYLITE_FreeCameraUpdate", Enum.RenderPriority.Camera.Value - 1, function(dt)
-				freecamRot = Vector2.new(
-					math.clamp(freecamRot.X + Look.X, -math.pi * 0.5, math.pi * 0.5),
-					(freecamRot.Y + Look.Y) % (math.pi * 2)
-				)
+				freecamRot = Vector2.new(math.clamp(freecamRot.X + Look.X, -math.pi * 0.5, math.pi * 0.5), (freecamRot.Y + Look.Y) % (math.pi * 2))
 				local CamCF = CFrame.fromEulerAngles(freecamRot.X, freecamRot.Y, 0, Enum.RotationOrder.YXZ)
 				freecamPos += (CamCF.RightVector * Move.X + CamCF.UpVector * Move.Y + CamCF.LookVector * Move.Z) * dt * freecamSpeed
 				CamCF += freecamPos
@@ -6374,7 +6005,7 @@ do
 	})
 	IY_AddCommand({
 		Command = "unfreecam",
-		Aliases = {"unfc", "uncamfly"},
+		Aliases = { "unfc", "uncamfly" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "we will be right back",
@@ -6395,9 +6026,9 @@ do
 	})
 	IY_AddCommand({
 		Command = "freecamgoto",
-		Aliases = {"fcgoto"},
+		Aliases = { "fcgoto" },
 		Arguments = {
-			{Name = "target", Type = "TARGET", Optional = false, Description = "The target player"},
+			{ Name = "target", Type = "TARGET", Optional = false, Description = "The target player" },
 		},
 		Plugin = "BUILTIN",
 		Description = "goto command but for freecam",
@@ -6417,19 +6048,17 @@ do
 	})
 	IY_AddCommand({
 		Command = "freecamspeed",
-		Aliases = {"fcspeed"},
+		Aliases = { "fcspeed" },
 		Arguments = {
-			{Name = "speed", Optional = false, Description = "Speed (1 for every 50 studs/s)"},
+			{ Name = "speed", Optional = false, Description = "Speed (1 for every 50 studs/s)" },
 		},
 		Plugin = "BUILTIN",
 		Description = "goto command but for freecam",
-		Execute = function(speed)
-			freecamSpeed = tonumber(speed) or freecamSpeed
-		end,
+		Execute = function(speed) freecamSpeed = tonumber(speed) or freecamSpeed end,
 	})
 	IY_AddCommand({
 		Command = "fixcam",
-		Aliases = {"restorecam"},
+		Aliases = { "restorecam" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Fix the camera",
@@ -6447,7 +6076,7 @@ end
 do -- Ifninite Yeild related commands
 	IY_AddCommand({
 		Command = "breakcmd",
-		Aliases = {"breakloops", "break"},
+		Aliases = { "breakloops", "break" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Breaks command loops (;inf^0^reset)",
@@ -6503,39 +6132,29 @@ do
 			local function nk(plr)
 				local function ca(char)
 					local human = char:WaitForChild("Humanoid", 60)
-					if human ~= nil then
-						human.Died:Connect(function()
-							local creator = human:FindFirstChild("creator")
-							if creator ~= nil then
-								local crname = "idk who"
-								if creator.Value ~= nil and typeof(creator.Value) == "Instance" and creator.Value:IsA("Player") then
-									crname = creator.Value.Name
-								end
-								if crname == Players.LocalPlayer.Name then
-									crname = "You just"
-								end
-								notify("Notify Kills", crname .. " killed " .. plr.Name .. "!")
-							end
-						end)
-					end
+					if human ~= nil then human.Died:Connect(function()
+						local creator = human:FindFirstChild("creator")
+						if creator ~= nil then
+							local crname = "idk who"
+							if creator.Value ~= nil and typeof(creator.Value) == "Instance" and creator.Value:IsA("Player") then crname = creator.Value.Name end
+							if crname == Players.LocalPlayer.Name then crname = "You just" end
+							notify("Notify Kills", crname .. " killed " .. plr.Name .. "!")
+						end
+					end) end
 				end
 				plr.CharacterAdded:Connect(ca)
 				if plr.Character ~= nil then ca(plr.Character) end
 			end
 			Players.PlayerAdded:Connect(nk)
-			for _,plr in pairs(Players:GetPlayers()) do
-				if plr ~= Players.LocalPlayer then
-					spawn(function()
-						nk(plr)
-					end)
-				end
+			for _, plr in pairs(Players:GetPlayers()) do
+				if plr ~= Players.LocalPlayer then spawn(function() nk(plr) end) end
 			end
 		end,
 	})
 	local notifyws = false
 	IY_AddCommand({
 		Command = "notifywhispers",
-		Aliases = {"notifyws"},
+		Aliases = { "notifyws" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Notifies all whispers (legacy chat)",
@@ -6552,17 +6171,13 @@ do
 						table.remove(split, 1)
 						table.remove(split, 1)
 						local wmessage = table.concat(split, " ")
-						if table.find({"/w", "/whisper"}, ngh) ~= nil then
-							notify("Notify Whispers", plr.Name .. " whispered to " .. target .. "\n" .. wmessage)
-						end
+						if table.find({ "/w", "/whisper" }, ngh) ~= nil then notify("Notify Whispers", plr.Name .. " whispered to " .. target .. "\n" .. wmessage) end
 					end
 				end)
 			end
 			Players.PlayerAdded:Connect(nk)
-			for _,plr in pairs(Players:GetPlayers()) do
-				if plr ~= Players.LocalPlayer then
-					nk(plr)
-				end
+			for _, plr in pairs(Players:GetPlayers()) do
+				if plr ~= Players.LocalPlayer then nk(plr) end
 			end
 		end,
 	})
@@ -6570,45 +6185,41 @@ do
 		Command = "notify",
 		Aliases = {},
 		Arguments = {
-			{Name = "message", Optional = false, Description = "The message in the notify"},
+			{ Name = "message", Optional = false, Description = "The message in the notify" },
 		},
 		Plugin = "BUILTIN",
 		Description = "Notifies you the text you put",
 		Execute = function(...)
-			local msg = table.concat({...}, " ")
+			local msg = table.concat({ ... }, " ")
 			notify("Custom Notification Command", msg)
 		end,
 	})
 	IY_AddCommand({
 		Command = "clearnotifications",
-		Aliases = {"clearnotifs", "notifyclear"},
+		Aliases = { "clearnotifs", "notifyclear" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Clears notifications (for persistent mode)",
-		Execute = function()
-			table.clear(_notificationz)
-		end,
+		Execute = function() table.clear(_notificationz) end,
 	})
 end
-local thegamestocheckfor = {487316}
+local thegamestocheckfor = { 487316 }
 if table.find(thegamestocheckfor, game.PlaceId) ~= nil then
 	local ahealconn = nil
 	IY_AddCommand({
 		Command = "autoheal",
-		Aliases = {"totemofundying", "siphon"},
+		Aliases = { "totemofundying", "siphon" },
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "[SFOTHO] Healpads you once you're low.",
 		Execute = function()
-			if firetouchinterest == nil then
-				return notify("Totem Of Undying", "Your executor does not support this command. (missing firetouchinterest)")
-			end
+			if firetouchinterest == nil then return notify("Totem Of Undying", "Your executor does not support this command. (missing firetouchinterest)") end
 			if ahealconn ~= nil then
 				ahealconn:Disconnect()
 				ahealconn = nil
 			end
 			local function heal(r)
-				for _,v in pairs(workspace:GetChildren()) do
+				for _, v in pairs(workspace:GetChildren()) do
 					if v.Name == "HealPad" then
 						local pad = v:FindFirstChild("Pad")
 						if pad ~= nil and pad:IsA("BasePart") and pad.Color.G > 0.5 then
@@ -6623,9 +6234,7 @@ if table.find(thegamestocheckfor, game.PlaceId) ~= nil then
 				if Players.LocalPlayer.Character ~= nil then
 					local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 					if h ~= nil and h.RootPart ~= nil then
-						if h.Health < h.MaxHealth then
-							heal(h.RootPart)
-						end
+						if h.Health < h.MaxHealth then heal(h.RootPart) end
 					end
 				end
 			end)
@@ -6643,9 +6252,7 @@ do -- Experimental commands
 			local character = Players.LocalPlayer.Character
 			if character ~= nil then
 				local hrp = character:FindFirstChild("HumanoidRootPart")
-				if hrp ~= nil then
-					hrp.CFrame = CFrame.new(Vector3.new(0/0, 0/0, 0/0))
-				end
+				if hrp ~= nil then hrp.CFrame = CFrame.new(Vector3.new(0 / 0, 0 / 0, 0 / 0)) end
 			end
 		end,
 	})
@@ -6653,12 +6260,12 @@ do -- Experimental commands
 		Command = "rcelol",
 		Aliases = {},
 		Arguments = {
-			{Name = "message", Optional = false, Description = "The message to print"},
+			{ Name = "message", Optional = false, Description = "The message to print" },
 		},
 		Plugin = "BUILTIN",
 		Description = "[DEV] FE print console lol",
 		Execute = function(...)
-			local msg = table.concat({...}, " ")
+			local msg = table.concat({ ... }, " ")
 			local character = Players.LocalPlayer.Character
 			if character ~= nil then
 				local old = character.Animate.idle.Animation1.AnimationId
@@ -6680,12 +6287,8 @@ do -- Experimental commands
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "[DEV] command counter",
-		Execute = function(...)
-			notify("better than frisk", `we got {#IY_Commands} cmds rn`)
-		end,
+		Execute = function(...) notify("better than frisk", `we got {#IY_Commands} cmds rn`) end,
 	})
 end
 
-Players.LocalPlayer.CharacterAdded:Connect(function()
-	IY_ExecuteCommand("clip\\vclip\\unfly\\unfloat", true)
-end)
+Players.LocalPlayer.CharacterAdded:Connect(function() IY_ExecuteCommand("clip\\vclip\\unfly\\unfloat", true) end)
