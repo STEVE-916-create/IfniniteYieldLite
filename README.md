@@ -9,7 +9,7 @@ get it [here](https://github.com/STEVE-916-create/IfniniteYieldLite/wiki)
 - Rewritten with code snippets!
 - Command Syntax prediction thing!
 - Snow and fireworks!
-- 51.87% smaller!
+- 58.35% smaller!
 - ...Did I already say that its faster than real IY?
 
 # Developers
