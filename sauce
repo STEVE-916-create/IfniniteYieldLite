@@ -155,6 +155,9 @@ do
 			"why pass when you can pass away",
 			"queen elisabeth exisits",
 			"Finite Return " .. IY_VERSION,
+			"what if i slapped lite into iy",
+			"so basically. owo. anywya.",
+			"its iy but faster",
 		}
 		GUITitle.Text = names[math.random(1, #names)]
 	end
@@ -1605,21 +1608,11 @@ function IY__AddCommandToList(data)
 	end)
 	return Example
 end
-local IY__AlreadyStepping = false
-function IY__RefreshCommandListAfterAStep()
-	if IY__AlreadyStepping then return end
-	IY__AlreadyStepping = true
-	spawn(function()
-		RunService.RenderStepped:Wait()
-		IY_IndexCommands("")
-		IY__AlreadyStepping = false
-	end)
-end
 function IY_AddCommand(data)
 	local element = IY__AddCommandToList(data)
 	data.GUIElement = element
 	table.insert(IY_Commands, data)
-	IY__RefreshCommandListAfterAStep()
+	if #IY_Commands % 16 == 0 then RunService.RenderStepped:Wait() end
 end
 local IY__LastCommandBreak = 0
 function IY_ExecuteCommand(command, nonotify)
@@ -4792,7 +4785,7 @@ do -- Silly Humanoid stuff
 		Description = "i refuse",
 		Execute = function()
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then h:SetStateEnabled(Enum.HumanoidStateType.Sitting, false) end
+			if h ~= nil then h:SetStateEnabled(Enum.HumanoidStateType.Seated, false) end
 		end,
 	})
 	IY_AddCommand({
@@ -4803,7 +4796,7 @@ do -- Silly Humanoid stuff
 		Description = "i accept",
 		Execute = function()
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			if h ~= nil then h:SetStateEnabled(Enum.HumanoidStateType.Sitting, true) end
+			if h ~= nil then h:SetStateEnabled(Enum.HumanoidStateType.Seated, true) end
 		end,
 	})
 	local headsitting = nil
@@ -6291,4 +6284,5 @@ do -- Experimental commands
 	})
 end
 
+IY_IndexCommands("")
 Players.LocalPlayer.CharacterAdded:Connect(function() IY_ExecuteCommand("clip\\vclip\\unfly\\unfloat", true) end)
