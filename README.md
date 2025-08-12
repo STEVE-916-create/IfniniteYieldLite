@@ -1,7 +1,7 @@
 # Ifninite Yeild Lite
 probably the best alternative to infinite yield. why? because its faster.
 
-get it [here](https://raw.githubusercontent.com/STEVE-916-create/IfniniteYieldLite/main/sauce)
+get it [here](https://github.com/STEVE-916-create/IfniniteYieldLite/wiki)
 
 - We got tens of commands, and they work!
 - Open sauced!
