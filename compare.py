@@ -2,9 +2,10 @@
 
 import requests
 
-iyl = requests.get("https://raw.githubusercontent.com/STEVE-916-create/IfniniteYieldLite/main/sauce")
-iyr = requests.get("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")
+iyl = open("sauce", "rb").read()
+iyr = requests.get("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source").content
 
-print(f"IY File Size: {len(iyr.content)}")
-print(f"IY Lite File Size: {len(iyl.content)}")
-print(f"Ratio: {100 * len(iyl.content) / len(iyr.content):.2f}%")
+print(f"IY File Size: {len(iyr)}")
+print(f"IY Lite File Size: {len(iyl)}")
+print(f"Ratio: {100 * len(iyl) / len(iyr):.2f}%")
+print(f"Smalled by: {100 * (1 - (len(iyl) / len(iyr))):.2f}%")

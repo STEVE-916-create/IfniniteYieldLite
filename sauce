@@ -3,7 +3,7 @@
 
 if _G.IYL_LOADED then return end
 _G.IYL_LOADED = true
-local IY_VERSION = "v0.67.69"
+local IY_VERSION = "v0.84.99"
 local IY_MAINNAME = "Ifninite Yeild Lite"
 
 -- coregui reference detector bypass
@@ -815,7 +815,7 @@ GUIScaling.Scale = GUIScale
 spawn(function()
 	local _l = false
 	while true do
-		wait()
+		task.wait()
 		local l = -GUIPivot.Position.X.Offset > 250
 		local L = 0
 		if l then L = 1 end
@@ -871,7 +871,7 @@ spawn(function()
 		end
 	end
 end)
-function notify(title, text)
+function IY_Notify(title, text)
 	if NotificationMode == "Disabled" then return end
 	table.insert(_notificationz, { title, text })
 end
@@ -879,9 +879,9 @@ end
 function toClipboard(text)
 	if everyClipboard then
 		everyClipboard(text)
-		notify("Clipboard", "Copied to clipboard!")
+		IY_Notify("Clipboard", "Copied to clipboard!")
 	else
-		notify("Clipboard", "Your exploit does not support clipboard functions.")
+		IY_Notify("Clipboard", "Your exploit does not support clipboard functions.")
 	end
 end
 
@@ -1672,7 +1672,7 @@ function IY_ExecuteCommand(command, nonotify)
 			s = false
 			e = m
 			NotificationMode = _oldne
-			notify("Command Error: " .. data.Command, debug.traceback(m))
+			IY_Notify("Command Error: " .. data.Command, debug.traceback(m))
 		end, unpack(args))
 		NotificationMode = _oldne
 		return true, s
@@ -1832,7 +1832,7 @@ IY_AddCommand({
 	--Description = "this command is useless, this is only here to make this look like the real iy",
 	Description = "you want some help? sure thing! this is awes' discord server and i robbed him for it >:3",
 	Execute = function()
-		--notify("help", "the command has description and it says this command you just ran is useless")
+		--IY_Notify("help", "the command has description and it says this command you just ran is useless")
 		toClipboard("https://discord.gg/Ua3bmjDdXn")
 	end,
 })
@@ -1867,7 +1867,7 @@ do -- Other Scripts from others
 		Plugin = "BUILTIN",
 		Description = "Opens DEX by Moon.",
 		Execute = function()
-			notify("Loading...", "Sit back and relax while this script loads...")
+			IY_Notify("Loading...", "Sit back and relax while this script loads...")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
 		end,
 	})
@@ -1878,7 +1878,7 @@ do -- Other Scripts from others
 		Plugin = "BUILTIN",
 		Description = "Opens Simple Spy V3.",
 		Execute = function()
-			notify("Loading...", "Sit back and relax while this script loads...")
+			IY_Notify("Loading...", "Sit back and relax while this script loads...")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
 		end,
 	})
@@ -1889,7 +1889,7 @@ do -- Other Scripts from others
 		Plugin = "BUILTIN",
 		Description = "Opens Edge's Audio Logger.",
 		Execute = function()
-			notify("Loading...", "Sit back and relax while this script loads...")
+			IY_Notify("Loading...", "Sit back and relax while this script loads...")
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/audiologger.lua", true))()
 		end,
 	})
@@ -2203,7 +2203,7 @@ do -- Server info related
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "Notifies you the JobId. why would you want that?",
-		Execute = function() notify("JobId notify", game.JobId) end,
+		Execute = function() IY_Notify("JobId notify", game.JobId) end,
 	})
 	IY_AddCommand({
 		Command = "copyplrid",
@@ -2223,7 +2223,7 @@ do -- Server info related
 					return
 				end
 			end
-			notify("Copy Player ID", "I dont know what you're trying to do you just gave me an invalid player or argument")
+			IY_Notify("Copy Player ID", "I dont know what you're trying to do you just gave me an invalid player or argument")
 		end,
 	})
 	IY_AddCommand({
@@ -2240,11 +2240,11 @@ do -- Server info related
 			if target ~= nil then
 				target = Players:FindFirstChild(target)
 				if target ~= nil then
-					notify("Player Age", target.Name .. "'s Age is " .. target.AccountAge .. " days")
+					IY_Notify("Player Age", target.Name .. "'s Age is " .. target.AccountAge .. " days")
 					return
 				end
 			end
-			notify("Player Age", "I dont know what you're trying to do you just gave me an invalid player or argument")
+			IY_Notify("Player Age", "I dont know what you're trying to do you just gave me an invalid player or argument")
 		end,
 	})
 	IY_AddCommand({
@@ -2271,7 +2271,7 @@ do -- Server info related
 		Plugin = "BUILTIN",
 		Description = "Automatically rejoins you if you get disconnected/kicked",
 		Execute = function()
-			notify("Auto Rejoin", "Auto rejoin enabled")
+			IY_Notify("Auto Rejoin", "Auto rejoin enabled")
 			if autorjEnabled then return end
 			autorjEnabled = true
 			GuiService.ErrorMessageChanged:Connect(function() IY_ExecuteCommand("rejoin") end)
@@ -2283,7 +2283,7 @@ do -- Server info related
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "this doesnt work for me, i destroyed it and is now unusable",
-		Execute = function() notify("Command", "this command doesnt work well, its disabled") end,
+		Execute = function() IY_Notify("Command", "this command doesnt work well, its disabled") end,
 	})
 	IY_AddCommand({
 		Command = "joinplayer",
@@ -2294,7 +2294,7 @@ do -- Server info related
 		},
 		Plugin = "BUILTIN",
 		Description = "this doesnt work for me, i destroyed it and is now unusable",
-		Execute = function() notify("Command", "this command doesnt work well, its disabled") end,
+		Execute = function() IY_Notify("Command", "this command doesnt work well, its disabled") end,
 	})
 	IY_AddCommand({
 		Command = "gameteleport",
@@ -2314,7 +2314,7 @@ do -- Server info related
 		Description = "Kills the fuсking game lmao",
 		Execute = function()
 			game:Shutdown()
-			notify("no game", "no game")
+			IY_Notify("no game", "no game")
 		end,
 	})
 end
@@ -2353,7 +2353,7 @@ do -- Anti____
 		Plugin = "BUILTIN",
 		Description = "Prevents being kicked for being idle",
 		Execute = function()
-			notify("Anti Idle", "Anti idle is enabled")
+			IY_Notify("Anti Idle", "Anti idle is enabled")
 			if antiidling then return end
 			antiidling = true
 			local GC = getconnections or get_signal_cons
@@ -2382,9 +2382,9 @@ do -- Anti____
 		Plugin = "BUILTIN",
 		Description = "Prevents kicked from client",
 		Execute = function()
-			if not hookmetamethod then return notify("Incompatible Exploit", "Your exploit does not support this command (missing hookmetamethod)") end
-			if not newcclosure then return notify("Incompatible Exploit", "Your exploit does not support this command (missing newcclosure)") end
-			notify("Client Antikick", "Client anti kick is now active (only effective on localscript kick)")
+			if not hookmetamethod then return IY_Notify("Incompatible Exploit", "Your exploit does not support this command (missing hookmetamethod)") end
+			if not newcclosure then return IY_Notify("Incompatible Exploit", "Your exploit does not support this command (missing newcclosure)") end
+			IY_Notify("Client Antikick", "Client anti kick is now active (only effective on localscript kick)")
 			if antikicking then return end
 			antikicking = true
 			-- this was fixed by STEVE, because for some reason the guy who made this
@@ -2423,8 +2423,8 @@ do -- Anti____
 		Plugin = "BUILTIN",
 		Description = "Prevents teleport from client",
 		Execute = function()
-			if not hookmetamethod then return notify("Incompatible Exploit", "Your exploit does not support this command (missing hookmetamethod)") end
-			notify("Client AntiTP", "Client anti teleport is now active (only effective on localscript teleport)")
+			if not hookmetamethod then return IY_Notify("Incompatible Exploit", "Your exploit does not support this command (missing hookmetamethod)") end
+			IY_Notify("Client AntiTP", "Client anti teleport is now active (only effective on localscript teleport)")
 			if antiteleporting then return end
 			antiteleporting = true
 			local TeleportService = TeleportService
@@ -2501,10 +2501,10 @@ do -- Anti____
 		Plugin = "BUILTIN",
 		Description = "Prevents chat logging",
 		Execute = function()
-			if not hookmetamethod or not hookfunction then return notify("Incompatible Exploit", "Your exploit does not support this command (missing hookmetamethod)") end
-			if anticloging then return notify("Antichat-log", "Im already g bro") end
+			if not hookmetamethod or not hookfunction then return IY_Notify("Incompatible Exploit", "Your exploit does not support this command (missing hookmetamethod)") end
+			if anticloging then return IY_Notify("Antichat-log", "Im already g bro") end
 			anticloging = true
-			notify("Antichat-log", "Wait while I load...")
+			IY_Notify("Antichat-log", "Wait while I load...")
 			-- this was made by STEVE
 			local randomquotes = {
 				"hi lol",
@@ -2631,19 +2631,19 @@ do -- Anti____
 			)
 			local posted = LocalPlayer:WaitForChild("PlayerScripts", 10)
 			if posted == nil then
-				notify("Antichat-log", "Client anti chat log not supported")
+				IY_Notify("Antichat-log", "Client anti chat log not supported")
 				anticloging = false
 				return
 			end
 			posted = posted:WaitForChild("ChatScript", 10)
 			if posted == nil then
-				notify("Antichat-log", "Client anti chat log not supported")
+				IY_Notify("Antichat-log", "Client anti chat log not supported")
 				anticloging = false
 				return
 			end
 			posted = posted:WaitForChild("ChatMain", 10)
 			if posted == nil then
-				notify("Antichat-log", "Client anti chat log not supported")
+				IY_Notify("Antichat-log", "Client anti chat log not supported")
 				anticloging = false
 				return
 			end
@@ -2651,7 +2651,7 @@ do -- Anti____
 			local s = false
 			s, posted = pcall(function() return posted.MessagePosted end)
 			if not s then
-				notify("Antichat-log", "Client anti chat log not supported")
+				IY_Notify("Antichat-log", "Client anti chat log not supported")
 				anticloging = false
 				return
 			end
@@ -2713,7 +2713,7 @@ do -- Anti____
 				setfflag("AbuseReportScreenshot", "False")
 				setfflag("AbuseReportScreenshotPercentage", "0")
 			end) end
-			notify("Antichat-log", "Client anti chat log is now active")
+			IY_Notify("Antichat-log", "Client anti chat log is now active")
 		end,
 	})
 	local antiadonisaa = false
@@ -2724,7 +2724,7 @@ do -- Anti____
 		Plugin = "BUILTIN",
 		Description = "Adonis really wants to kill the client. Lets murder them! >:3",
 		Execute = function()
-			notify("AntiAnticheat (Adonis)", "Anti anticheat is now active")
+			IY_Notify("AntiAnticheat (Adonis)", "Anti anticheat is now active")
 			if antiadonisaa then return end
 			antiadonisaa = true
 			-- anti client detection and anticrashes
@@ -2774,7 +2774,7 @@ do -- Anti____
 		Plugin = "BUILTIN",
 		Description = "In SF games, you get hit if you touch their sword on either your or their client. This makes it apply only on theirs.",
 		Execute = function()
-			notify("Anti client handle kill", "Anti client handle kill is now active")
+			IY_Notify("Anti client handle kill", "Anti client handle kill is now active")
 			if anticlienthandlekill then return end
 			anticlienthandlekill = true
 			local function nocok(v)
@@ -2810,7 +2810,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			if ControlM ~= nil then return end
 			task.wait()
 		end
-		notify("RequireControlModule", "ControlModule returns nil!")
+		IY_Notify("RequireControlModule", "ControlModule returns nil!")
 	end)
 	local FLYING = nil
 	function NOFLY()
@@ -2974,7 +2974,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Lets you fly around",
 		Execute = function(speed)
-			notify("Flight", "You are now flying!\nHold Jump button to go up and down!")
+			IY_Notify("Flight", "You are now flying!\nHold Jump button to go up and down!")
 			local s = tonumber(speed)
 			if s ~= nil then
 				s *= 50
@@ -2998,7 +2998,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Lets you fly around with a vehicle",
 		Execute = function(speed)
-			notify("Flight", "You are now vflying!\nHold Jump button to go up and down!")
+			IY_Notify("Flight", "You are now vflying!\nHold Jump button to go up and down!")
 			local s = tonumber(speed)
 			if s ~= nil then
 				s *= 50
@@ -3022,7 +3022,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Fly using CFrame, the replicating version.",
 		Execute = function(speed)
-			notify("Flight", "You are now cflying!\nHold Jump button to go up and down!")
+			IY_Notify("Flight", "You are now cflying!\nHold Jump button to go up and down!")
 			local s = tonumber(speed)
 			if s ~= nil then
 				s *= 50
@@ -3044,7 +3044,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Disables flying (works for 3 types of fly)",
 		Execute = function()
-			notify("Flight", "Flight has been disabled")
+			IY_Notify("Flight", "Flight has been disabled")
 			NOFLY()
 			NOCFLY()
 		end,
@@ -3073,7 +3073,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Go through walls by letting your atoms align",
 		Execute = function()
-			notify("Noclip", "Noclip Enabled")
+			IY_Notify("Noclip", "Noclip Enabled")
 			if ncconn ~= nil then ncconn:Disconnect() end
 			ncconn = RunService.Stepped:Connect(function()
 				local char = Players.LocalPlayer.Character
@@ -3092,7 +3092,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Become solid again, i guess",
 		Execute = function()
-			notify("Noclip", "Noclip Disabled")
+			IY_Notify("Noclip", "Noclip Disabled")
 			if ncconn ~= nil then ncconn:Disconnect() end
 			local char = Players.LocalPlayer.Character
 			local root = char:FindFirstChild("HumanoidRootPart")
@@ -3107,7 +3107,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Make your vehicle's atoms align",
 		Execute = function()
-			notify("Noclip", "Vehicle Noclip Enabled")
+			IY_Notify("Noclip", "Vehicle Noclip Enabled")
 			vnoclipParts = {}
 			local seat = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").SeatPart
 			local vehicleModel = seat.Parent
@@ -3131,7 +3131,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Solidify your vehicle back",
 		Execute = function()
-			notify("Noclip", "Vehicle Noclip Disabled")
+			IY_Notify("Noclip", "Vehicle Noclip Disabled")
 			IY_ExecuteCommand("clip", true)
 			for i, v in pairs(vnoclipParts) do
 				v.CanCollide = true
@@ -3146,7 +3146,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Places a floor directly on your feet",
 		Execute = function()
-			notify("Float", "Floating Enabled")
+			IY_Notify("Float", "Floating Enabled")
 			NOFLOAT()
 			RunService.Stepped:Wait()
 			RunService.Stepped:Wait()
@@ -3160,7 +3160,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "Stops float/platform",
 		Execute = function()
-			notify("Float", "Floating Disabled")
+			IY_Notify("Float", "Floating Disabled")
 			NOFLOAT()
 		end,
 	})
@@ -3233,7 +3233,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			bambam.MaxTorque = Vector3.new(0, math.huge, 0)
 			bambam.P = math.huge
 			char.Destroying:Connect(function() fligning = false end)
-			notify("Fling", "ok now go touch some kids")
+			IY_Notify("Fling", "ok now go touch some kids")
 			repeat
 				bambam.AngularVelocity = Vector3.new(0, 99999, 0)
 				task.wait(0.2)
@@ -3275,7 +3275,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 				task.wait()
 			end
 			walkfligning = true
-			notify("Walk Fling", "ok now be that one youtube roblox animator")
+			IY_Notify("Walk Fling", "ok now be that one youtube roblox animator")
 			IY_ExecuteCommand("antifling", true)
 			pcall(sethiddenproperty, "SignalBehavior", "Immediate")
 			repeat
@@ -3349,7 +3349,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "those skids cant get ye now hehehe",
 		Execute = function()
-			notify("Antifling", "Antifling enabled!")
+			IY_Notify("Antifling", "Antifling enabled!")
 			if antiflingcon ~= nil then
 				antiflingcon:Disconnect()
 				antiflingcon = nil
@@ -3366,13 +3366,39 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		end,
 	})
 	IY_AddCommand({
+		Command = "antifling2",
+		Aliases = {},
+		Arguments = {},
+		Plugin = "BUILTIN",
+		Description = "\"trust me antifling is disabled see i can step on ppl\"",
+		Execute = function()
+			IY_Notify("Antifling", "Antifling enabled!")
+			if antiflingcon ~= nil then
+				antiflingcon:Disconnect()
+				antiflingcon = nil
+			end
+			antiflingcon = RunService.PreSimulation:Connect(function()
+				for _, v in pairs(Players:GetPlayers()) do
+					if v ~= Players.LocalPlayer and v.Character ~= nil then
+						for _, w in pairs(v.Character:GetDescendants()) do
+							if w:IsA("BasePart") then
+								w.Velocity = Vector3.zero
+								w.RotVelocity = Vector3.zero
+							end
+						end
+					end
+				end
+			end)
+		end,
+	})
+	IY_AddCommand({
 		Command = "unantifling",
 		Aliases = {},
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "\"doesnt that make you feel a little weak? :3c\"",
 		Execute = function()
-			notify("Antifling", "Antifling disabled!")
+			IY_Notify("Antifling", "Antifling disabled!")
 			if antiflingcon ~= nil then
 				antiflingcon:Disconnect()
 				antiflingcon = nil
@@ -3386,7 +3412,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "do you remember this? unless ur a newgen LOL",
 		Execute = function()
-			notify("Invisfling", "Please wait while I... ngfhh.!! meow")
+			IY_Notify("Invisfling", "Please wait while I... ngfhh.!! meow")
 			Players.LocalPlayer.Character:BreakJoints()
 			workspace.FallenPartsDestroyHeight = 0/0
 			local char = Players.LocalPlayer.CharacterAdded:Wait()
@@ -3400,7 +3426,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			local root = char:WaitForChild("HumanoidRootPart")
 			local hum = char:WaitForChild("Humanoid")
 			if hum.RigType ~= Enum.HumanoidRigType.R15 then
-				notify("Invisfling", "ngh!! i dont smell R15 here.!! 3:")
+				IY_Notify("Invisfling", "ngh!! i dont smell R15 here.!! 3:")
 				return
 			end
 			local invis = RunService.PreSimulation:Connect(function()
@@ -3461,7 +3487,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 		Plugin = "BUILTIN",
 		Description = "fling but fly",
 		Execute = function()
-			notify("Flyfling", "i even centered the camera for you! :3")
+			IY_Notify("Flyfling", "i even centered the camera for you! :3")
 			local char = Players.LocalPlayer.Character
 			local root = char:WaitForChild("HumanoidRootPart")
 			Camera.CameraSubject = root
@@ -3482,14 +3508,14 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			if hatflinging then return end
 			hatflinging = true
 			if replicatesignal == nil then
-				notify("Hatfling", "use deleta executor (missing replicatesignal)")
+				IY_Notify("Hatfling", "use deleta executor (missing replicatesignal)")
 				return
 			end
 			if sethiddenproperty == nil then
-				notify("Hatfling", "use deleta executor (missing sethiddenproperty)")
+				IY_Notify("Hatfling", "use deleta executor (missing sethiddenproperty)")
 				return
 			end
-			notify("Hatfling", "Please wait while I... ngfhh.!! meow")
+			IY_Notify("Hatfling", "Please wait while I... ngfhh.!! meow")
 			local CurrentCF = nil
 			local flinghat = nil
 			pcall(sethiddenproperty, "SignalBehavior", "Immediate")
@@ -3647,6 +3673,86 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 	})
 end
 do -- Animation
+	local danceTrack = nil
+	IY_AddCommand({
+		Command = "dance",
+		Aliases = {},
+		Arguments = {},
+		Plugin = "BUILTIN",
+		Description = "Makes you D A N C E",
+		Execute = function()
+			if danceTrack ~= nil then
+				danceTrack:Stop()
+				danceTrack:Destroy()
+				danceTrack = nil
+			end
+			local Character = Players.LocalPlayer.Character
+			if Character ~= nil then
+				local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+				if Humanoid ~= nil then
+					local dances = { "27789359", "30196114", "248263260", "45834924", "33796059", "28488254", "52155728" }
+					if Humanoid.RigType == Enum.HumanoidRigType.R15 then dances = { "3333432454", "4555808220", "4049037604", "4555782893", "10214311282", "10714010337", "10713981723", "10714372526", "10714076981", "10714392151", "11444443576" } end
+					local animation = Instance.new("Animation")
+					animation.AnimationId = "rbxassetid://" .. dances[math.random(1, #dances)]
+					danceTrack = Humanoid:LoadAnimation(animation)
+					danceTrack.Looped = true
+					danceTrack:Play()
+				end
+			end
+		end,
+	})
+	IY_AddCommand({
+		Command = "undance",
+		Aliases = {},
+		Arguments = {},
+		Plugin = "BUILTIN",
+		Description = "noboogie",
+		Execute = function()
+			if danceTrack ~= nil then
+				danceTrack:Stop()
+				danceTrack:Destroy()
+				danceTrack = nil
+			end
+		end,
+	})
+	IY_AddCommand({
+		Command = "noanim",
+		Aliases = {},
+		Arguments = {},
+		Plugin = "BUILTIN",
+		Description = "Animate.Disabled = true",
+		Execute = function()
+			local Character = Players.LocalPlayer.Character
+			if Character ~= nil then
+				local Animate = Character:FindFirstChild("Animate")
+				if Animate ~= nil then Animate.Disabled = true end
+			end
+		end,
+	})
+	IY_AddCommand({
+		Command = "reanim",
+		Aliases = {},
+		Arguments = {},
+		Plugin = "BUILTIN",
+		Description = "Animate.Disabled = false",
+		Execute = function()
+			local Character = Players.LocalPlayer.Character
+			if Character ~= nil then
+				local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+				if Humanoid ~= nil then
+					for i, v in pairs(Humanoid:GetPlayingAnimationTracks()) do
+						v:Stop()
+					end
+				end
+				local Animate = Character:FindFirstChild("Animate")
+				if Animate ~= nil then
+					Animate.Disabled = true
+					task.wait()
+					Animate.Disabled = false
+				end
+			end
+		end,
+	})
 	IY_AddCommand({
 		Command = "stopanimations",
 		Aliases = { "stopanims" },
@@ -3704,8 +3810,11 @@ do -- Stuff related to players
 					if target.Character ~= nil then
 						local tar = target.Character:GetPivot()
 						char:PivotTo(tar + (tar.LookVector * -2.5))
-						for _, v in pairs(char:GetChildren()) do
-							if v:IsA("BasePart") then v.AssemblyLinearVelocity = Vector3.zero end
+						for _, v in pairs(char:GetDescendants()) do
+							if v:IsA("BasePart") then
+								v.Velocity = Vector3.zero
+								v.RotVelocity = Vector3.zero
+							end
 						end
 					end
 				end
@@ -3996,7 +4105,7 @@ do -- Silly Spawning related commands
 				local root = char:FindFirstChild("HumanoidRootPart")
 				if root ~= nil then spawnpos = root.CFrame end
 			end
-			notify("Spawnpoint", "Spawn point created!")
+			IY_Notify("Spawnpoint", "Spawn point created!")
 		end,
 	})
 	IY_AddCommand({
@@ -4007,7 +4116,7 @@ do -- Silly Spawning related commands
 		Description = "Remove spawnpoint",
 		Execute = function()
 			spawnpos = nil
-			notify("Spawnpoint", "Spawn point removed!")
+			IY_Notify("Spawnpoint", "Spawn point removed!")
 		end,
 	})
 	local flashbackOnRespawn = false
@@ -4019,7 +4128,7 @@ do -- Silly Spawning related commands
 		Description = "Automatically teleports you to where you died when you respawn",
 		Execute = function()
 			flashbackOnRespawn = true
-			notify("Auto flashback", "oh yea giddy yes break bro buddy")
+			IY_Notify("Auto flashback", "oh yea giddy yes break bro buddy")
 		end,
 	})
 	IY_AddCommand({
@@ -4030,7 +4139,7 @@ do -- Silly Spawning related commands
 		Description = "Stops autoflashback",
 		Execute = function()
 			flashbackOnRespawn = false
-			notify("Auto flashback", "oh no skibidi nuh fix blud enemy")
+			IY_Notify("Auto flashback", "oh no skibidi nuh fix blud enemy")
 		end,
 	})
 	local onDied = nil
@@ -4120,12 +4229,12 @@ do -- Silly Tool related commands
 		Execute = function(list)
 			local tool = Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
 			if tool == nil then
-				notify("Handle kill", "Equip a tool that deals damage on touch (like the Classic Sword)")
+				IY_Notify("Handle kill", "Equip a tool that deals damage on touch (like the Classic Sword)")
 				return
 			end
 			local tooh = tool:FindFirstChild("Handle")
 			if tooh == nil then
-				notify("Handle kill", "Equip a tool that HAS A HANDLE and deals damage on touch (like the Classic Sword)")
+				IY_Notify("Handle kill", "Equip a tool that HAS A HANDLE and deals damage on touch (like the Classic Sword)")
 				return
 			end
 			local targets = getPlayer(list)
@@ -4165,9 +4274,9 @@ do -- Silly Tool related commands
 			wait()
 			local tool = Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") or Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
 			if tool ~= nil and tool:FindFirstChild("Handle") ~= nil then
-				notify("Aurakill", "Created aura.")
+				IY_Notify("Aurakill", "Created aura.")
 			else
-				notify("Aurakill", "Grab a tool handlekill wants.")
+				IY_Notify("Aurakill", "Grab a tool handlekill wants.")
 				return
 			end
 			local function getChild(parent, name, class)
@@ -4231,9 +4340,9 @@ do -- Silly Tool related commands
 			task.wait()
 			local tool = Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") or Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
 			if tool ~= nil and tool:FindFirstChild("Handle") ~= nil then
-				notify("Loopkill", "Loopkilling the targets.")
+				IY_Notify("Loopkill", "Loopkilling the targets.")
 			else
-				notify("Loopkill", "Grab a tool handlekill wants.")
+				IY_Notify("Loopkill", "Grab a tool handlekill wants.")
 				return
 			end
 			local function getChild(parent, name, class)
@@ -4281,7 +4390,7 @@ do -- Silly Tool related commands
 							lastlkill = tick()
 						else
 							if tick() > lastlkill + 10 then
-								notify("Loopkill", "No targets, loopkill stopped")
+								IY_Notify("Loopkill", "No targets, loopkill stopped")
 								loophkilling = false
 							end
 						end
@@ -4311,7 +4420,7 @@ do -- Silly Tool related commands
 			loophkilling_ufte = false
 			loopkillcfg.ufte = false
 			loophkill_a.Value = 0
-			notify("Handle kill Settings", "Your executor does not support this feature. (missing firetouchinterest)")
+			IY_Notify("Handle kill Settings", "Your executor does not support this feature. (missing firetouchinterest)")
 		end
 	end)
 	loophkill_a.Value = loophkilling_ufte and 1 or 0
@@ -4906,7 +5015,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Gives you infinite jumps",
 		Execute = function()
-			notify("Infinite Jump", "Infinite Jump enabled!")
+			IY_Notify("Infinite Jump", "Infinite Jump enabled!")
 			if inflyjump then inflyjump:Disconnect() end
 			local deb = false
 			inflyjump = UserInputService.JumpRequest:Connect(function()
@@ -4930,7 +5039,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Disables infinite jumping",
 		Execute = function()
-			notify("Infinite Jump", "Infinite Jump disabled!")
+			IY_Notify("Infinite Jump", "Infinite Jump disabled!")
 			if inflyjump then inflyjump:Disconnect() end
 			inflyjump = nil
 		end,
@@ -4944,7 +5053,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Gives you velocity based infinite jumps, bypasses infinite jump detectors",
 		Execute = function(jumppower)
-			notify("Infinite VelJump", "Infinite VelJump enabled!")
+			IY_Notify("Infinite VelJump", "Infinite VelJump enabled!")
 			if inflyjump then inflyjump:Disconnect() end
 			local deb = false
 			inflyjump = UserInputService.JumpRequest:Connect(function()
@@ -4968,7 +5077,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Disables infinite velocity jumping",
 		Execute = function()
-			notify("Infinite VekJump", "Infinite VelJump disabled!")
+			IY_Notify("Infinite VekJump", "Infinite VelJump disabled!")
 			if inflyjump then inflyjump:Disconnect() end
 			inflyjump = nil
 		end,
@@ -4980,7 +5089,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Lets you hold jump to fly",
 		Execute = function()
-			notify("Fly Jump", "Fly Jump enabled!")
+			IY_Notify("Fly Jump", "Fly Jump enabled!")
 			if inflyjump then inflyjump:Disconnect() end
 			inflyjump = UserInputService.JumpRequest:Connect(function()
 				if Players.LocalPlayer.Character ~= nil then
@@ -4997,7 +5106,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Disables fly jump",
 		Execute = function()
-			notify("Fly Jump", "Fly Jump disabled!")
+			IY_Notify("Fly Jump", "Fly Jump disabled!")
 			if inflyjump then inflyjump:Disconnect() end
 			inflyjump = nil
 		end,
@@ -5010,7 +5119,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Automatically jump over obstacles",
 		Execute = function()
-			notify("Auto Jump", "Auto Jump enabled!")
+			IY_Notify("Auto Jump", "Auto Jump enabled!")
 			if autojump then autojump:Disconnect() end
 			autojump = RunService.Stepped:Connect(function(_, dt)
 				if Players.LocalPlayer.Character ~= nil then
@@ -5037,7 +5146,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Disables auto jump",
 		Execute = function()
-			notify("Auto Jump", "Auto Jump disabled!")
+			IY_Notify("Auto Jump", "Auto Jump disabled!")
 			if autojump then autojump:Disconnect() end
 			autojump = nil
 		end,
@@ -5050,7 +5159,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Automatically jump over gaps",
 		Execute = function()
-			notify("Edge Jump", "Edge Jump enabled!")
+			IY_Notify("Edge Jump", "Edge Jump enabled!")
 			if edgejump then edgejump:Disconnect() end
 			local lstate = nil
 			edgejump = RunService.Stepped:Connect(function(_, dt)
@@ -5081,7 +5190,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Disables edge jump",
 		Execute = function()
-			notify("Edge Jump", "Edge Jump disabled!")
+			IY_Notify("Edge Jump", "Edge Jump disabled!")
 			if edgejump then edgejump:Disconnect() end
 			edgejump = nil
 		end,
@@ -5096,7 +5205,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Walk faster using teleportation",
 		Execute = function(speed)
-			notify("Teleport walk", "Teleport walk enabled!")
+			IY_Notify("Teleport walk", "Teleport walk enabled!")
 			if tpwalker then tpwalker:Disconnect() end
 			local ws = tonumber(speed) or 1
 			tpwalker = RunService.Stepped:Connect(function(_, dt)
@@ -5117,7 +5226,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Disables teleport walk",
 		Execute = function()
-			notify("Teleport walk", "Teleport walk disabled!")
+			IY_Notify("Teleport walk", "Teleport walk disabled!")
 			if tpwalker then tpwalker:Disconnect() end
 			tpwalker = nil
 		end,
@@ -5130,7 +5239,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "If you fall off the void, will bounce you back up",
 		Execute = function()
-			notify("Antivoid", "Antivoid enabled!")
+			IY_Notify("Antivoid", "Antivoid enabled!")
 			if antivoiding then antivoiding:Disconnect() end
 			antivoiding = RunService.PreSimulation:Connect(function()
 				if Players.LocalPlayer.Character ~= nil then
@@ -5150,7 +5259,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Stops antivoid",
 		Execute = function()
-			notify("Antivoid", "Antivoid disabled!")
+			IY_Notify("Antivoid", "Antivoid disabled!")
 			if antivoiding then antivoiding:Disconnect() end
 			antivoiding = nil
 		end,
@@ -5232,7 +5341,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Removes the void completely, allowing you to fall forever.",
 		Execute = function()
-			notify("No void", "workspace.Void:Destroy() executed successfully")
+			IY_Notify("No void", "workspace.Void:Destroy() executed successfully")
 			workspace.FallenPartsDestroyHeight = 0 / 0
 		end,
 	})
@@ -5243,7 +5352,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "Restores the void.",
 		Execute = function()
-			notify("Re void", "workspace.Void re successfully")
+			IY_Notify("Re void", "workspace.Void re successfully")
 			workspace.FallenPartsDestroyHeight = FallenPartsDestroyHeight
 		end,
 	})
@@ -5255,17 +5364,17 @@ do -- Silly Humanoid stuff
 		Description = "either disables respawning or respawns",
 		Execute = function()
 			if replicatesignal == nil then
-				notify("Permadeath", "Unsupported executor")
+				IY_Notify("Permadeath", "Unsupported executor")
 				return
 			end
-			notify("Permadeath", "Wait for it...")
+			IY_Notify("Permadeath", "Wait for it...")
 			local oldchar = Players.LocalPlayer.Character
 			replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend)
 			task.wait(Players.RespawnTime)
 			if oldchar == Players.LocalPlayer.Character then
-				notify("Permadeath", "Hardcore mode enabled.")
+				IY_Notify("Permadeath", "Hardcore mode enabled.")
 			else
-				notify("Permadeath", "Respawned.")
+				IY_Notify("Permadeath", "Respawned.")
 			end
 		end,
 	})
@@ -5278,10 +5387,10 @@ do -- Silly Humanoid stuff
 		Description = "Instant respawn",
 		Execute = function()
 			if replicatesignal == nil then
-				notify("Instant respawn", "Unsupported executor")
+				IY_Notify("Instant respawn", "Unsupported executor")
 				return
 			end
-			notify("Instant respawn", "Instant respawn enabled")
+			IY_Notify("Instant respawn", "Instant respawn enabled")
 			if instarespawner then instarespawner:Disconnect() end
 			instarespawner = RunService.Stepped:Connect(function() replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend) end)
 		end,
@@ -5346,6 +5455,50 @@ do -- Silly Humanoid stuff
 					v.RotVelocity = Vector3.zero
 				end
 				if v:IsA("BodyMover") then v:Destroy() end
+			end
+		end,
+	})
+	IY_AddCommand({
+		Command = "god",
+		Aliases = { "noonecanactuallykillme" },
+		Arguments = {},
+		Plugin = "BUILTIN",
+		Description = "adamxdd690 technically made this command!\nmakes you unkillable. youll need a specific condition for this to work.",
+		Execute = function()
+			local h = Players.LocalPlayer.Character.Humanoid
+			Players.LocalPlayer.Character.ChildAdded:Connect(function(v)
+				if v:IsA("Tool") and v.CanBeDropped and v:GetAttribute("B") then
+					task.wait()
+					v.Parent = workspace
+				end
+			end)
+			h:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+			pcall(replicatesignal, Players.LocalPlayer.Kill)
+			while h:IsDescendantOf(workspace) and task.wait() do
+				pcall(function() game:GetService("CoreGui").TopBarApp.TopBarApp.FullScreenFrame.HurtOverlay:Destroy() end)
+				pcall(function() game:GetService("CoreGui").TopBarApp.TopBarApp.UnibarLeftFrame.HealthBar.HealthBar.ClipsDescendants = true end)
+				h.RootPart.CFrame += Vector3.new(0, -0.0016, 0)
+				local toolhandles = {}
+				for _, player in pairs(Players:GetPlayers()) do
+					if player ~= Players.LocalPlayer and player.Character then
+						for _, v in pairs(player.Character:GetChildren()) do
+							if v:IsA("Tool") and v:FindFirstChild("Handle") then
+								v:SetAttribute("B", true)
+								table.insert(toolhandles, v.Handle)
+							end
+						end
+					end
+				end
+				for _, limb in pairs(h.Parent:GetChildren()) do
+					if limb:IsA("BasePart") then
+						limb.CanTouch = true
+						for _, h in pairs(toolhandles) do
+							h.CanTouch = true
+							pcall(firetouchinterest, h, limb, 1)
+							pcall(firetouchinterest, h, limb, 0)
+						end
+					end
+				end
 			end
 		end,
 	})
@@ -5426,11 +5579,11 @@ do -- Cool tools
 				if rc ~= nil then hit = rc.Instance end
 				if hit == nil then return end
 				if not hit.Anchored then
-					notify("TPUA", "yes")
+					IY_Notify("TPUA", "yes")
 					tpua_PUT(hit, CFrame.new(Camera.Focus.Position))
 					return
 				end
-				notify("TPUA", "no")
+				IY_Notify("TPUA", "no")
 			end)
 		end,
 	})
@@ -5562,7 +5715,7 @@ do -- Outfit related commands
 				becomehd(dummy)
 				becomehd(target)
 				dummy:Destroy()
-				notify("Disguise", "Successfully loaded avatar!")
+				IY_Notify("Disguise", "Successfully loaded avatar!")
 			end
 		end
 		loadavatar_ = false
@@ -5582,7 +5735,7 @@ do -- Outfit related commands
 				if ID ~= nil then ID = ID.UserId end
 			end
 			if ID == nil then ID = tonumber(plrid) end
-			notify("Disguise", "Loading from ID: " .. ID)
+			IY_Notify("Disguise", "Loading from ID: " .. ID)
 			local target = game.Players:GetHumanoidDescriptionFromUserId(ID)
 			loadavatar(target)
 		end,
@@ -5597,7 +5750,7 @@ do -- Outfit related commands
 		Description = "[CLIENT] Loads an avatar by outfit ID, and applies it to your character",
 		Execute = function(plrid)
 			local ID = tonumber(plrid)
-			notify("Disguise", "Loading from outfit ID: " .. ID)
+			IY_Notify("Disguise", "Loading from outfit ID: " .. ID)
 			local target = game.Players:GetHumanoidDescriptionFromOutfitId(ID)
 			loadavatar(target)
 		end,
@@ -5631,7 +5784,7 @@ do -- Outfit related commands
 							if targethdes ~= nil then
 								loadavatar(targethdes)
 							else
-								notify("Disguise", "Humanoid has no description")
+								IY_Notify("Disguise", "Humanoid has no description")
 							end
 						end
 					end
@@ -5668,10 +5821,10 @@ do -- Outfit related commands
 					loadavatar(target)
 					return
 				end
-				notify("Load Outfit", "Data loading error")
+				IY_Notify("Load Outfit", "Data loading error")
 				return
 			end
-			notify("Load Outfit", "Outfit not found")
+			IY_Notify("Load Outfit", "Outfit not found")
 		end,
 	})
 	IY_AddCommand({
@@ -5684,19 +5837,19 @@ do -- Outfit related commands
 		Description = "[CLIENT] Saves the current outfit of your character",
 		Execute = function(name)
 			local char = Players.LocalPlayer.Character
-			if char == nil then notify("Save Outfit", "No character.") end
+			if char == nil then IY_Notify("Save Outfit", "No character.") end
 			local hum = char:FindFirstChildOfClass("Humanoid")
-			if hum == nil then notify("Save Outfit", "No character.") end
+			if hum == nil then IY_Notify("Save Outfit", "No character.") end
 			local target = IY_ConfigJson.OutfitData[name]
 			if target ~= nil then
-				notify("Save Outfit", "Overwriting save...")
+				IY_Notify("Save Outfit", "Overwriting save...")
 			else
-				notify("Save Outfit", "Writing save...")
+				IY_Notify("Save Outfit", "Writing save...")
 			end
 			local target = hum:GetAppliedDescription()
 			local success = false
 			success, target = xpcall(function() return serializehd(target) end, function(m) print(debug.traceback(m)) end)
-			if not success then notify("Save Outfit", "Failed to serialize.") end
+			if not success then IY_Notify("Save Outfit", "Failed to serialize.") end
 			IY_ConfigJson.OutfitData[name] = target
 		end,
 	})
@@ -5775,10 +5928,10 @@ do -- Outfit related commands
 					uwu()
 					return
 				end
-				notify("Load Outfit", "Data loading error")
+				IY_Notify("Load Outfit", "Data loading error")
 				return
 			end
-			notify("Load Outfit", "Outfit not found")
+			IY_Notify("Load Outfit", "Outfit not found")
 		end,
 	})
 	IY_AddCommand({
@@ -5848,7 +6001,7 @@ do
 					Camera.CameraSubject = cursub
 				end)
 				cursub = Camera.CameraSubject
-				notify("Spectator", "Spectating " .. viewplr.Name)
+				IY_Notify("Spectator", "Spectating " .. viewplr.Name)
 			end
 		end,
 	})
@@ -5869,7 +6022,7 @@ do
 			end
 			viewplr = nil
 			Camera.CameraSubject = Players.LocalPlayer.Character
-			notify("Spectator", "Spectate is bye (unviewed)")
+			IY_Notify("Spectator", "Spectate is bye (unviewed)")
 		end,
 	})
 	Players.PlayerRemoving:Connect(function(plr)
@@ -5884,7 +6037,7 @@ do
 			end
 			viewplr = nil
 			Camera.CameraSubject = Players.LocalPlayer.Character
-			notify("Spectator", "Spectate is bye (player left)")
+			IY_Notify("Spectator", "Spectate is bye (player left)")
 		end
 	end)
 	local freecamming = false
@@ -5901,7 +6054,7 @@ do
 		Execute = function()
 			if freecamming then return end
 			freecamming = true
-			notify("Freecam", "birb")
+			IY_Notify("Freecam", "birb")
 			local Move, Look = Vector3.zero, Vector2.zero
 			if UserInputService.TouchEnabled then
 				local TouchControlGUI = Instance.new("ScreenGui")
@@ -6067,7 +6220,7 @@ do -- Ifninite Yeild related commands
 		Plugin = "BUILTIN",
 		Description = "Breaks command loops (;inf^0^reset)",
 		Execute = function()
-			notify("Break command", "Command loops broken!")
+			IY_Notify("Break command", "Command loops broken!")
 			IY__LastCommandBreak = tick()
 		end,
 	})
@@ -6081,7 +6234,7 @@ do
 		Plugin = "BUILTIN",
 		Description = "Notifies who kills you in games like SFOTHO",
 		Execute = function()
-			notify("Notify Kill", "Initialized!")
+			IY_Notify("Notify Kill", "Initialized!")
 			if notifykill then return end
 			notifykill = true
 			table.insert(__OnDiedEvent, function()
@@ -6096,7 +6249,7 @@ do
 								crname1 = creator.Value.Name
 								crname2 = crname1
 							end
-							notify("Notify Kill", crname1 .. " killed you, blame " .. crname2 .. "!")
+							IY_Notify("Notify Kill", crname1 .. " killed you, blame " .. crname2 .. "!")
 						end
 					end
 				end
@@ -6112,7 +6265,7 @@ do
 		Description = "Notifies all kills in games like SFOTHO",
 		Execute = function()
 			IY_ExecuteCommand("notifykill")
-			notify("Notify Kills", "Initialized!")
+			IY_Notify("Notify Kills", "Initialized!")
 			if notifykills then return end
 			notifykills = true
 			local function nk(plr)
@@ -6124,7 +6277,7 @@ do
 							local crname = "idk who"
 							if creator.Value ~= nil and typeof(creator.Value) == "Instance" and creator.Value:IsA("Player") then crname = creator.Value.Name end
 							if crname == Players.LocalPlayer.Name then crname = "You just" end
-							notify("Notify Kills", crname .. " killed " .. plr.Name .. "!")
+							IY_Notify("Notify Kills", crname .. " killed " .. plr.Name .. "!")
 						end
 					end) end
 				end
@@ -6145,7 +6298,7 @@ do
 		Plugin = "BUILTIN",
 		Description = "Notifies all whispers (legacy chat)",
 		Execute = function()
-			notify("Notify Whispers", "Initialized!")
+			IY_Notify("Notify Whispers", "Initialized!")
 			if notifyws then return end
 			notifyws = true
 			local function nk(plr)
@@ -6157,7 +6310,7 @@ do
 						table.remove(split, 1)
 						table.remove(split, 1)
 						local wmessage = table.concat(split, " ")
-						if table.find({ "/w", "/whisper" }, ngh) ~= nil then notify("Notify Whispers", plr.Name .. " whispered to " .. target .. "\n" .. wmessage) end
+						if table.find({ "/w", "/whisper" }, ngh) ~= nil then IY_Notify("Notify Whispers", plr.Name .. " whispered to " .. target .. "\n" .. wmessage) end
 					end
 				end)
 			end
@@ -6177,7 +6330,7 @@ do
 		Description = "Notifies you the text you put",
 		Execute = function(...)
 			local msg = table.concat({ ... }, " ")
-			notify("Custom Notification Command", msg)
+			IY_Notify("Custom Notification Command", msg)
 		end,
 	})
 	IY_AddCommand({
@@ -6199,7 +6352,7 @@ if table.find(thegamestocheckfor, game.PlaceId) ~= nil then
 		Plugin = "BUILTIN",
 		Description = "[SFOTHO] Healpads you once you're low.",
 		Execute = function()
-			if firetouchinterest == nil then return notify("Totem Of Undying", "Your executor does not support this command. (missing firetouchinterest)") end
+			if firetouchinterest == nil then return IY_Notify("Totem Of Undying", "Your executor does not support this command. (missing firetouchinterest)") end
 			if ahealconn ~= nil then
 				ahealconn:Disconnect()
 				ahealconn = nil
@@ -6224,6 +6377,19 @@ if table.find(thegamestocheckfor, game.PlaceId) ~= nil then
 					end
 				end
 			end)
+		end,
+	})
+	IY_AddCommand({
+		Command = "unautoheal",
+		Aliases = { "totemofdying", "unsiphon" },
+		Arguments = {},
+		Plugin = "BUILTIN",
+		Description = "[SFOTHO] Stops autoheal.",
+		Execute = function()
+			if ahealconn ~= nil then
+				ahealconn:Disconnect()
+				ahealconn = nil
+			end
 		end,
 	})
 end
@@ -6273,7 +6439,7 @@ do -- Experimental commands
 		Arguments = {},
 		Plugin = "BUILTIN",
 		Description = "[DEV] command counter",
-		Execute = function(...) notify("better than frisk", `we got {#IY_Commands} cmds rn`) end,
+		Execute = function(...) IY_Notify("better than frisk", `we got {#IY_Commands} cmds rn`) end,
 	})
 end
 
