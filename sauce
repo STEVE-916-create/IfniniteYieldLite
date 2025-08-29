@@ -3,7 +3,7 @@
 
 if _G.IYL_LOADED then return end
 _G.IYL_LOADED = true
-local IY_VERSION = "v0.84.99"
+local IY_VERSION = "v1.0.0"
 local IY_MAINNAME = "Ifninite Yeild Lite"
 
 -- coregui reference detector bypass
@@ -3285,7 +3285,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 					local root = char:FindFirstChild("HumanoidRootPart")
 					if root ~= nil then
 						local a, b = root.Velocity, root.RotVelocity
-						root.Velocity, root.RotVelocity = Vector3.new(0, -2 ^ 64, 0), Vector3.zero
+						root.Velocity, root.RotVelocity = Vector3.new(0, -2 ^ 64, 0), Vector3.new(9e12, 9e12, 9e12)
 						RunService.PreAnimation:Wait()
 						root.Velocity, root.RotVelocity = a, b
 					end
@@ -3573,7 +3573,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 						h:BreakJoints()
 						h.Velocity = Vector3.new(0, 50, 0)
 						h.RotVelocity = Vector3.zero
-						h.CFrame = CFrame.new(0, FallenPartsDestroyHeight + 10, 0) + GetSandboxPosition()
+						h.CFrame = CFrame.new(0, FallenPartsDestroyHeight + 20, 0) + GetSandboxPosition()
 					end
 					task.spawn(function()
 						while hatcolling do
@@ -3582,7 +3582,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 								local h = v[2]
 								h.Velocity = Vector3.new(0, 50, 0)
 								h.RotVelocity = Vector3.zero
-								h.CFrame = CFrame.new(0, FallenPartsDestroyHeight + 10, 0) + GetSandboxPosition()
+								h.CFrame = CFrame.new(0, FallenPartsDestroyHeight + 20, 0) + GetSandboxPosition()
 							end
 						end
 					end)
@@ -3594,7 +3594,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 					for _, v in pairs(hats) do
 						sethiddenproperty(v[1], "BackendAccoutrementState", 4)
 					end
-					task.wait(1)
+					task.wait(2)
 					local ohats = hats
 					hats = {}
 					for _, v in pairs(ohats) do
@@ -3607,7 +3607,10 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 						replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend)
 						return
 					end
-					table.sort(hats, function(a, b) return a[2].Size.Magnitude > b[2].Size.Magnitude end)
+					table.sort(hats, function(a, b)
+						local c, d = a[2].Size, b[2].Size
+						return c.X * c.Y * c.Z > d.X * d.Y * d.Z
+					end)
 					flinghat = hats[1][2]
 					flinghat.AncestryChanged:Wait()
 					replicatesignal(Players.LocalPlayer.ConnectDiedSignalBackend)
@@ -3623,6 +3626,7 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 			cam.Size = Vector3.zero
 			cam.Material = Enum.Material.SmoothPlastic
 			cam.Parent = workspace
+			local claimed = 0
 			repeat
 				local dt = RunService.PostSimulation:Wait()
 				if CurrentCF ~= nil then
@@ -3642,18 +3646,24 @@ do -- Silly stuff: Fly, Noclip, Swim, Float, Spin, Fling
 							if flinghat.ReceiveAge == 0 then
 								flinghat.CFrame = CurrentCF
 								flinghat.Velocity = vel + Vector3.new(0, 25, 0)
-								flinghat.RotVelocity = Vector3.one * 999999
+								flinghat.RotVelocity = Vector3.one * 9e9 * math.clamp((claimed - 5) / 25, 0, 1)
 								flinghat.CanCollide = false
 								flinghat.CanTouch = false
 								cam.Color = Color3.new(0, 1, 0)
+							else
+								claimed = 0
 							end
+						else
+							claimed = 0
 						end
 						cam.Size = flinghat.Size
 						Camera.CameraSubject = cam
 						Players.LocalPlayer.SimulationRadius = 999
 					else
+						claimed = 0
 						cam.Size = Vector3.zero
 					end
+					claimed += dt
 				end
 			until not hatflinging
 			cam:Destroy()
@@ -4202,6 +4212,8 @@ do -- Silly Tool related commands
 					v.CanTouch = true
 					pcall(firetouchinterest, tooh, v, 1)
 					pcall(firetouchinterest, tooh, v, 0)
+					pcall(firetouchinterest, v, tooh, 1)
+					pcall(firetouchinterest, v, tooh, 0)
 				end
 			end
 		else
@@ -4507,6 +4519,32 @@ do -- Silly Tool related commands
 		end,
 	})
 	IY_AddCommand({
+		Command = "safedroptools",
+		Aliases = {},
+		Arguments = {
+			{ Name = "speed", Optional = true, Description = "default is 1" },
+		},
+		Plugin = "BUILTIN",
+		Description = "Drops all droppable tools, \"safely\"",
+		Execute = function(speed)
+			speed = 0.2 / (tonumber(speed) or 1)
+			if Players.LocalPlayer.Character ~= nil then
+				local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+				if h ~= nil then
+					for _, v in pairs(Players.LocalPlayer.Backpack:GetChildren()) do
+						if v:IsA("Tool") and v.CanBeDropped then v.Parent = Players.LocalPlayer.Character end
+					end
+					for _, v in pairs(Players.LocalPlayer.Character:GetChildren()) do
+						if v:IsA("Tool") and v.CanBeDropped then
+							v.Parent = workspace
+							task.wait(speed)
+						end
+					end
+				end
+			end
+		end,
+	})
+	IY_AddCommand({
 		Command = "activatetools",
 		Aliases = { "usetools" },
 		Arguments = {},
@@ -4695,6 +4733,7 @@ do -- Silly Tool related commands
 		Execute = function(times)
 			times = tonumber(times) or 1
 			for i = 1, times do
+				IY_Notify("Dupe Tools", `Duping tools {i}/{times}...`)
 				local char = Players.LocalPlayer.Character
 				local back = Players.LocalPlayer.Backpack
 				local root = char:WaitForChild("HumanoidRootPart")
@@ -4972,6 +5011,7 @@ do -- Silly Humanoid stuff
 			local h = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 			if h ~= nil and h.RootPart ~= nil then
 				local r = h.RootPart
+				RunService.PreSimulation:Wait()
 				h:ChangeState(0)
 				r.AssemblyLinearVelocity = r.CFrame.LookVector * 30
 			end
@@ -5449,7 +5489,7 @@ do -- Silly Humanoid stuff
 		Plugin = "BUILTIN",
 		Description = "kill force and stuff",
 		Execute = function()
-			for _, v in pairs(Players.LocalPlayer:GetDescendants()) do
+			for _, v in pairs(Players.LocalPlayer.Character:GetDescendants()) do
 				if v:IsA("BasePart") then
 					v.Velocity = Vector3.zero
 					v.RotVelocity = Vector3.zero
@@ -5474,10 +5514,10 @@ do -- Silly Humanoid stuff
 			end)
 			h:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
 			pcall(replicatesignal, Players.LocalPlayer.Kill)
-			while h:IsDescendantOf(workspace) and task.wait() do
+			while h:IsDescendantOf(workspace) and RunService.PreAnimation:Wait() do
 				pcall(function() game:GetService("CoreGui").TopBarApp.TopBarApp.FullScreenFrame.HurtOverlay:Destroy() end)
 				pcall(function() game:GetService("CoreGui").TopBarApp.TopBarApp.UnibarLeftFrame.HealthBar.HealthBar.ClipsDescendants = true end)
-				h.RootPart.CFrame += Vector3.new(0, -0.0016, 0)
+				h.RootPart.CFrame += Vector3.new(0, 0.003, 0)
 				local toolhandles = {}
 				for _, player in pairs(Players:GetPlayers()) do
 					if player ~= Players.LocalPlayer and player.Character then
@@ -6445,3 +6485,5 @@ end
 
 IY_IndexCommands("")
 Players.LocalPlayer.CharacterAdded:Connect(function() IY_ExecuteCommand("clip\\vclip\\unfly\\unfloat", true) end)
+
+IY_Notify("Ifninite Yeild Lite TESTING", "You are using the testing version of IY Lite. It can be decompiled with a testing version of IY Lite.\nSeriously, expect things to break.")
